@@ -5,13 +5,15 @@ import { getMessages } from "next-intl/server";
 import "../../(main)/global.css";
 import Sidebar from "../../../Components/dashboard/sidebar";
 import Dock from '../../../Components/dashboard/Dock';
-import { VscHome, VscArchive, VscAccount, VscSettingsGear } from 'react-icons/vsc';
+import { DarkIcon } from "../../../Components/DarkIcon";
+import { LightIcon } from "../../../Components/LightIcon";
+import Footer from "../../../Components/dashboard/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
   display: "swap",
-  variable: "--font-inter", // 👈 هتستخدمه في Tailwind كـ CSS variable
+  variable: "--font-inter", 
 });
 export const dynamic = "force-dynamic";
 
@@ -25,12 +27,6 @@ export default async function RootLayout({ children, params }) {
   const messages = await getMessages(locale);
   console.log(locale);
 
-  const items = [
-    { icon: <VscHome size={18} />, label: 'Home',  },
-    { icon: <VscArchive size={18} />, label: 'Archive',  },
-    { icon: <VscAccount size={18} />, label: 'Profile',  },
-    { icon: <VscSettingsGear size={18} />, label: 'Settings',  },
-  ];
 
   return (
     <html
@@ -54,12 +50,7 @@ export default async function RootLayout({ children, params }) {
             <Sidebar />
             {children}
           </div>
-              <Dock 
-    items={items}
-    panelHeight={68}
-    baseItemSize={50}
-    magnification={70}
-  />
+            <Footer/>
         </NextIntlClientProvider>
       </body>
     </html>

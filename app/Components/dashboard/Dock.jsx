@@ -1,8 +1,7 @@
 'use client';
-
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'motion/react';
+import Link from 'next/link';
 import { Children, cloneElement, useEffect, useMemo, useRef, useState } from 'react';
-
 function DockItem({ children, className = '', onClick, mouseX, spring, distance, magnification, baseItemSize }) {
   const ref = useRef(null);
   const isHovered = useMotionValue(0);
@@ -82,7 +81,9 @@ export default function Dock({
   distance = 200,
   panelHeight = 64,
   dockHeight = 256,
-  baseItemSize = 50
+  baseItemSize = 50,
+  toggleTheme,
+  theme
 }) {
   const mouseX = useMotionValue(Infinity);
   const isHovered = useMotionValue(0);
@@ -93,6 +94,7 @@ export default function Dock({
   );
   const heightRow = useTransform(isHovered, [0, 1], [panelHeight, maxHeight]);
   const height = useSpring(heightRow, spring);
+
 
   return (
     <motion.div style={{ height, scrollbarWidth: 'none' }} className="mx-2 flex max-w-full items-center">
@@ -105,15 +107,19 @@ export default function Dock({
           isHovered.set(0);
           mouseX.set(Infinity);
         }}
-        className={`${className} fixed bottom-2 left-1/2 transform -translate-x-1/2 flex items-end w-fit gap-4 rounded-2xl bg-[white] border-[#dbdbdb] dark:border-neutral-700 border-2 pb-2 px-4`}
+        className={`${className}  fixed bottom-2 left-1/2 transform -translate-x-1/2 flex items-end w-fit gap-4 rounded-2xl ${theme === "dark" ? "" :"bg-[white] border-[#dbdbdb]"} dark:border-neutral-700 border-2 pb-2 px-4`}
         style={{ height: panelHeight }}
         role="toolbar"
         aria-label="Application dock"
       >
-        {items.map((item, index) => (
-          <DockItem
+        {items.map((item, index) =>{ 
+                  const handleClick = item.labelTheme === "Theme" ? toggleTheme : item.onClick;
+
+          return(
+          <Link href={item.href} key={index}>
+                      <DockItem
             key={index}
-            onClick={item.onClick}
+            onClick={handleClick}
             className={item.className}
             mouseX={mouseX}
             spring={spring}
@@ -121,10 +127,14 @@ export default function Dock({
             magnification={magnification}
             baseItemSize={baseItemSize}
           >
-            <DockIcon>{item.icon}</DockIcon>
-            <DockLabel>{item.label}</DockLabel>
+            <DockIcon className={`${theme === "dark" ? "text-white" : ""}`}>
+              {item.icon} 
+      {theme === "light" ? item.iconDark : item.iconLight}
+              </DockIcon>
+            <DockLabel>{item.label}{theme === "dark" ? item.labelDark : item.labelLight}</DockLabel>
           </DockItem>
-        ))}
+          </Link>
+        )})}
       </motion.div>
     </motion.div>
   );

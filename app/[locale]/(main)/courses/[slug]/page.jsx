@@ -1,6 +1,27 @@
 import React from "react";
-
-const page = () => {
+const api = process.env.URL_API
+async function getAllProducts() {
+  const res = await fetch(`${api}/product`); // Endpoint بيجيب كله
+  return res.json();
+}
+const page = async ({params}) => {
+  
+  const {slug , locale} = await params
+  const allProducts = await getAllProducts();
+  const productInfo = allProducts.find(
+    (p) => p.title[locale].toLowerCase().replace(/ /g, '-') === params.slug
+   );
+  console.log(`productinfo :: ${productInfo}     ///     slug :: ${slug} `);
+  
+  if (!productInfo) {
+    return <div>Product not found!</div>;
+  }
+  const id = productInfo.id;
+  // const api = ``
+  const res = await fetch(`${api}/product/${id}`);
+  const data = await res.json();
+  console.log(data);
+  
   return (
     <main className="flex-1">
       <div className="w-full bg-white dark:bg-slate-900/50">
@@ -13,7 +34,7 @@ const page = () => {
                   data-alt="A vibrant abstract gradient representing the course's topic"
                   style={{
                     backgroundImage:
-                      "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBcX9KAyjuTH5AqLGhYiLNkw_HmZkmcWESZOT2-2_JcOwzPBC2DiW5m1-QsasPKBNpuFtNSq4TGJmZSEFBb-fNowSXmOgdb7NvJP9zRJBM6jKqvI7pWLv5ry9HCe6ko3svCiBVQi6SUlzC9PadHP7JSJ4Xegrp1gp47yj4oyOdnQEoCNjVHo83gQ-8mZ0Wofb4S73U6YU-wclFsNYAN33gYNW41rHc-OaFOKnUwIH4jjUFKJ5b3_mRHGglyLhCE9SsrGCuLugw7JguW')",
+                      `url(${data.image})`,
                   }}
                 ></div>
               </div>
@@ -23,12 +44,10 @@ const page = () => {
                   USER EXPERIENCE DESIGN
                 </span>
                 <h1 className="text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white mt-2">
-                  Introduction to UX Design
+                  {data.title[locale]}
                 </h1>
                 <p className="text-slate-600 dark:text-slate-300 text-lg mt-4 max-w-3xl">
-                  Master the fundamentals of user experience design. Learn to
-                  create intuitive and user-centered digital products from
-                  scratch, from initial research to final prototype.
+                    {data.description[locale]}
                 </p>
               </div>
 
@@ -44,50 +63,12 @@ const page = () => {
                   ></div>
                   <div>
                     <p className="font-bold text-slate-900 dark:text-white">
-                      John Doe
+                      {data.instructor[locale]}
                     </p>
                     <p className="text-sm text-slate-500 dark:text-slate-400">
-                      Lead UX Designer at Google
+                      Lead at Google
                     </p>
                   </div>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <div className="flex items-center text-amber-400">
-                    <span
-                      className="material-symbols-outlined"
-                      style={{ fontSize: 20 }}
-                    >
-                      star
-                    </span>
-                    <span
-                      className="material-symbols-outlined"
-                      style={{ fontSize: 20 }}
-                    >
-                      star
-                    </span>
-                    <span
-                      className="material-symbols-outlined"
-                      style={{ fontSize: 20 }}
-                    >
-                      star
-                    </span>
-                    <span
-                      className="material-symbols-outlined"
-                      style={{ fontSize: 20 }}
-                    >
-                      star
-                    </span>
-                    <span
-                      className="material-symbols-outlined"
-                      style={{ fontSize: 20 }}
-                    >
-                      star_half
-                    </span>
-                  </div>
-                  <span className="text-slate-500 dark:text-slate-400 text-sm font-medium">
-                    4.5 (1,280 reviews)
-                  </span>
                 </div>
               </div>
             </div>
@@ -96,7 +77,7 @@ const page = () => {
               <div className="sticky top-28 bg-background-light dark:bg-background-dark rounded-xl shadow-lg p-6 border border-slate-200 dark:border-slate-800">
                 <div className="flex justify-between items-center">
                   <p className="text-4xl font-bold text-slate-900 dark:text-white">
-                    $99
+                    {data.price}
                   </p>
                   <p className="text-slate-500 dark:text-slate-400 line-through text-lg">
                     $199
@@ -183,12 +164,7 @@ const page = () => {
                     What you'll learn
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
-                    {[
-                      "Understand the core principles and methodologies of modern UX design.",
-                      "Effectively conduct user research, synthesize findings, and create user personas.",
-                      "Develop wireframes and create interactive, high-fidelity prototypes using Figma.",
-                      "Plan and execute usability tests to validate and iterate on your designs.",
-                    ].map((item, i) => (
+                    {data.whatLearn.map((item, i) => (
                       <div
                         key={i}
                         className="flex items-start gap-3 p-4 rounded-lg bg-white dark:bg-slate-800/50 shadow-sm"
@@ -200,7 +176,7 @@ const page = () => {
                           check_circle
                         </span>
                         <span className="text-slate-700 dark:text-slate-300">
-                          {item}
+                          {item[locale]}
                         </span>
                       </div>
                     ))}
@@ -214,35 +190,7 @@ const page = () => {
                   </h3>
 
                   <div className="space-y-3">
-                    {[
-                      {
-                        num: "01",
-                        title: "Introduction to UX & Design Thinking",
-                        lessons: [
-                          "Lesson 1: What is UX Design? (12:35)",
-                          "Lesson 2: The UX Design Process Overview (15:50)",
-                          "Lesson 3: Key Roles in a Modern Product Team (10:10)",
-                        ],
-                      },
-                      {
-                        num: "02",
-                        title: "User Research & Analysis",
-                        lessons: [
-                          "Lesson 1: Conducting Effective User Interviews (22:15)",
-                          "Lesson 2: Creating Surveys That Get Results (18:40)",
-                          "Lesson 3: Deep Dive into Competitive Analysis (16:05)",
-                        ],
-                      },
-                      {
-                        num: "03",
-                        title: "Prototyping, Testing & Iteration",
-                        lessons: [
-                          "Lesson 1: Low-Fidelity Wireframing Techniques (14:30)",
-                          "Lesson 2: High-Fidelity Prototyping in Figma (25:00)",
-                          "Lesson 3: Planning and Conducting Usability Testing (19:20)",
-                        ],
-                      },
-                    ].map((section, i) => (
+                    {data.courseSyllabus.map((section, i) => (
                       <details
                         key={i}
                         className="group rounded-xl bg-white dark:bg-slate-800/50 shadow-sm overflow-hidden"
@@ -251,10 +199,10 @@ const page = () => {
                         <summary className="flex cursor-pointer items-center justify-between p-5 font-medium text-slate-900 dark:text-white list-none">
                           <div className="flex items-center gap-4">
                             <span className="text-primary font-bold text-lg">
-                              {section.num}
+                              {section.moduleNumber}
                             </span>
                             <span className="font-semibold text-lg">
-                              {section.title}
+                              {section.moduleTitle[locale]}
                             </span>
                           </div>
                           <span className="ml-4 shrink-0 transition duration-300 group-open:rotate-180">
@@ -274,7 +222,7 @@ const page = () => {
                                 >
                                   play_circle
                                 </span>
-                                <span>{lesson}</span>
+                                <span>{lesson[locale]}</span>
                               </div>
                             ))}
                           </div>

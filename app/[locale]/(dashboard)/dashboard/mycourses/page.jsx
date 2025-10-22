@@ -69,7 +69,7 @@ const page = () => {
   {coursesData.map((course) => (
     <div
       key={course.id}
-      className="bg-white dark:bg-background-dark/50 rounded-xl shadow-md p-4 flex flex-col md:flex-row items-start md:items-center gap-4 group"
+      className="bg-white dark:bg-card-dark rounded-xl shadow-md p-4 flex flex-col md:flex-row items-start md:items-center gap-4 group"
     >
       <div
         className="w-full md:w-48 h-32 md:h-24 rounded-lg bg-center bg-no-repeat bg-cover"
@@ -98,13 +98,11 @@ const page = () => {
           <p className="text-slate-600 dark:text-slate-300 text-sm font-medium">
             Completion
           </p>
-          {/* استخدمنا كلاس اللون المتغير من الـ array */}
           <p className={`${course.textColor} text-sm font-bold`}>
             {course.completion}%
           </p>
         </div>
         <div className="rounded-full bg-slate-200 dark:bg-slate-700 h-2">
-          {/* استخدمنا كلاس اللون ونسبة التقدم المتغيرة */}
           <div
             className={`h-2 rounded-full ${course.bgColor}`}
             style={{ width: `${course.completion}%` }}
