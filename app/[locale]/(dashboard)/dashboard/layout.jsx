@@ -1,7 +1,11 @@
+
 import { Inter } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import "../../(main)/global.css";
+import Sidebar from "../../../Components/dashboard/sidebar";
+import Dock from '../../../Components/dashboard/Dock';
+import { VscHome, VscArchive, VscAccount, VscSettingsGear } from 'react-icons/vsc';
 
 const inter = Inter({
   subsets: ["latin"],
@@ -21,17 +25,41 @@ export default async function RootLayout({ children, params }) {
   const messages = await getMessages(locale);
   console.log(locale);
 
-  return (
-    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"} className={inter.className}>
-            <head>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
-      </head>
-      <body className="bg-background-light dark:bg-[#131c26] font-display text-text-light dark:text-text-dark">
-        <NextIntlClientProvider locale={locale} messages={messages}>
+  const items = [
+    { icon: <VscHome size={18} />, label: 'Home',  },
+    { icon: <VscArchive size={18} />, label: 'Archive',  },
+    { icon: <VscAccount size={18} />, label: 'Profile',  },
+    { icon: <VscSettingsGear size={18} />, label: 'Settings',  },
+  ];
 
-          {children}
-          
+  return (
+    <html
+      lang={locale}
+      dir={locale === "ar" ? "rtl" : "ltr"}
+      className={inter.className}
+    >
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="relative bg-background-light dark:bg-[#131c26] font-display text-text-light dark:text-text-dark">
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <div className="flex h-full grow">
+            <Sidebar />
+            {children}
+          </div>
+              <Dock 
+    items={items}
+    panelHeight={68}
+    baseItemSize={50}
+    magnification={70}
+  />
         </NextIntlClientProvider>
       </body>
     </html>
