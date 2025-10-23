@@ -27,12 +27,12 @@ export default function CourseCard({
       <div
         className={`overflow-hidden ${
           isListView
-            ? 'w-full md:w-2/5 h-48 md:h-auto' 
-            : 'w-full h-48'
+            ? 'w-full md:w-[55%] h-48 md:h-auto' 
+            : 'w-full h-80'
         }`}
       >
         <img
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          className="w-full h-full  group-hover:scale-105 transition-transform duration-300"
           src={image}
           alt={title[locale]} 
         />
@@ -51,10 +51,10 @@ export default function CourseCard({
             <h3 className="text-lg font-bold leading-tight line-clamp-2">
               {title[locale]}
             </h3>
-            <span className="text-xl font-bold text-primary ml-2">{price}</span>
+            <span className={`text-xl font-bold   ${price === 0 ? "text-green-500" : "text-primary ml-2"}`}>{price === 0 ? "Free" : price}</span>
           </div>
 
-          <p className="text-sm text-text-muted-light dark:text-text-muted-dark mb-3">
+          <p className="text-sm text-text-muted-light dark:text-text-muted-dark mb-3 ">
             By {instructor[locale]}
           </p>
 

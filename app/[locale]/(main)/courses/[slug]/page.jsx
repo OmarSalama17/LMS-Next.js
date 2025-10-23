@@ -76,15 +76,15 @@ const page = async ({params}) => {
             <div className="lg:col-span-1">
               <div className="sticky top-28 bg-background-light dark:bg-background-dark rounded-xl shadow-lg p-6 border border-slate-200 dark:border-slate-800">
                 <div className="flex justify-between items-center">
-                  <p className="text-4xl font-bold text-slate-900 dark:text-white">
-                    {data.price}
+                  <p className={`text-4xl font-bold  dark:text-white ${data.price === 0 ? "text-green-500" : " text-slate-900"}`}>
+                    {data.price === 0 ? "Free" : data.price}
                   </p>
                   <p className="text-slate-500 dark:text-slate-400 line-through text-lg">
                     $199
                   </p>
                 </div>
                 <p className="text-green-600 dark:text-green-400 font-semibold mt-1">
-                  50% off for a limited time
+                  {data.price === 0 ? "100% off for a limited time" : "50% off for a limited time"}
                 </p>
                 <button className="mt-6 flex min-w-[84px] w-full items-center justify-center rounded-lg h-14 px-5 bg-primary text-slate-50 text-lg font-bold hover:bg-primary/90 transition-all duration-300 shadow-lg shadow-primary/40 hover:shadow-xl hover:shadow-primary/50 transform hover:-translate-y-1">
                   <span className="truncate">Enroll Now</span>
