@@ -1,7 +1,9 @@
 import React from "react";
+import PathName from "../../../../Components/PathName"
+
 const api = process.env.URL_API
 async function getAllProducts() {
-  const res = await fetch(`${api}/product`); // Endpoint بيجيب كله
+  const res = await fetch(`${api}/product`);
   return res.json();
 }
 const page = async ({params}) => {
@@ -25,7 +27,10 @@ const page = async ({params}) => {
   return (
     <main className="flex-1">
       <div className="w-full bg-white dark:bg-slate-900/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-10 lg:px-20 pt-12 pb-16">
+        <div className="container mx-auto px-4 sm:px-10 lg:px-10 pt-12 pb-16">
+                            <div className="mb-8">
+          <PathName />
+      </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-12 gap-y-8">
             <div className="lg:col-span-2 flex flex-col gap-8">
               <div>
@@ -89,9 +94,6 @@ const page = async ({params}) => {
                 <button className="mt-6 flex min-w-[84px] w-full items-center justify-center rounded-lg h-14 px-5 bg-primary text-slate-50 text-lg font-bold hover:bg-primary/90 transition-all duration-300 shadow-lg shadow-primary/40 hover:shadow-xl hover:shadow-primary/50 transform hover:-translate-y-1">
                   <span className="truncate">Enroll Now</span>
                 </button>
-                <button className="mt-3 flex min-w-[84px] w-full items-center justify-center rounded-lg h-12 px-5 bg-slate-200 dark:bg-slate-700/50 text-slate-800 dark:text-slate-200 text-base font-bold hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors">
-                  <span className="truncate">Add to Wishlist</span>
-                </button>
                 <div className="text-center text-sm text-slate-500 dark:text-slate-400 mt-4">
                   30-Day Money-Back Guarantee
                 </div>
@@ -153,12 +155,10 @@ const page = async ({params}) => {
       </div>
       
       <div className="bg-background-light dark:bg-background-dark py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-10 lg:px-20">
+        <div className="container mx-auto px-4 sm:px-10 lg:px-10  py-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-16 gap-y-12">
-            {/* Left side - What you'll learn + Course syllabus */}
             <div className="lg:col-span-2">
               <div className="flex flex-col gap-12">
-                {/* What you'll learn */}
                 <div>
                   <h3 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">
                     What you'll learn
@@ -183,7 +183,6 @@ const page = async ({params}) => {
                   </div>
                 </div>
 
-                {/* Course Syllabus */}
                 <div>
                   <h3 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">
                     Course Syllabus
@@ -234,7 +233,6 @@ const page = async ({params}) => {
               </div>
             </div>
 
-            {/* Right side - Student Reviews */}
             <div className="lg:col-span-1">
               <div className="flex flex-col gap-10">
                 <div>

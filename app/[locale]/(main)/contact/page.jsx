@@ -1,4 +1,6 @@
+import PathName from "../../../Components/PathName"
 export default function page() {
+  
     const formFields = [
   {
     id: "name",
@@ -29,11 +31,7 @@ export default function page() {
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
       <div className="mb-8">
-        <div className="flex flex-wrap items-center gap-2">
-          <a className="text-gray-500 dark:text-gray-400 text-sm font-medium hover:text-primary" href="#">Home</a>
-          <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">/</span>
-          <span className="text-text-light dark:text-text-dark text-sm font-medium">Contact Us</span>
-        </div>
+          <PathName />
       </div>
 
       <div className="text-center mb-12">

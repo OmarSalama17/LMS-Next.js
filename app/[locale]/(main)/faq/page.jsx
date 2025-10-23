@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import PathName from "../../../Components/PathName"
 
 export default function FAQPage() {
   const [openFAQ, setOpenFAQ] = useState([true, false, false]);
@@ -15,27 +16,21 @@ export default function FAQPage() {
 
   return (
     <div className="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden bg-background-light dark:bg-background-dark font-display text-[#111418] dark:text-white">
-      {/* Header */}
-      {/* Main */}
+
       <main className="flex-grow">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-          {/* Breadcrumb */}
-          <div className="flex flex-wrap gap-2 pb-6">
-            <a className="text-[#617589] dark:text-gray-400 text-sm font-medium" href="#">
-              Home
-            </a>
-            <span className="text-[#617589] dark:text-gray-400 text-sm font-medium">/</span>
-            <span className="text-[#111418] dark:text-white text-sm font-medium">FAQs</span>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-[80px]">
+          <div>
+                  <div className="mb-8">
+          <PathName />
+      </div>
           </div>
 
-          {/* Title */}
           <div className="flex flex-wrap justify-between gap-3 pb-8">
             <p className="text-[#111418] dark:text-white text-4xl font-black leading-tight min-w-72">
               Frequently Asked Questions
             </p>
           </div>
 
-          {/* Search */}
           <div className="pb-8">
             <label className="flex flex-col min-w-40 h-12 w-full max-w-2xl mx-auto">
               <div className="flex w-full flex-1 items-stretch rounded-lg h-full shadow-sm">
@@ -51,9 +46,7 @@ export default function FAQPage() {
             </label>
           </div>
 
-          {/* FAQ Section */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-            {/* Sidebar */}
             <aside className="md:col-span-3">
               <div className="sticky top-24">
                 <div className="pb-3">
@@ -79,7 +72,6 @@ export default function FAQPage() {
               </div>
             </aside>
 
-            {/* FAQ Content */}
             <div className="md:col-span-9 space-y-4">
               {[
                 {
@@ -135,7 +127,6 @@ export default function FAQPage() {
                 </div>
               ))}
 
-              {/* Support Section */}
               <div className="mt-12 p-6 bg-white dark:bg-gray-800 rounded-lg text-center">
                 <h3 className="text-xl font-bold mb-2">Can't find an answer?</h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
@@ -150,7 +141,6 @@ export default function FAQPage() {
         </div>
       </main>
 
-      {/* Back to top */}
       {backToTopVisible && (
         <button
           className="fixed bottom-5 right-5 bg-primary text-white p-3 rounded-full shadow-lg hover:bg-primary/90 transition-opacity"
@@ -160,7 +150,6 @@ export default function FAQPage() {
         </button>
       )}
 
-      {/* Modal */}
       {modalOpen && (
         <div
           className="fixed inset-0 z-50 overflow-y-auto flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0"

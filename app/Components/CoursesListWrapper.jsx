@@ -2,6 +2,7 @@
 import React, { useState, useMemo , useEffect} from "react";
 import CourseCard from "./CoursesCard";
 import FilterSidebar from "./filter";
+import PathName from "./PathName";
 
 const ITEMS_PER_PAGE = 6
 const CoursesListWrapper = ({ initialCourses, locale }) => {
@@ -82,7 +83,10 @@ const CoursesListWrapper = ({ initialCourses, locale }) => {
   console.log(initialCourses);
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-[80px]">
+                    <div className="mb-8">
+          <PathName />
+      </div>
       <div className="flex flex-col xl:flex-row gap-12">
         <FilterSidebar
           onApplyFilters={setFilters}

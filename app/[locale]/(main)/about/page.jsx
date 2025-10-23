@@ -1,3 +1,4 @@
+import PathName from "../../../../app/Components/PathName";
 import React from "react";
 
 const page = () => {
@@ -57,7 +58,10 @@ const page = () => {
 
   return (
     <div className="flex h-full grow flex-col">
-      <div className="container mx-auto px-4 sm:px-8 py-5">
+      <div className="container mx-auto px-4 sm:px-8 py-[80px]">
+            <div className="mb-8">
+          <PathName />
+      </div>
         <div className="max-w-7xl mx-auto">
           <div className="@container">
             <div className="@[480px]:p-4">

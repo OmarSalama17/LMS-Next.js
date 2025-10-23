@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import PathName from "../../../../app/Components/PathName";
 
 const newsData = [
   {
@@ -66,7 +67,10 @@ export default function page() {
       : newsData.filter((item) => item.category === selectedCategory);
 
   return (
-    <main className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-[80px]">
+                  <div className="mb-8">
+          <PathName />
+      </div>
       <div className="flex flex-wrap justify-between gap-3 p-4 py-8">
         <p className="text-gray-900 dark:text-white text-4xl font-black leading-tight tracking-[-0.033em] min-w-72">
           LMS News & Updates
