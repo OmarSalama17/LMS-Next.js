@@ -2,17 +2,17 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@theme{
+@theme {
   --color-primary: #3b82f6;
   --color-background-light: #f8f9fa;
   --color-primary-light: #E9F2FF;
   --color-background-dark: #0B1117;
   --color-off-white: #F8F9FA;
   --color-text: #6C757D;
-  --color-brand:#005792;
-  --color-brand-blue:#005792;
-  --color-text-light:#1F2937;
-  --color-bg-primary:#E9F2FF;
+  --color-brand: #005792;
+  --color-brand-blue: #005792;
+  --color-text-light: #1F2937;
+  --color-bg-primary: #E9F2FF;
   --color-background-dark: #131c26;
   --color-background-dd: "#131c26";
   --color-secondary: #FFA500;
@@ -20,7 +20,7 @@
   --color-border-dark: #343A40;
   --color-card-light: #FFFFFF;
   --color-card-dark: #1A202C;
-  --color-text-dark:#F8F9FA;
+  --color-text-dark: #F8F9FA;
 }
 
 /* :root {
@@ -71,17 +71,20 @@ body {
 .to-accent-purple {
   background-image: linear-gradient(to right, transparent, #9a5eed);
 }
+
 /* ---home--- */
-.cl-userButtonPopoverFooter{
-  display:  none !important;
-}
-.cl-internal-1dauvpw{
+.cl-userButtonPopoverFooter {
   display: none !important;
 }
-.cl-internal-15hkgn2{
-background: repeating-linear-gradient(-45deg,
- color-mix(in srgb, transparent, var(--clerk-color-warning, #fff) 7%),
- color-mix(in srgb, transparent, var(--clerk-color-warning, #fff) 7%) 6px,
- color-mix(in srgb, transparent, var(--clerk-color-warning, #fff) 11%) 6px,
- color-mix(in srgb, transparent, var(--clerk-color-warning, #fff) 11%) 12px);
+
+.cl-internal-1dauvpw {
+  display: none !important;
+}
+
+.cl-internal-15hkgn2 {
+  background: repeating-linear-gradient(-45deg,
+      color-mix(in srgb, transparent, var(--clerk-color-warning, #fff) 7%),
+      color-mix(in srgb, transparent, var(--clerk-color-warning, #fff) 7%) 6px,
+      color-mix(in srgb, transparent, var(--clerk-color-warning, #fff) 11%) 6px,
+      color-mix(in srgb, transparent, var(--clerk-color-warning, #fff) 11%) 12px);
 }

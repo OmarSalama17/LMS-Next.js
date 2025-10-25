@@ -1,12 +1,14 @@
 import Image from "next/image";
 import DarkVeil from './Prism';
-
-import { useTranslations } from "next-intl";
-import LanguageSwitcher from "../../Components/langSwitcher";
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
+import FeaturedCourses from "../../Components/FeaturedCourses";
 
-export default function Home() {
-  const t = useTranslations("home");
+export default async function Home({ params }) {
+  const { locale } = await params;
+  const res = await fetch(`${process.env.URL_API}/product`);
+  const data = await res.json();
+const t = await getTranslations("home");
   const categories = [
     {
       title: "Development",
@@ -254,64 +256,7 @@ export default function Home() {
         </div>
       </section>
 
-    <section className="py-20 sm:py-24 bg-primary-light dark:bg-gray-900/50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-wrap justify-between items-center mb-12 gap-4">
-          <h2 className="text-4xl font-bold tracking-tight dark:text-white">Featured Courses</h2>
-          <div className="flex items-center gap-2">
-            <button className="p-3 rounded-full bg-white dark:bg-gray-800 shadow-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-              <span className="material-symbols-outlined dark:text-white">arrow_back</span>
-            </button>
-            <button className="p-3 rounded-full bg-white dark:bg-gray-800 shadow-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-              <span className="material-symbols-outlined dark:text-white">arrow_forward</span>
-            </button>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredCourses.map((course, index) => (
-            <div
-              key={index}
-              className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-soft dark:shadow-soft-dark border border-gray-200 dark:border-gray-700 flex flex-col"
-            >
-              <img
-                className="h-56 w-full object-cover"
-                src={course.image}
-                alt={course.title}
-              />
-              <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-xl font-bold leading-tight flex-grow">
-                  {course.title}
-                </h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400 my-2">
-                  By {course.instructor}
-                </p>
-                <div className="flex items-center">
-                  <div className="flex text-secondary">
-                    {renderStars(course.rating)}
-                  </div>
-                  <span className="ml-2 text-sm text-gray-500 dark:text-gray-300">
-                    {course.rating} ({course.reviews.toLocaleString()})
-                  </span>
-                </div>
-                <div className="mt-4 flex justify-between items-center">
-                  <div
-                    className={`text-2xl font-bold ${
-                      course.isFree ? "text-green-500" : "text-primary"
-                    }`}
-                  >
-                    {course.price}
-                  </div>
-                  <button className="px-6 py-2.5 text-base font-semibold rounded-full bg-primary text-white hover:bg-primary/90 transition-colors shadow-sm">
-                    Enroll Now
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+            <FeaturedCourses data={data} locale={locale}/>
 
     <section className="py-20 sm:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
