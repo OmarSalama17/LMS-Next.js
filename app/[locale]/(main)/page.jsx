@@ -173,12 +173,12 @@ export default function Home() {
                   <img
                     className="absolute top-0 left-0 w-3/4 h-3/4 object-cover rounded-3xl shadow-soft dark:shadow-soft-dark border border-white/20 dark:border-gray-800/50 transform -rotate-12 hover:rotate-0 hover:scale-105 transition-transform duration-500"
                     alt="Female student smiling and learning on a laptop"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRJPnvSWiwTZYGmKJdi_vF9LZS7Id1splML7iE7YozeG3U_gy5tiRwLn-4iqghxBALg-fuIvOXMj0Y8EOq8InUKQUzqbq2pYD6naexPCiN1DVGMg25fg-cVxeXFnKl3SysV3h9lvH_n_mAkKPrHQniIDh7o-uT9_8yl5AH0Qcd7iSDe0wpnxYrQTYBnDDWy8kba0lUuTInIgw8mLAjgV7NRP1-EZw-FDrTHak0PBsX36Viw70qEMi3DBWzBFVfYVJGMXTJMsz0CYQf"
+                    src="https://www.atomcamp.com/wp-content/uploads/2024/01/image-1-1024x705.png"
                   />
                   <img
                     className="absolute bottom-0 right-0 w-2/3 h-2/3 object-cover rounded-3xl shadow-soft dark:shadow-soft-dark border border-white/20 dark:border-gray-800/50 transform rotate-12 hover:rotate-0 hover:scale-105 transition-transform duration-500 z-10"
                     alt="Male instructor teaching in a classroom"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6wTuX84Bgo33yeqvduWYiSN0WQVq-orNsZAUri2qfkIiO7sXlR3TPNwhFvH4F9MO-QNqJgWyA2LZxMI_aAaV-46JFj8-lpIAJBOKjG6Ayt2uZQlJOsItwQM9Kv0Qu4Qim6CituVKJx5EVG1zMLUFufenOn6GFESMhXrE3jH0z34bRJw5HdBwnYF8zjMkwNuyk0KsmLEq-WlM_CaiJZQ38kW-VYVi5vCJPP8TFpIMJp5jlCdkWnFi5ZSEDpvPJ73Ji2nImx8jW5ldC"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhcfBbw8ccJ_HiMT7UKnTQVNWmBuQngi5w4kjRo462WWfO_45k70r1mbEpHr_OlfVbAJdXmMeyua7JsCqqboZkqIdtG7eBAh2o9PLizGFD6zzasnM7XrDGGMx--6U6WyZ794GwZStTjhfVDDKdTcqxrzaCQitEdTTY7_xh-ya8I8ppeQo9jCIaqfEz1C8usWjWehMNNViq5GHjyXPOUT2uBjm0HmqQ41In_fkRPshRIwVgpQyJY_c53WNtWVn0T9JH_idh8vYcUveu"
                   />
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent-purple/10 dark:from-primary/20 dark:to-accent-purple/20 rounded-3xl -z-10 blur-2xl"></div>
                 </div>

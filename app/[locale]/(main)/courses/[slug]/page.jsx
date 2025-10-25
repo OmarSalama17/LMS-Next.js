@@ -27,7 +27,7 @@ const page = async ({params}) => {
   return (
     <main className="flex-1">
       <div className="w-full bg-white dark:bg-slate-900/50">
-        <div className="container mx-auto px-4 sm:px-10 lg:px-10 pt-12 pb-16">
+        <div className="container mx-auto px-4 sm:px-10 lg:px-10n pt-12 pb-16">
                             <div className="mb-8">
           <PathName />
       </div>

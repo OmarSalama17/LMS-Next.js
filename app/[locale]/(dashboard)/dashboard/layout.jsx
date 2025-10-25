@@ -4,9 +4,6 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import "../../(main)/global.css";
 import Sidebar from "../../../Components/dashboard/sidebar";
-import Dock from '../../../Components/dashboard/Dock';
-import { DarkIcon } from "../../../Components/DarkIcon";
-import { LightIcon } from "../../../Components/LightIcon";
 import Footer from "../../../Components/dashboard/Footer";
 
 const inter = Inter({
@@ -29,22 +26,6 @@ export default async function RootLayout({ children, params }) {
 
 
   return (
-    <html
-      lang={locale}
-      dir={locale === "ar" ? "rtl" : "ltr"}
-      className={inter.className}
-    >
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="relative bg-background-light dark:bg-[#131c26] font-display text-text-light dark:text-text-dark">
         <NextIntlClientProvider locale={locale} messages={messages}>
           <div className="flex h-full grow">
             <Sidebar />
@@ -52,7 +33,5 @@ export default async function RootLayout({ children, params }) {
           </div>
             <Footer/>
         </NextIntlClientProvider>
-      </body>
-    </html>
   );
 }

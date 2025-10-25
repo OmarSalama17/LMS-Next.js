@@ -83,7 +83,7 @@ export default function Dock({
   dockHeight = 256,
   baseItemSize = 50,
   toggleTheme,
-  theme
+  theme,
 }) {
   const mouseX = useMotionValue(Infinity);
   const isHovered = useMotionValue(0);

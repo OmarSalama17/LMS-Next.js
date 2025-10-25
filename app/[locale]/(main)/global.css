@@ -72,3 +72,16 @@ body {
   background-image: linear-gradient(to right, transparent, #9a5eed);
 }
 /* ---home--- */
+.cl-userButtonPopoverFooter{
+  display:  none !important;
+}
+.cl-internal-1dauvpw{
+  display: none !important;
+}
+.cl-internal-15hkgn2{
+background: repeating-linear-gradient(-45deg,
+ color-mix(in srgb, transparent, var(--clerk-color-warning, #fff) 7%),
+ color-mix(in srgb, transparent, var(--clerk-color-warning, #fff) 7%) 6px,
+ color-mix(in srgb, transparent, var(--clerk-color-warning, #fff) 11%) 6px,
+ color-mix(in srgb, transparent, var(--clerk-color-warning, #fff) 11%) 12px);
+}
