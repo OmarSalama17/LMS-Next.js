@@ -11,7 +11,7 @@ export default async function Home({ params }) {
 const t = await getTranslations("home");
   const categories = [
     {
-      title: "Development",
+      title: t("Categories.Category1"),
       icon: "code",
       img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCQJEVCMIO72oc_Dc19I-W7MRr-TyzckvzrufHxJorxCkmKMrG2Dn_KkFMS3wLHuExdM6Bpz1OniX8Qnp1TepACBkVJFalbt8s6ug_X69Ms7arBd5SYEHFBq6XUC72zycviFWJsnGoY0AjIV9p5p2UqIJvUf5p1fHbpBLmw8Uuyr5eJKWl9F1uSNR2vU82PJVb0NvmoaxBoiU6MK_JlBDpnl51z9eyLB96X0zUceIzaAszLv1rAG3TnpZCfTVrzjdNJGvApbdeK-141",
       bgColor: "bg-primary",
@@ -19,7 +19,7 @@ const t = await getTranslations("home");
       alt: "Laptop with code on screen",
     },
     {
-      title: "Design",
+      title: t("Categories.Category2"),
       icon: "palette",
       img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAnbJC9sYsRaOGY15x7Lr6-2mMWZOsJq_yqu7KCAvpcRYhnwGUjQop5jA7jfeUTnVXJ_BJZ0nq0ue8IDEq_yA6OEXqAAyQFyJNj5oBm5sdIR3OBuHiuwGIpd0eRbWBx-HPUszXVxS469g3LG72yqI2dl7ysjXZxpz3I33z3RyNNLRzbY7lzrtAlC-yLBYjILCuILDVNktcCeCus6tSvbXozlgseR6_kqjJLPQyG0H2rPHe7BVeTHUmZRgtswtfX_F_Jr2EkYvFONrYw",
       bgColor: "bg-[#fb5607]",
@@ -27,7 +27,7 @@ const t = await getTranslations("home");
       alt: "Person sketching on a tablet",
     },
     {
-      title: "Business",
+      title: t("Categories.Category3"),
       icon: "insights",
       img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDWnk8_g8uo57MMJBnQIMqRQdg0auK0hOUnFWdZohbjyI8IA9TLTJJLjYBpHwS3gqeyHZm5X52Nl2EH0_8sEl8MWjKDwuyQ6MP-bRhQ_V_QDXTg4iI845PEj4QRZkoe3t6jeeKavONt47jYYrIJEhF-QRP8xNNgJ_J4QxYmq2VtZPCofD0W0Y6U0iezYRr1EuVgKMXeoeewO0oYFnD7AJNtlQQ7kV7BqroC_1g-6Tv8mtWWysoFEpFD0BdpeA8kO0scocUJbiVVDs-F",
       bgColor: "bg-[#ffbe0b]",
@@ -35,7 +35,7 @@ const t = await getTranslations("home");
       alt: "Business meeting with charts",
     },
     {
-      title: "View All",
+      title: t("Categories.Category4"),
       icon: "arrow_forward",
       img: null,
       bgColor: "bg-gray-300 ",
@@ -44,56 +44,23 @@ const t = await getTranslations("home");
     },
   ];
 
-  const featuredCourses = [
-    {
-      title: "The Complete Web Developer Course 3.0",
-      instructor: "Angela Yu",
-      image:
-        "https://lh3.googleusercontent.com/aida-public/AB6AXuCQJEVCMIO72oc_Dc19I-W7MRr-TyzckvzrufHxJorxCkmKMrG2Dn_KkFMS3wLHuExdM6Bpz1OniX8Qnp1TepACBkVJFalbt8s6ug_X69Ms7arBd5SYEHFBq6XUC72zycviFWJsnGoY0AjIV9p5p2UqIJvUf5p1fHbpBLmw8Uuyr5eJKWl9F1uSNR2vU82PJVb0NvmoaxBoiU6MK_JlBDpnl51z9eyLB96X0zUceIzaAszLv1rAG3TnpZCfTVrzjdNJGvApbdeK-141",
-      rating: 4.7,
-      reviews: 12450,
-      price: "$89.99",
-      isFree: false,
-    },
-    {
-      title: "Data Science & Machine Learning Bootcamp",
-      instructor: "Jose Portilla",
-      image:
-        "https://lh3.googleusercontent.com/aida-public/AB6AXuDWnk8_g8uo57MMJBnQIMqRQdg0auK0hOUnFWdZohbjyI8IA9TLTJJLjYBpHwS3gqeyHZm5X52Nl2EH0_8sEl8MWjKDwuyQ6MP-bRhQ_V_QDXTg4iI845PEj4QRZkoe3t6jeeKavONt47jYYrIJEhF-QRP8xNNgJ_J4QxYmq2VtZPCofD0W0Y6U0iezYRr1EuVgKMXeoeewO0oYFnD7AJNtlQQ7kV7BqroC_1g-6Tv8mtWWysoFEpFD0BdpeA8kO0scocUJbiVVDs-F",
-      rating: 4.8,
-      reviews: 18991,
-      price: "Free",
-      isFree: true,
-    },
-    {
-      title: "Ultimate Guide to Digital Sketching",
-      instructor: "Austin Batchelor",
-      image:
-        "https://lh3.googleusercontent.com/aida-public/AB6AXuAnbJC9sYsRaOGY15x7Lr6-2mMWZOsJq_yqu7KCAvpcRYhnwGUjQop5jA7jfeUTnVXJ_BJZ0nq0ue8IDEq_yA6OEXqAAyQFyJNj5oBm5sdIR3OBuHiuwGIpd0eRbWBx-HPUszXVxS469g3LG72yqI2dl7ysjXZxpz3I33z3RyNNLRzbY7lzrtAlC-yLBYjILCuILDVNktcCeCus6tSvbXozlgseR6_kqjJLPQyG0H2rPHe7BVeTHUmZRgtswtfX_F_Jr2EkYvFONrYw",
-      rating: 4.6,
-      reviews: 8230,
-      price: "$49.99",
-      isFree: false,
-    },
-  ];
-
   const testimonials = [
     {
-      name: "Jane Doe",
-      role: "Web Developer",
+      name: t("review.review1.name"),
+      role: t("review.review1.role"),
       image:
         "https://lh3.googleusercontent.com/aida-public/AB6AXuDRJPnvSWiwTZYGmKJdi_vF9LZS7Id1splML7iE7YozeG3U_gy5tiRwLn-4iqghxBALg-fuIvOXMj0Y8EOq8InUKQUzqbq2pYD6naexPCiN1DVGMg25fg-cVxeXFnKl3SysV3h9lvH_n_mAkKPrHQniIDh7o-uT9_8yl5AH0Qcd7iSDe0wpnxYrQTYBnDDWy8kba0lUuTInIgw8mLAjgV7NRP1-EZw-FDrTHak0PBsX36Viw70qEMi3DBWzBFVfYVJGMXTJMsz0CYQf",
       quote:
-        '"LearnSphere completely transformed my career. The courses are practical, engaging, and taught by true industry experts. Highly recommended!"',
+        t("review.review1.title"),
       rating: 5,
     },
     {
-      name: "John Smith",
-      role: "Data Analyst",
+      name: t("review.review2.name"),
+      role: t("review.review2.role"),
       image:
         "https://lh3.googleusercontent.com/aida-public/AB6AXuB6wTuX84Bgo33yeqvduWYiSN0WQVq-orNsZAUri2qfkIiO7sXlR3TPNwhFvH4F9MO-QNqJgWyA2LZxMI_aAaV-46JFj8-lpIAJBOKjG6Ayt2uZQlJOsItwQM9Kv0Qu4Qim6CituVKJx5EVG1zMLUFufenOn6GFESMhXrE3jH0z34bRJw5HdBwnYF8zjMkwNuyk0KsmLEq-WlM_CaiJZQ38kW-VYVi5vCJPP8TFpIMJp5jlCdkWnFi5ZSEDpvPJ73Ji2nImx8jW5ldC",
       quote:
-        '"The flexibility of learning on my own schedule was a game changer. I could finally pursue my passion for data science without quitting my job."',
+        t("review.review2.title"),
       rating: 5,
     },
   ];
@@ -148,20 +115,19 @@ const t = await getTranslations("home");
           <div className="grid lg:grid-cols-5 gap-16 items-center">
             <div className="lg:col-span-3 text-center lg:text-left">
               <h1 className="text-5xl sm:text-6xl lg:text-8xl font-extrabold tracking-tighter text-text-light dark:text-white leading-tight">
-                Unlock Your Potential.{" "}
-                <span className="text-primary">Master New Skills.</span>
+                {t("landing.title")}
+                <span className="text-primary"> {t("landing.primary")}</span>
               </h1>
               <p className="mt-8 max-w-2xl mx-auto lg:mx-0 text-xl sm:text-2xl text-gray-600 dark:text-gray-400">
-                Join millions of learners from around the globe. Discover
-                expert-led courses and accelerate your journey to success today.
+                {t("landing.description")}
               </p>
 
               <div className="mt-12 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                 <button className="w-full sm:w-auto px-10 py-5 text-xl font-bold rounded-full bg-primary text-white hover:bg-primary/90 transition-all duration-300 transform hover:scale-105 shadow-lg">
-                  Find Your Course
+                  {t("landing.btn1")}
                 </button>
                 <button className="w-full sm:w-auto px-10 py-5 text-xl font-bold rounded-full bg-primary-light dark:bg-gray-800 text-primary dark:text-text-dark hover:bg-primary/20 dark:hover:bg-gray-700 transition-colors flex items-center gap-2 group">
-                  <span>Start Teaching</span>
+                  <span>{t("landing.btn2")}</span>
                   <span className="material-symbols-outlined transition-transform group-hover:translate-x-1">
                     arrow_forward
                   </span>
@@ -194,10 +160,10 @@ const t = await getTranslations("home");
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold tracking-tight dark:text-white">
-              Explore Popular Categories
+              {t("Categories.title")}
             </h2>
             <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
-              Dive into subjects that spark your curiosity.
+              {t("Categories.description")}
             </p>
           </div>
 
@@ -301,24 +267,23 @@ const t = await getTranslations("home");
             <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-white/20 rounded-full opacity-50"></div>
             <div className="relative z-10">
               <h2 className="text-4xl font-bold text-white mb-4 tracking-tight">
-                Join Millions of Learners
+                {t("learners.title")}
               </h2>
               <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">
-                Embark on your learning journey today. With expert instructors
-                and a global community, you're in good company.
+                  {t("learners.description")}
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <button
                   aria-label="Start Learning"
                   className="px-8 py-4 text-base font-bold rounded-full bg-white text-primary hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-white transition-transform hover:scale-105 shadow-lg"
                 >
-                  Start Learning
+                  {t("learners.btn")}
                 </button>
                 <button
                   aria-label="Become an Instructor"
                   className="px-8 py-4 text-base font-bold rounded-full bg-white/20 text-white hover:bg-white/30 focus:outline-none focus:ring-4 focus:ring-white transition-colors"
                 >
-                  Become an Instructor
+                  {t("learners.btn2")}
                 </button>
               </div>
             </div>
