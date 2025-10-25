@@ -1,40 +1,46 @@
-// 1. استورد createRouteMatcher
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'; 
 import createIntlMiddleware from 'next-intl/middleware';
 
-// 2. جهز الـ middleware بتاع اللغات (زي ما هو)
+// 1. جهز الـ middleware بتاع اللغات (زي ما هو)
 const intlMiddleware = createIntlMiddleware({
   locales: ['en', 'ar'],
   defaultLocale: 'en',
 });
 
-// 3. حدد الصفحات اللي عايز تحميها (لازم تشمل اللغات)
+// 2. حدد الصفحات اللي عايز تحميها (زي ما هو)
 const isProtectedRoute = createRouteMatcher([
-  '/(ar|en)/dashboard(.*)',   // مثال: حماية الداشبورد وكل اللي جواها
-  '/(ar|en)/settings',       // مثال: حماية صفحة الإعدادات
-  // ضيف أي صفحات تانية هنا
+  '/(ar|en)/dashboard(.*)',
+  '/(ar|en)/settings',
+  '/(ar|en)/checkout' 
 ]);
 
-// 4. عدّل الـ export بتاعك
+// 3. (!!  هنا التعديل !!)
 export default clerkMiddleware( async (auth, req) => {
   
-  // 5. شغّل intlMiddleware الأول (ده بيظبط اللغة)
+  // (الخطوة 1)
+  // شغل intlMiddleware الأول عشان يظبط المسار واللغة
   const response = intlMiddleware(req);
 
-  // 6. اعمل check: لو الصفحة دي محمية، اطلب تسجيل الدخول
+  // (الخطوة 2)
+  // دلوقتي شغل auth() عشان تحمل السيشن للمسار "الجديد" (اللي فيه ar أو en)
+  // ده اللي هيخلي auth() تشتغل جوه الـ Server Actions
+  await auth(); 
+
+  // (الخطوة 3)
+  // احمي الصفحة لو محتاجة حماية
   if (isProtectedRoute(req)) {
     await auth.protect();
   }
 
-  // 7. رجّع الـ response
+  // (الخطوة 4)
+  // رجّع الـ response
   return response;
 });
 
 
 export const config = {
   matcher: [
-    '/((?!.*\\..*|_next).*)', 
-    '/', 
-    '/(api|trpc)(.*)'
-  ]
+    // القاعدة دي سليمة وممتازة، سيبها زي ما هي
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+  ],
 };

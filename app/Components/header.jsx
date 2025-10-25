@@ -19,7 +19,7 @@ export default function Header() {
   ];
 
   const { user } = useUser();
-  console.log(user);
+  // console.log(user);
 
   return (
     <ThemeController>
@@ -31,7 +31,7 @@ export default function Header() {
                 theme === "dark" ? "bg-white rounded-md p-[2px]" : ""
               }`}
             >
-              <img className="w-[130px]" src="/EduPro Logo Design.png" alt="" />
+              <img className="w-[130px]" src="https://res.cloudinary.com/dr2dnmx76/image/upload/v1761406970/EduProLogoDesign_pg337l.png" alt="" />
             </div>
 
             <nav className="hidden md:flex items-center gap-8">

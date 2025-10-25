@@ -15,7 +15,7 @@ export default async function Page({ params }) {
   const { locale } = await params;
 
   const coursesData = await getCoursesData();
-  console.log(coursesData);
+  // console.log(coursesData);
 
 return <CoursesListWrapper initialCourses={coursesData} locale={locale}/>
 }

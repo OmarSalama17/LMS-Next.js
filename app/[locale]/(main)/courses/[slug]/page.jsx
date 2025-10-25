@@ -1,5 +1,6 @@
 import React from "react";
 import PathName from "../../../../Components/PathName";
+import EnrollButton from "../../../../Components/EnrollButton";
 
 const api = process.env.URL_API;
 async function getAllProducts() {
@@ -18,7 +19,7 @@ const page = async ({ params }) => {
 
     return slugEN === deCodeSlug || slugAR === deCodeSlug;
   });
-  console.log("productinfo :: ", productInfo, "slug :: ", deCodeSlug);
+  // console.log("productinfo :: ", productInfo, "slug :: ", deCodeSlug);
 
   if (!productInfo) {
     return <div>Product not found!</div>;
@@ -27,7 +28,7 @@ const page = async ({ params }) => {
   // const api = ``
   const res = await fetch(`${api}/product/${id}`);
   const data = await res.json();
-  console.log(data);
+  // console.log(data);
 
   return (
     <main className="flex-1">
@@ -101,9 +102,7 @@ const page = async ({ params }) => {
                     ? "100% off for a limited time"
                     : "50% off for a limited time"}
                 </p>
-                <button className="mt-6 flex min-w-[84px] w-full items-center justify-center rounded-lg h-14 px-5 bg-primary text-slate-50 text-lg font-bold hover:bg-primary/90 transition-all duration-300 shadow-lg shadow-primary/40 hover:shadow-xl hover:shadow-primary/50 transform hover:-translate-y-1">
-                  <span className="truncate">Enroll Now</span>
-                </button>
+                  <EnrollButton courseId={data.id} locale={locale}/>
                 <div className="text-center text-sm text-slate-500 dark:text-slate-400 mt-4">
                   30-Day Money-Back Guarantee
                 </div>

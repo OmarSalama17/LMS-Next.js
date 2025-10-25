@@ -23,9 +23,9 @@ const CoursesListWrapper = ({ initialCourses, locale }) => {
     // filter categories
     if (filters.category) {
       filtered = filtered.filter((course) =>
-        course.categories[locale].includes(filters.category)
-      );
+        course.categories[locale] === filters.category)
     }
+    
 
     // filter level
     if (filters.level.length > 0) {
@@ -80,7 +80,7 @@ const CoursesListWrapper = ({ initialCourses, locale }) => {
     setCurrentPage(1);
   }, [filters, sortBy]);
 
-  console.log(initialCourses);
+  // console.log(initialCourses);
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-[80px]">
