@@ -1,7 +1,7 @@
 import Image from "next/image";
 import DarkVeil from './Prism';
 import { getTranslations } from "next-intl/server";
-import Link from "next/link";
+import {Link} from "../../../src/i18n/navigation";
 import FeaturedCourses from "../../Components/FeaturedCourses";
 
 export default async function Home({ params }) {
@@ -17,6 +17,7 @@ const t = await getTranslations("home");
       bgColor: "bg-primary",
       isViewAll: false,
       alt: "Laptop with code on screen",
+      href: "/courses?cat=Programming"
     },
     {
       title: t("Categories.Category2"),
@@ -25,6 +26,7 @@ const t = await getTranslations("home");
       bgColor: "bg-[#fb5607]",
       isViewAll: false,
       alt: "Person sketching on a tablet",
+      href: "/courses?cat=Design"
     },
     {
       title: t("Categories.Category3"),
@@ -33,6 +35,7 @@ const t = await getTranslations("home");
       bgColor: "bg-[#ffbe0b]",
       isViewAll: false,
       alt: "Business meeting with charts",
+      href: "/courses?cat=Business"
     },
     {
       title: t("Categories.Category4"),
@@ -41,6 +44,7 @@ const t = await getTranslations("home");
       bgColor: "bg-gray-300 ",
       isViewAll: true,
       alt: "",
+      href: "/courses"
     },
   ];
 
@@ -167,7 +171,8 @@ const t = await getTranslations("home");
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {categories.map((cat, index) => (
-              <div
+              <Link
+              href={`${cat.href}`}
                 key={index}
                 className={`group relative overflow-hidden rounded-xl border border-gray-200  hover:shadow-xl hover:-translate-y-2 transition-all duration-300 ${
                   cat.isViewAll
@@ -214,7 +219,7 @@ const t = await getTranslations("home");
                     {cat.title}
                   </h3>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

@@ -1,5 +1,6 @@
 "use client";
 import React, { useMemo } from "react";
+import EnrollButton from "./EnrollButton";
 
 const FeaturedCourses = ({ data, locale }) => {
   const featuredCourses = useMemo(() => {
@@ -69,7 +70,7 @@ const FeaturedCourses = ({ data, locale }) => {
                     {course.rating} ({course.reviews.toLocaleString()})
                   </span>
                 </div>
-                <div className="mt-4 flex justify-between items-center">
+                <div className="mt-4 flex flex-col justify-between items-center">
                   <div
                     className={`text-2xl font-bold ${
                       course.price === 0 ? "text-green-500" : "text-primary"
@@ -77,9 +78,7 @@ const FeaturedCourses = ({ data, locale }) => {
                   >
                     {course.price ? `$${course.price}` : "Free"}
                   </div>
-                  <button className="px-6 py-2.5 text-base font-semibold rounded-full bg-primary text-white hover:bg-primary/90 transition-colors shadow-sm">
-                    Enroll Now
-                  </button>
+                  <EnrollButton courseId={data.id} locale={locale}/>
                 </div>
               </div>
             </div>

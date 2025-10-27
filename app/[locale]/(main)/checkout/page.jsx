@@ -3,12 +3,12 @@
 import { useSearchParams, useRouter, useParams } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import toast, { Toaster } from "react-hot-toast";
-// (!! اتأكد إن المسار ده صح بعد ما نقلت الفولدر !!)
-import { enrollCourseAction } from "../../../actions/enrollCourse"; 
+import { enrollCourseAction } from "../../../actions/enrollCourse";
 import { useUser } from "@clerk/nextjs";
+import { send } from "process";
 
 export default function Page() {
-  const router = useRouter(); // (!! هنستخدم ده للـ redirect !!)
+  const router = useRouter(); 
   const { user } = useUser();
 
   const [course, setCourse] = useState(null);
@@ -21,7 +21,6 @@ export default function Page() {
   const courseId = searchParams.get("courseId");
   const locale = params.locale;
 
-  // Fetch course data (الكود بتاعك زي ما هو)
   useEffect(() => {
     if (!courseId) {
       toast.error("No course selected.");
@@ -49,8 +48,6 @@ export default function Page() {
     fetchCourse();
   }, [courseId, router]);
 
-  
-  // (!!  هنا التعديل كله  !!)
   const handlePayment = async () => {
     if (!courseId) {
       toast.error("Cannot process payment without a course.");
@@ -59,33 +56,63 @@ export default function Page() {
 
     startTransition(async () => {
       try {
-        // (1) هننادي الأكشن زي ما هو
-        const response = await enrollCourseAction(courseId); // Server Action
+        const response = await enrollCourseAction(courseId); 
 
-        // (2) هنتأكد من الرد اللي راجع
         if (response.success) {
-          // (3) لو نجح، اعرض رسالة نجاح
-          toast.success(response.message || "Payment successful! Redirecting...");
-          
-          // (4) الكلاينت هو اللي يعمل redirect
-          router.push('/dashboard'); 
-        
-        } else {
-          // (5) لو فشل، اعرض رسالة الإيرور اللي جاية من السيرفر
-          // (زي "أنت مشترك بالفعل في هذا الكورس.")
-          toast.error(response.error || 'An error occurred.');
-        }
+          toast.success(
+            response.message || "Payment successful! Redirecting..."
+          );
 
+          await sendEmail(
+            user.primaryEmailAddress.emailAddress,
+            user.firstName
+          );
+
+          toast.success("Confirmation email sent. Redirecting...");
+          router.push("/dashboard");
+        } else {
+          toast.error(response.error || "An error occurred.");
+        }
       } catch (error) {
-        // (ده لو حصل إيرور كبير زي مشكلة في النت)
         console.error(error);
         toast.error(error.message || "An unexpected error occurred.");
       }
     });
   };
-  // (!!  نهاية التعديل  !!)
 
+const sendEmail = async (userEmail, userName) => {
+    if (!course) {
+      toast.error("Course data not loaded, cannot send email.");
+      return; 
+    }
 
+    try {
+      const res = await fetch("/api/sendEmail", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: userEmail,
+          firstName: userName || 'Valued Customer',
+          courseTitle: course.title.en,
+          coursePrice: course.price,
+          courseImage: course.image,
+        }),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || "Failed to send email.");
+      }
+      
+      console.log("Email request successful");
+
+    } catch (error) {
+      console.error("sendEmail error:", error);
+      toast.error(error.message); 
+    }
+  };
   if (fetchLoading) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -118,7 +145,6 @@ export default function Page() {
     <div className="flex flex-col gap-8 p-6">
       <Toaster position="top-right" />
 
-      {/* Breadcrumbs (الكود بتاعك زي ما هو) */}
       <div className="flex flex-wrap gap-2 text-sm text-accent">
         {breadcrumbs.map((crumb, i) => (
           <span key={i} className="flex items-center">
@@ -138,17 +164,16 @@ export default function Page() {
         ))}
       </div>
 
-      {/* Main Content (الكود بتاعك زي ما هو) */}
       <div className="flex flex-col md:flex-row gap-8 lg:gap-12">
-        {/* Left Column */}
         <div className="w-full md:w-3/5 lg:w-2/3 order-2 md:order-1">
           <div className="bg-white dark:bg-background-dark/50 rounded-xl shadow-sm p-6 md:p-8">
-            <h1 className="text-3xl font-bold tracking-tight">Secure Payment</h1>
+            <h1 className="text-3xl font-bold tracking-tight">
+              Secure Payment
+            </h1>
             <p className="text-accent mt-2">
               Complete your purchase by providing your payment details.
             </p>
 
-            {/* Payment Button (الكود بتاعك زي ما هو) */}
             <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 flex flex-col sm:flex-row-reverse items-center gap-4">
               <button
                 onClick={handlePayment}
@@ -167,7 +192,6 @@ export default function Page() {
           </div>
         </div>
 
-        {/* Right Column: Order Summary (الكود بتاعك زي ما هو) */}
         <div className="w-full md:w-2/5 lg:w-1/3 order-1 md:order-2">
           <div className="bg-white dark:bg-background-dark/50 rounded-xl shadow-sm p-6 md:p-8">
             <h2 className="text-lg font-semibold text-text-primary dark:text-white">
@@ -188,7 +212,9 @@ export default function Page() {
             <div className="mt-6 border-t border-gray-200 dark:border-gray-700 pt-6 space-y-4">
               <div className="flex justify-between text-sm text-accent">
                 <p>Subtotal</p>
-                <p className="text-text-primary dark:text-white">${course.price}</p>
+                <p className="text-text-primary dark:text-white">
+                  ${course.price}
+                </p>
               </div>
               <div className="flex justify-between text-base font-semibold text-text-primary dark:text-white">
                 <p>Total</p>

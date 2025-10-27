@@ -24,7 +24,6 @@ const Page = () => {
     titleSyllabus: "",
     descriptionSyllabus: "",
   });
-  console.log(formData);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -160,7 +159,6 @@ const Page = () => {
       }
 
       const data = await res.json();
-      console.log("Saved data:", data);
 
       toast.dismiss();
       toast.success(t("toast.success"));

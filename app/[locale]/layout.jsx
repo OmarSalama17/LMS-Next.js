@@ -22,8 +22,8 @@ export default async function RootLayout({ children, params }) {
   console.log(locale);
 
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
-      <ClerkProvider>
+    <ClerkProvider>
+        <NextIntlClientProvider locale={locale} messages={messages}>
         <html
           lang={locale}
           dir={locale === "ar" ? "rtl" : "ltr"}
@@ -43,7 +43,7 @@ export default async function RootLayout({ children, params }) {
             {children}
           </body>
         </html>
-      </ClerkProvider>
     </NextIntlClientProvider>
+      </ClerkProvider>
   );
 }

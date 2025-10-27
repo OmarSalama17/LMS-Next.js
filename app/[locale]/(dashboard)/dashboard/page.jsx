@@ -8,21 +8,16 @@ import { getTranslations } from "next-intl/server";
 const MOCK_API_URL = "https://68f816d9deff18f212b51c45.mockapi.io/api/product";
 
 const page = async ({ params }) => {
-  // [تصحيح] إضافة await وتصحيح الخطأ الإملائي
   const t = await getTranslations("dashboard");
   const clerk = await clerkClient();
   const users = await clerk.users.getUserList({ limit: 100 });
   const filterUsers = users.data.filter((user) => user.privateMetadata.enrolledCourses);
   const filterUsersEnrolled = filterUsers.map((user) => user.privateMetadata.enrolledCourses);
-  console.log("usersss", users);
-  console.log("filterUsers", filterUsers);
-  console.log("filterUsersEnrolled", filterUsersEnrolled);
 
   const { locale } = await params;
 
   const { userId } = await auth();
   const user = await currentUser();
-  console.log(user);
 
   if (!userId || !user) {
     return redirect(`/${locale}/sign-in`);
@@ -62,7 +57,6 @@ const page = async ({ params }) => {
     );
     enrolledCourses = filter;
   }
-  console.log("enrolledCoursesenrolledCourses", enrolledCourses);
 
   return (
     <div className={`flex flex-1 flex-col ml-0 ${locale === "ar" ? "lg:mr-64" : "lg:ml-64"} `}>

@@ -3,14 +3,20 @@ import React, { useState, useMemo , useEffect} from "react";
 import CourseCard from "./CoursesCard";
 import FilterSidebar from "./filter";
 import PathName from "./PathName";
-import { useTranslations } from "next-intl"; // Added import
+import { useTranslations } from "next-intl"; 
+import { useSearchParams } from 'next/navigation'
 
 const ITEMS_PER_PAGE = 6;
 
 const CoursesListWrapper = ({ initialCourses, locale }) => {
-  const t = useTranslations("courses"); // Use 'courses' namespace
 
-  // Sort Options Mapping: Uses English keys for logic, translated labels for display
+  const searchParams = useSearchParams()
+  
+const selectedCategory = searchParams.get("cat")
+  
+  const t = useTranslations("courses"); 
+
+
   const sortOptions = useMemo(() => [
     { key: "Newest", label: t('sort.options.newest') },
     { key: "Most Popular", label: t('sort.options.popular') },
@@ -26,7 +32,7 @@ const CoursesListWrapper = ({ initialCourses, locale }) => {
   const [filters, setFilters] = useState({
     category: null,
     level: [],
-    price: "All", // Uses English keys: "Free", "Paid", "All"
+    price: "All",
   });
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -34,10 +40,15 @@ const CoursesListWrapper = ({ initialCourses, locale }) => {
   const filteredAndSortedCourses = useMemo(() => {
     let filtered = [...initialCourses];
 
+    if(selectedCategory !== null){
+      filtered = filtered.filter((course) =>
+        course.categories[locale] === searchParams.get("cat") )
+
+    }
     // filter categories (uses locale prop, so it works with translated category names)
     if (filters.category) {
       filtered = filtered.filter((course) =>
-        course.categories[locale] === filters.category)
+        course.categories[locale] === filters.category )
     }
     
     // filter level (uses English keys: "Beginner", "Intermediate", "Advanced")
@@ -53,7 +64,7 @@ const CoursesListWrapper = ({ initialCourses, locale }) => {
     } else if (filters.price === "Paid") {
       filtered = filtered.filter((course) => parseFloat(course.price) > 0);
     }
-
+    
     // filter sort (uses English keys)
     return filtered.sort((a, b) => {
       if (sortBy === "Highest Rated") return b.rating - a.rating;

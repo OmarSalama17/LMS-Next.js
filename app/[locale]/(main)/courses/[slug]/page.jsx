@@ -91,7 +91,7 @@ const page = async ({ params }) => {
                       data.price === 0 ? "text-green-500" : " text-slate-900"
                     }`}
                   >
-                    {data.price === 0 ? "Free" : data.price}
+                    {data.price === 0 ? "Free" : `${data.price} $`}
                   </p>
                   <p className="text-slate-500 dark:text-slate-400 line-through text-lg">
                     $199

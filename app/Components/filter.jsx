@@ -1,14 +1,16 @@
 import React , {useState} from "react";
 import { useTranslations } from "next-intl";
-
-// استخدام المفاتيح الإنجليزية كقيم ثابتة للمنطق
+import { useRouter } from "../../src/i18n/navigation";
+import { useSearchParams } from 'next/navigation'; // <--- استيراد مهم
 const levelKeys = ["Beginner", "Intermediate", "Advanced"];
 const priceKeys = ["Free", "Paid", "All"];
 
 const FilterSidebar = ({onApplyFilters , categories}) => {
+const searchParams = useSearchParams() // <--- تعريف الـ Hook
+const router = useRouter()
+const selectedCat = searchParams.get("cat")
   const t = useTranslations("filter");
 
-  // تعريف مفاتيح الترجمة للمستويات والأسعار
   const levels = levelKeys.map(key => ({ 
     key: key, 
     label: t(`level.${key.toLowerCase()}`) 
@@ -21,8 +23,8 @@ const FilterSidebar = ({onApplyFilters , categories}) => {
 
 
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [selectedLevel, setSelectedLevel] = useState([]); // يستخدم المفاتيح الإنجليزية (e.g., "Beginner")
-  const [selectedPrice, setSelectedPrice] = useState("All"); // يستخدم المفاتيح الإنجليزية
+  const [selectedLevel, setSelectedLevel] = useState([]); 
+  const [selectedPrice, setSelectedPrice] = useState("All");
 
   const handleLevelChange = (levelKey) => {
     setSelectedLevel((prevSelected) => {
@@ -40,17 +42,20 @@ const FilterSidebar = ({onApplyFilters , categories}) => {
       level: selectedLevel,
       price: selectedPrice,
     }
+    if (selectedCat !== null) {
+      router.push("/courses")
+    }
     onApplyFilters(filters);
+
   }
 
   return (
-    <aside className="w-full xl:w-1/4 xl:sticky xl:top-28 self-start">
+    <aside className="w-full xl:w-1/4 xl:sticky xl:top-[60px] self-start">
       <div className="bg-card-light dark:bg-card-dark rounded-xl p-6 shadow-sm">
         <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
           <span className="material-symbols-outlined">filter_list</span> {t("title")}
         </h2>
         <div className="space-y-6">
-          {/* Category Section */}
           <div>
             <h3 className="font-semibold mb-4">{t("category.title")}</h3>
             <div className="space-y-3">
@@ -78,9 +83,7 @@ const FilterSidebar = ({onApplyFilters , categories}) => {
             </div>
           </div>
 
-          <div className="border-t border-border-light dark:border-border-dark my-6"></div>
-
-          {/* Level Section */}
+          {/* <div className="border-t border-border-light dark:border-border-dark my-6"></div>
           <div>
             <h3 className="font-semibold mb-4">{t("level.title")}</h3>
             <div className="space-y-3">
@@ -89,20 +92,17 @@ const FilterSidebar = ({onApplyFilters , categories}) => {
                   <input
                     className="h-4 w-4 rounded text-primary focus:ring-primary border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark mr-3"
                     type="checkbox"
-                    // نستخدم مفتاح المستوى (key) للمقارنة في حالة الـ state
                     checked={selectedLevel.includes(level.key)}
                     onChange={()=> handleLevelChange(level.key)}
                   />
-                  {/* نعرض القيمة المترجمة (label) */}
                   {level.label}
                 </label>
               ))}
             </div>
-          </div>
+          </div> */}
 
           <div className="border-t border-border-light dark:border-border-dark my-6"></div>
 
-          {/* Price Section */}
           <div>
             <h3 className="font-semibold mb-4">{t("price.title")}</h3>
             <div className="space-y-3">
@@ -112,12 +112,10 @@ const FilterSidebar = ({onApplyFilters , categories}) => {
                     className="h-4 w-4 text-primary focus:ring-primary border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark mr-3"
                     name="price"
                     type="radio"
-                    // نستخدم مفتاح السعر (key) كقيمة للإدخال والمقارنة في حالة الـ state
                     value={price.key}
                     checked={selectedPrice === price.key}
                     onChange={(e) => setSelectedPrice(e.target.value)}
                   />
-                  {/* نعرض القيمة المترجمة (label) */}
                   {price.label}
                 </label>
               ))}
@@ -126,7 +124,6 @@ const FilterSidebar = ({onApplyFilters , categories}) => {
 
           <div className="border-t border-border-light dark:border-border-dark my-6"></div>
 
-          {/* Apply Filters Button */}
           <button className="w-full bg-primary text-white font-bold py-2.5 px-4 rounded-lg hover:bg-opacity-90 transition-all flex items-center justify-center gap-2"
           onClick={handleApply}
           >
