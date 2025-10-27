@@ -1,5 +1,4 @@
 
-"use client";
 import { Inter } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
@@ -15,12 +14,13 @@ const inter = Inter({
 });
 export const dynamic = "force-dynamic";
 
-export default  function RootLayout({ children }) {
-
+export default async  function RootLayout({ children , params }) 
+{
+const { locale } = await params;
   return (
 <>
           <div className="flex h-full grow">
-            <Sidebar />
+            <Sidebar locale={locale} />
             {children}
           </div>
             <Footer/>

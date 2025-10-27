@@ -2,7 +2,7 @@
   "home": {
     "landing": {
       "title": "Unlock Your Potential.",
-      "primary":" Master New Skills.",
+      "primary": " Master New Skills.",
       "description": "Join millions of learners from around the globe. Discover expert-led courses and accelerate your journey to success today.",
       "btn1": "Find Your Course",
       "btn2": "Start Teaching"
@@ -324,5 +324,105 @@
       "grid": "Grid View",
       "list": "List View"
     }
+  },
+  "dashboard": {
+    "addNewCourse": "Add New Course",
+    "generalStatistics": "General Statistics",
+    "totalCourses": "Total Courses",
+    "totalStudents": "Total Students",
+    "myCourses": "My Courses",
+    "viewAll": "View All",
+    "userAvatarAlt": "User Avatar"
+  },
+  "analytics": {
+    "completionRate": "Completion Rate",
+    "activeStudents": "Active Students",
+    "averageScore": "Average Score",
+    "engagementLevel": "Engagement Level",
+    "engagementValueHigh": "High",
+    "performanceOverTime": "Performance Over Time",
+    "enrollments": "Enrollments",
+    "last30Days": "Last 30 days",
+    "week1": "Week 1",
+    "week2": "Week 2",
+    "week3": "Week 3",
+    "week4": "Week 4",
+    "completionStatus": "Completion Status",
+    "statusCompleted": "Completed",
+    "statusInProgress": "In Progress",
+    "statusNotStarted": "Not Started",
+    "studentPerformanceTitle": "Student Performance",
+    "studentPerformanceSubtitle": "Detailed breakdown of individual student progress.",
+    "table": {
+      "studentName": "Student Name",
+      "progress": "Progress",
+      "lastActive": "Last Active",
+      "avgScore": "Average Score",
+      "actions": "Actions",
+      "viewDetails": "View Details"
+    }
+  },
+  "myCourses": {
+    "addNewCourse": "Add New Course",
+    "noCoursesMessage": "You are not enrolled in any courses yet.",
+    "browseCourses": "Browse Courses",
+    "editLabel": "Edit course",
+    "deleteLabel": "Delete course",
+    "toast": {
+      "loading": "Deleting course...",
+      "success": "Course deleted successfully!",
+      "error": "An error occurred while deleting the course."
+    }
+  },
+  "addCourse": {
+    "back": "Back",
+    "title": "Add New Course",
+    "form": {
+      "sectionTitle": "Course Details",
+      "courseTitle": "Course Title",
+      "courseTitlePlaceholder": "Enter course title",
+      "coursePrice": "Course price",
+      "coursePricePlaceholder": "Enter course price",
+      "courseDescription": "Course Description",
+      "courseDescriptionPlaceholder": "Enter course description",
+      "category": "Category",
+      "categorySelect": "Select a category",
+      "categories": {
+        "development": "Development",
+        "design": "Design",
+        "business": "Business",
+        "marketing": "Marketing"
+      },
+      "pricing": "Pricing",
+      "pricingFree": "Free",
+      "pricingPaid": "Paid",
+      "syllabusTitle": "Title of Course Syllabus",
+      "syllabusTitlePlaceholder": "Title of Course Syllabus",
+      "syllabusDescription": "Course Syllabus",
+      "syllabusDescriptionPlaceholder": "Course Syllabus",
+      "whatLearn": "What you'll learn",
+      "whatLearnPlaceholder": "What you'll learn",
+      "saveDraft": "Save Draft",
+      "nextStep": "Next Step",
+      "saving": "Saving..."
+    },
+    "toast": {
+      "userNotLoaded": "User not loaded yet. Please wait.",
+      "translating": "Translating course details...",
+      "savingToApi": "Saving course to API...",
+      "success": "Course added and translated successfully!",
+      "error": "An error occurred: {message}"
+    }
+  },
+  "sidebar": {
+    "logoAlt": "EduPro Logo",
+    "dashboard": "Dashboard",
+    "myCourses": "My Courses",
+    "students": "Students",
+    "analytics": "Analytics"
+  },
+  "dashboardHeader": {
+    "greeting": "Hello, {name} 👋",
+    "welcomeMessage": "Welcome to your dashboard."
   }
 }

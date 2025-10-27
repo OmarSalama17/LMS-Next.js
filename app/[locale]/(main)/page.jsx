@@ -97,8 +97,6 @@ const t = await getTranslations("home");
 
   return (
     <main>
-
-
       <section className="relative overflow-hidden bg-white dark:bg-background-dd">
  <DarkVeil />
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36">

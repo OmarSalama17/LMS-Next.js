@@ -1,10 +1,9 @@
-import { auth, currentUser } from '@clerk/nextjs/server';
-import { redirect } from 'next/navigation';
+import { auth, currentUser } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
-import DashboardClient from '../../../../Components/dashboard/DashboardClient'; 
+import DashboardClient from "../../../../Components/dashboard/DashboardClient";
 
 const MOCK_API_URL = "https://68f816d9deff18f212b51c45.mockapi.io/api/product";
-
 
 export default async function DashboardPage({ params }) {
   const { locale } = await params;
@@ -41,14 +40,15 @@ export default async function DashboardPage({ params }) {
       const coursesData = await Promise.all(coursePromises);
       enrolledCourses = coursesData.filter((course) => course !== null);
     }
-  }else{
+  } else {
     const res = await fetch(`${MOCK_API_URL}`);
     const data = await res.json();
-    const filter = data.filter((course) => course.instructor["en"] === user.fullName || course.instructor["ar"] === user.fullName);
-    enrolledCourses = filter
+    const filter = data.filter(
+      (course) =>
+        course.userId === user.id 
+    );
+    enrolledCourses = filter;
   }
 
-  return (
-    <DashboardClient coursesData={enrolledCourses} locale={locale} />
-  );
+  return <DashboardClient coursesData={enrolledCourses} locale={locale} />;
 }

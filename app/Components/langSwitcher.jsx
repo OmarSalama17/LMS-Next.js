@@ -4,7 +4,7 @@ import { usePathname, useRouter } from "../../src/i18n/navigation";
 import { useLocale } from "next-intl";
 import React, { useState, useEffect } from "react";
 
-export default function LanguageSwitcher() {
+export default function LanguageSwitcher({theme}) {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
@@ -44,7 +44,7 @@ export default function LanguageSwitcher() {
   return (
     <div className="relative z-30">
       <button
-        className="flex items-center gap-2 px-3 w-[130px] justify-between py-2.5 border bg-white border-[#E8E9ED] rounded-full"
+        className={`flex items-center gap-2 px-3 w-[130px] justify-between py-2.5 border  dark:bg-[#1a202c]  border-[#E8E9ED] rounded-full`}
         aria-expanded={isOpen}
         aria-haspopup="listbox"
         onClick={toggleDropdown}
@@ -77,7 +77,7 @@ export default function LanguageSwitcher() {
 
       {isOpen && (
         <ul
-          className="absolute mt-2 w-[130px] bg-white border border-[#E8E9ED] rounded-xl shadow-lg z-10"
+          className="absolute mt-2 w-[130px] bg-white border border-[#E8E9ED] dark:bg-[#1a202c] rounded-xl shadow-lg z-10"
           role="listbox"
         >
           {languages.map((lang) => (

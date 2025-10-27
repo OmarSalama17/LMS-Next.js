@@ -3,18 +3,21 @@ import React from "react";
 import { auth, clerkClient, currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { Link } from "../../../../src/i18n/navigation";
+import { getTranslations } from "next-intl/server";
 
 const MOCK_API_URL = "https://68f816d9deff18f212b51c45.mockapi.io/api/product";
 
 const page = async ({ params }) => {
-const clerk = await clerkClient()
-const users = await clerk.users.getUserList({limit: 100})
-  const filterUsers = users.data.filter(user => user.privateMetadata.enrolledCourses)
-  const filterUsersEnrolled = filterUsers.map(user => user.privateMetadata.enrolledCourses) 
-  console.log("usersss",users);
-  console.log("filterUsers",filterUsers);
-  console.log("filterUsersEnrolled",filterUsersEnrolled);
-  
+  // [تصحيح] إضافة await وتصحيح الخطأ الإملائي
+  const t = await getTranslations("dashboard");
+  const clerk = await clerkClient();
+  const users = await clerk.users.getUserList({ limit: 100 });
+  const filterUsers = users.data.filter((user) => user.privateMetadata.enrolledCourses);
+  const filterUsersEnrolled = filterUsers.map((user) => user.privateMetadata.enrolledCourses);
+  console.log("usersss", users);
+  console.log("filterUsers", filterUsers);
+  console.log("filterUsersEnrolled", filterUsersEnrolled);
+
   const { locale } = await params;
 
   const { userId } = await auth();
@@ -50,30 +53,28 @@ const users = await clerk.users.getUserList({limit: 100})
       const coursesData = await Promise.all(coursePromises);
       enrolledCourses = coursesData.filter((course) => course !== null);
     }
-  }else{
+  } else {
     const res = await fetch(`${MOCK_API_URL}`);
     const data = await res.json();
-    const filter = data.filter((course) => course.instructor["en"] === user.fullName || course.instructor["ar"] === user.fullName);
-    filter.map((course) => filterUsersEnrolled.forEach((id) => id.includes(course.id) ? countStudents++ : null));
-    enrolledCourses = filter
+    const filter = data.filter((course) => course.userId === user.id);
+    filter.map((course) =>
+      filterUsersEnrolled.forEach((id) => (id.includes(course.id) ? countStudents++ : null))
+    );
+    enrolledCourses = filter;
   }
-  console.log("enrolledCoursesenrolledCourses",enrolledCourses);
-  
+  console.log("enrolledCoursesenrolledCourses", enrolledCourses);
 
   return (
-    <div className="flex flex-1 flex-col ml-0 lg:ml-64">
+    <div className={`flex flex-1 flex-col ml-0 ${locale === "ar" ? "lg:mr-64" : "lg:ml-64"} `}>
       <Header
         div={
           <div className="flex items-center gap-4">
-            <button className="lg:hidden p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800">
-              <span className="material-symbols-outlined">menu</span>
-            </button>
             <Link
               href={`dashboard/mycourses/addnewcourse`}
               className="hidden sm:flex items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold shadow-sm hover:bg-primary/90 transition-colors"
             >
               <span className="material-symbols-outlined mr-2">add</span>
-              <span className="truncate">Add New Course</span>
+              <span className="truncate">{t("addNewCourse")}</span>
             </Link>
           </div>
         }
@@ -81,7 +82,7 @@ const users = await clerk.users.getUserList({limit: 100})
       <main className="flex-1 p-4 sm:p-6">
         <div className="mb-6">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            General Statistics
+            {t("generalStatistics")}
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="flex items-start gap-4 rounded-xl p-4 bg-card-light dark:bg-card-dark border border-gray-200 dark:border-gray-700/50">
@@ -92,7 +93,7 @@ const users = await clerk.users.getUserList({limit: 100})
               </div>
               <div>
                 <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">
-                  Total Courses
+                  {t("totalCourses")}
                 </p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">
                   {enrolledCourses.length}
@@ -109,7 +110,7 @@ const users = await clerk.users.getUserList({limit: 100})
                 </div>
                 <div>
                   <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">
-                    Total Students
+                    {t("totalStudents")}
                   </p>
                   <p className="text-2xl font-bold text-gray-900 dark:text-white">
                     {countStudents}
@@ -126,13 +127,13 @@ const users = await clerk.users.getUserList({limit: 100})
             <div className="bg-card-light dark:bg-card-dark rounded-xl border border-gray-200 dark:border-gray-700/50 p-4 sm:p-6">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  My Courses
+                  {t("myCourses")}
                 </h3>
                 <Link
                   className="text-sm font-medium text-primary hover:underline"
                   href={`dashboard/mycourses`}
                 >
-                  View All
+                  {t("viewAll")}
                 </Link>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -145,7 +146,7 @@ const users = await clerk.users.getUserList({limit: 100})
                       <div className="flex-grow">
                         <div className="w-full aspect-video rounded-md bg-gray-200 dark:bg-gray-700 mb-4">
                           <img
-                            alt="The Complete Web Development Bootcamp"
+                            alt={course.title[locale]}
                             className="w-full h-full object-cover rounded-md"
                             src={course.image}
                           />
@@ -160,17 +161,17 @@ const users = await clerk.users.getUserList({limit: 100})
                       <div className="flex items-center justify-between mt-4">
                         <div className="flex items-center -space-x-2">
                           <img
-                            alt="User"
+                            alt={t("userAvatarAlt")}
                             className="inline-block h-6 w-6 rounded-full ring-2 ring-white dark:ring-gray-800"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRPQl2ILydyUe0pNvv_FCZ8x8R-asXI_bLxxVTLxe6yDNZWy81mH6CgKTzwvIUebxvRnR7LWA8YD6eQ2v-LatMNRyVEYMoaRBqbMKUjshjvV2kYWaToVMWW3TO66DmHSz63nBSmreyy-1L8XKWA7InczVEQqqz1wSmcMevufvpsBlUBBgHdUDjUVgn5yVN2K4lbcDzt38Z1NSqG2ZsRNXc69v4ixksPS8dv0296cnSD32PPMJceXlbPLWgL-_u3fUVCeXOz898lrN1"
                           />
                           <img
-                            alt="User"
+                            alt={t("userAvatarAlt")}
                             className="inline-block h-6 w-6 rounded-full ring-2 ring-white dark:ring-gray-800"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCljgeGgM1ItMoqCncJhgK51Ce2Xi7ry-QqNcJ9DRPXKtueX96qFSc9YFIG0cyw8fNrlRC70nymsllRVNwz01LJc4sgcxz1gudLegxlyr61Q7GLKRIqTXwTUOu-NrEA31NGWy_fqf14gUa-CK27uniTcSKPI41lm67odOLAICuuq0Z43DUsJGDVhKeAcgy-p4b2GHYDuVqv7-yWYoDjrLwsnkbEsg1l7jaHV2i5EoJo3zVs0Q8rgfCvKC_RjkoFngpUaON_ZwvpUK6A"
                           />
                           <img
-                            alt="User"
+                            alt={t("userAvatarAlt")}
                             className="inline-block h-6 w-6 rounded-full ring-2 ring-white dark:ring-gray-800"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiFhRXGgqPFHJwAxp_iwsZ4zmkAinPk_EcyOvRjT9M0ofAj4DxpCJQHrTIRiU3EXoYFyp1C4_0avzGEmATbhELwVcum4asngi2TPvbpwxpFCfJBfubHO3Jbj-Vfr4rfanf-WTkZCT8qL5glZ2RxI6IDOUgvTT8pKbBormD9KgjQYHoeYC0vaGRV9BUl9ZMxM1d4DJzNI-HF9qehNxW6VE1VvY_0Va3cskSeTUpmXk5gYCVVJbsCTzDrVObdStFab77WM10B1J6xyJ3"
                           />
@@ -186,7 +187,7 @@ const users = await clerk.users.getUserList({limit: 100})
               <div className="flex justify-center mt-4 sm:hidden">
                 <button className="flex items-center justify-center rounded-lg h-10 px-4 w-full bg-primary text-white text-sm font-bold shadow-sm hover:bg-primary/90 transition-colors">
                   <span className="material-symbols-outlined mr-2">add</span>
-                  <span className="truncate">Add New Course</span>
+                  <span className="truncate">{t("addNewCourse")}</span>
                 </button>
               </div>
             </div>

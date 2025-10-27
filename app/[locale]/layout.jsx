@@ -22,23 +22,28 @@ export default async function RootLayout({ children, params }) {
   console.log(locale);
 
   return (
-            <NextIntlClientProvider locale={locale} messages={messages}>
-    
-        <ClerkProvider>
-
-    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"} className={inter.className}>
-            <head>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
-      </head>
-      <body className="bg-background-light dark:bg-[#131c26] font-display text-text-light dark:text-text-dark">
-        
-          {children}
-          
-      </body>
-    </html>
-        </ClerkProvider>
-        </NextIntlClientProvider>
-
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      <ClerkProvider>
+        <html
+          lang={locale}
+          dir={locale === "ar" ? "rtl" : "ltr"}
+          className={inter.className}
+        >
+          <head>
+            <link
+              href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap"
+              rel="stylesheet"
+            />
+            <link
+              href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+              rel="stylesheet"
+            />
+          </head>
+          <body className="bg-background-light dark:bg-[#131c26] font-display text-text-light dark:text-text-dark">
+            {children}
+          </body>
+        </html>
+      </ClerkProvider>
+    </NextIntlClientProvider>
   );
 }

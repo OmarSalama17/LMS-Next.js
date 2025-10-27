@@ -1,29 +1,31 @@
 "use client";
 import React, { useState } from "react";
 import Header from "./Header";
-import Link from "next/link";
+// [ملحوظة] Link هنا المفروض يكون من next-intl/link لو الصفحة دي جزء من الـ i18n routing
+import Link from "next/link"; 
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "../../../src/i18n/navigation";
 import { Toaster, toast } from "react-hot-toast";
+import { useTranslations } from "next-intl";
+
 const MOCK_API_URL = "https://68f816d9deff18f212b51c45.mockapi.io/api/product";
+
 export default function DashboardClient({ coursesData, locale }) {
+  // [تعديل] حددنا الـ namespace
+  const t = useTranslations("myCourses");
   const { user } = useUser();
   const router = useRouter();
+
   const handelDelete = async (id) => {
-    let loading = locale === "en" ? "Deleting course..." : "حذف الكورس...";
-    let success = locale === "en" ? "Course deleted successfully!" : "تم حذف الكورس بنجاح!";
-    let error = locale === "en" ? "An error occurred while deleting the course." : "حدث خطاء في حذف الكورس.";
-    const deletePromise =  fetch(`${MOCK_API_URL}/${id}`, { method: "DELETE" });
-    toast.promise(
-    deletePromise,
-    {
-      loading: loading,
-      success: success,
-      error: error,
-    }
-  );
+    // [تعديل] تم سحب الترجمات مباشرة من t()
+    const deletePromise = fetch(`${MOCK_API_URL}/${id}`, { method: "DELETE" });
+    toast.promise(deletePromise, {
+      loading: t("toast.loading"),
+      success: t("toast.success"),
+      error: t("toast.error"),
+    });
     try {
-    await deletePromise;
+      await deletePromise;
       router.refresh();
     } catch (error) {
       console.error(error);
@@ -31,7 +33,7 @@ export default function DashboardClient({ coursesData, locale }) {
   };
 
   return (
-    <div className="flex flex-1 flex-col ml-0 lg:ml-64">
+    <div className={`flex flex-1 flex-col ml-0 ${locale === "ar" ? "lg:mr-64" : "lg:ml-64"} `}>
       <Toaster position="top-center" reverseOrder={false} />
       <Header
         div={
@@ -44,23 +46,27 @@ export default function DashboardClient({ coursesData, locale }) {
               className="hidden sm:flex items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold shadow-sm hover:bg-primary/90 transition-colors"
             >
               <span className="material-symbols-outlined mr-2">add</span>
-              <span className="truncate">Add New Course</span>
+              {/* [تعديل] */}
+              <span className="truncate">{t("addNewCourse")}</span>
             </Link>
           </div>
         }
       />
 
       <div className="flex flex-col gap-4 p-[24px]">
-        {coursesData.length === 0  && user?.unsafeMetadata?.role !== "teacher" ? (
+        {coursesData.length === 0 &&
+        user?.unsafeMetadata?.role !== "teacher" ? (
           <div className="text-center mt-10">
             <p className="text-lg text-gray-600 dark:text-gray-400">
-              You are not enrolled in any courses yet.
+              {/* [تعديل] */}
+              {t("noCoursesMessage")}
             </p>
             <Link
               href={`/${locale}/courses`}
               className="text-primary hover:underline mt-4 inline-block"
             >
-              Browse Courses
+              {/* [تعديل] */}
+              {t("browseCourses")}
             </Link>
           </div>
         ) : (
@@ -71,23 +77,32 @@ export default function DashboardClient({ coursesData, locale }) {
             >
               <div
                 className="w-full md:w-48 h-32 md:h-24 rounded-lg bg-center bg-no-repeat bg-cover"
-                data-alt={course.alt}
+                // [ملحوظة] alt attribute مش شغال على div، لو ده img يبقى أفضل
+                data-alt={course.alt} 
                 style={{
                   backgroundImage: `url('${course.image}')`,
                 }}
               />
               <div className="flex-1">
                 <h3 className="text-slate-900 dark:text-white text-lg font-bold leading-snug mb-1">
+                  {/* ده سليم لإنه بيقرأ من الـ API */}
                   {course.title[locale]}
                 </h3>
               </div>
               {user?.unsafeMetadata?.role === "teacher" ? (
                 <div className="flex items-center gap-2">
-                  <button className="size-10 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300">
+                  <button 
+                    // [تعديل] إضافة label للـ accessibility
+                    title={t("editLabel")}
+                    aria-label={t("editLabel")}
+                    className="size-10 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300">
                     <span className="material-symbols-outlined">edit</span>
                   </button>
                   <button
                     onClick={() => handelDelete(course.id)}
+                    // [تعديل] إضافة label للـ accessibility
+                    title={t("deleteLabel")}
+                    aria-label={t("deleteLabel")}
                     className="size-10 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300"
                   >
                     <span className="material-symbols-outlined">delete</span>
