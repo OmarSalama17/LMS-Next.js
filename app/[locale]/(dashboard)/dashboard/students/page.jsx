@@ -1,6 +1,8 @@
 "use client";
-import React, { useState } from 'react'; 
+import React, { useState , useEffect } from 'react'; 
 import Header from '../../../../Components/dashboard/Header'
+import { useUser } from '@clerk/nextjs';
+import { useRouter } from '../../../../../src/i18n/navigation';
 
 
 const students = [
@@ -121,7 +123,19 @@ const StudentCard = ({ student, view }) => {
 
 
 const page = () => {
+  const { user } = useUser();
+  const router = useRouter();
   const [view, setView] = useState('grid'); 
+
+  useEffect(() => {
+    if (user?.unsafeMetadata?.role === "student") {
+      router.push("/dashboard");
+    }
+  }, [user, router]);
+
+  if (user) {
+    return null;
+  }
 
   return (
     <main className="flex-1 flex-col ml-0 lg:ml-64">

@@ -1,5 +1,4 @@
 import { Inter } from "next/font/google";
-import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import "./global.css";
 import Header from "../../Components/header";
@@ -23,18 +22,9 @@ export default async function RootLayout({ children, params }) {
   console.log(locale);
 
   return (
-    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"} className={inter.className}>
-            <head>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
-      </head>
-      <body className="bg-background-light dark:bg-[#131c26] font-display text-text-light dark:text-text-dark">
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <Header />
-
-          {children}
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <>
+      <Header />
+      {children}
+    </>
   );
 }

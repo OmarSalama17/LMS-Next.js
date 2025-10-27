@@ -1,13 +1,33 @@
-import createMiddleware from 'next-intl/middleware';
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'; 
+import createIntlMiddleware from 'next-intl/middleware';
 
-export default createMiddleware({
-  // اللغات المتاحة
+const intlMiddleware = createIntlMiddleware({
   locales: ['en', 'ar'],
-
-  // اللغة الافتراضية
   defaultLocale: 'en',
 });
 
+const isProtectedRoute = createRouteMatcher([
+  '/(ar|en)/dashboard(.*)',
+  '/(ar|en)/settings',
+  '/(ar|en)/checkout' 
+]);
+
+export default clerkMiddleware( async (auth, req) => {
+  
+  const response = intlMiddleware(req);
+
+  await auth(); 
+
+  if (isProtectedRoute(req)) {
+    await auth.protect();
+  }
+
+  return response;
+});
+
+
 export const config = {
-  matcher: ['/((?!api|_next|.*\\..*).*)']
+  matcher: [
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+  ],
 };

@@ -1,56 +1,131 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-
-export default function LoginPage() {
-  const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+import { useState , useEffect } from 'react';
+import { useSignIn, useClerk, useUser } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+export default function Page() {
+  //hooks theme and signin
+  const [theme, setTheme] = useState(null); 
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState("");
+  const { isLoaded, signIn, setActive } = useSignIn();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState('');
+  const router = useRouter();
 
-  const handleLogin = async (e) => {
+
+//start-theme
+      useEffect(() => {
+      const storedTheme = localStorage.getItem('theme') || 'light'; 
+      setTheme(storedTheme);
+      if (storedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }, []);
+  
+    const toggleTheme = () => {
+      const newTheme = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+      
+      setTheme(newTheme); 
+      localStorage.setItem('theme', newTheme);
+      
+      if (newTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    };
+//end-theme
+
+
+  const handleSubmit = async (e) => { 
     e.preventDefault();
-    setError("");
+    if (!isLoaded) return; 
 
     try {
-      // Fake API – غيّرها بالـ endpoint بتاعك
-      const res = await fetch("https://jsonplaceholder.typicode.com/users");
-      const users = await res.json();
+      const result = await signIn.create({
+        identifier: email,
+        password: password,
+      });
 
-      // بنشوف هل الإيميل دا موجود
-      const user = users.find(
-        (u) => u.email.toLowerCase() === email.toLowerCase()
-      );
-
-      if (user) {
-        localStorage.setItem("user", JSON.stringify(user));
-        alert("✅ تم تسجيل الدخول بنجاح!");
-        router.push("/dashboard");
+      if (result.status === 'complete') {
+        setError('');
+        await setActive({ session: result.createdSessionId });
+        router.push('/dashboard'); 
       } else {
-        setError("❌ البريد الإلكتروني أو كلمة المرور غير صحيحة");
+        console.log(result);
       }
     } catch (err) {
-      setError("حدث خطأ أثناء الاتصال بالسيرفر");
+      setError(err.errors[0]?.longMessage || 'حدث خطأ ما');
+      console.error(JSON.stringify(err, null, 2));
     }
   };
+
 
   return (
     <div className=" flex flex-col lg:flex-row h-screen">
       {/* الجزء الشمال */}
       <div className="w-full lg:w-1/2 bg-white dark:bg-slate-900 p-8 flex flex-col justify-center items-center">
         <div className="max-w-md w-full">
-          <div className="mb-8 text-center">
-            <a className="inline-flex items-center gap-2" href="#">
-              <span className="material-symbols-outlined text-primary text-3xl">
-                school
-              </span>
-              <span className="text-2xl font-bold text-slate-800 dark:text-white">
-                Learnify
-              </span>
-            </a>
-          </div>
+                          <div className="absolute top-6 right-6 flex items-center gap-4">
+                  <span className="material-symbols-outlined text-slate-500 dark:text-slate-400">
+                    wb_sunny
+                  </span>
+
+                  {/* الكونتينر بتاع الزرار */}
+                  <div className="relative inline-block w-10 align-middle select-none z-10">
+                    {/* الدايرة اللي بتتحرك (Handle) */}
+                    <input
+                    onClick={toggleTheme}
+                      type="checkbox"
+                      name="toggle"
+                      id="toggle"
+                      className="peer
+                 absolute 
+                 block 
+                 w-6 h-6 
+                 rounded-full 
+                 bg-white 
+                 border-2 
+                 appearance-none 
+                 cursor-pointer 
+                 top-[-2px] 
+                 left-0                 /* وضع البداية (شمال) */
+                 transition-all 
+                 duration-200 
+                 ease-in
+                 checked:left-4           /* الوضع لما تدوس (يمين) */
+                "
+                    />
+
+                    {/* الخلفية (Track) */}
+                    <label
+                      htmlFor="toggle"
+                      className="toggle-label 
+                 block 
+                 overflow-hidden 
+                 h-5 
+                 rounded-full 
+                 bg-slate-300 
+                 cursor-pointer
+                 peer-checked:bg-blue-500  /* اللون لما تدوس */
+                 dark:bg-slate-700
+                 dark:peer-checked:bg-blue-600
+                "
+                    ></label>
+                  </div>
+
+                  <span className="material-symbols-outlined text-slate-500 dark:text-slate-400">
+                    dark_mode
+                  </span>
+                </div>
+            <Link href="/" className={`flex items-center gap-4 justify-center gap-4 text-brand-blue mb-4`}>
+              <img className="w-[130px]" src="/EduPro Logo Design.png" alt="" />
+            </Link>
 
           <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2 text-center">
             Welcome Back!
@@ -59,7 +134,7 @@ export default function LoginPage() {
             Sign in to unlock a world of knowledge.
           </p>
 
-          <form onSubmit={handleLogin} className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             {/* Email */}
             <div>
               <label
@@ -148,9 +223,11 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              className="w-full bg-primary text-white font-bold py-3 px-4 rounded-lg hover:bg-primary/90 transition-colors duration-300 h-12 text-sm shadow-md shadow-primary/30"
+              // 8. ربط الزرار بالـ loading state
+              disabled={isLoading}
+              className="w-full bg-primary text-white font-bold py-3 px-4 rounded-lg hover:bg-primary/90 transition-colors duration-300 h-12 text-sm shadow-md shadow-primary/30 disabled:opacity-50"
             >
-              Sign In
+                          {isLoading ? "Signing In..." : "Sign In"}           {" "}
             </button>
 
             <div className="relative flex items-center my-4">
@@ -182,11 +259,7 @@ export default function LoginPage() {
                   type="button"
                   className="flex items-center justify-center gap-2 w-full h-12 border border-slate-300 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors duration-300 text-sm font-medium text-slate-700 dark:text-slate-200"
                 >
-                  <img
-                    alt={social.name}
-                    src={social.img}
-                    className="w-5 h-5"
-                  />
+                  <img alt={social.name} src={social.img} className="w-5 h-5" />
                   <span>{social.name}</span>
                 </button>
               ))}
@@ -215,7 +288,9 @@ export default function LoginPage() {
           <h3 className="text-3xl font-bold text-slate-800 dark:text-white mb-4">
             "The best investment you can make is in yourself."
           </h3>
-          <p className="text-slate-600 dark:text-slate-300">- A Wise Investor</p>
+          <p className="text-slate-600 dark:text-slate-300">
+            - A Wise Investor
+          </p>
         </div>
       </div>
     </div>

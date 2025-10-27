@@ -1,20 +1,26 @@
 import React from "react";
-import PathName from "../../../../Components/PathName"
+import PathName from "../../../../Components/PathName";
+import EnrollButton from "../../../../Components/EnrollButton";
 
-const api = process.env.URL_API
+const api = process.env.URL_API;
 async function getAllProducts() {
   const res = await fetch(`${api}/product`);
   return res.json();
 }
-const page = async ({params}) => {
-  
-  const {slug , locale} = await params
+const page = async ({ params }) => {
+  const { slug, locale } = await params;
+
+  console.log(locale);
+  const deCodeSlug = decodeURIComponent(slug);
   const allProducts = await getAllProducts();
-  const productInfo = allProducts.find(
-    (p) => p.title[locale].toLowerCase().replace(/ /g, '-') === params.slug
-   );
-  console.log(`productinfo :: ${productInfo}     ///     slug :: ${slug} `);
-  
+  const productInfo = allProducts.find((p) => {
+    const slugEN = p.title["en"].toLowerCase().replace(/ /g, "-");
+    const slugAR = p.title["ar"].toLowerCase().replace(/ /g, "-");
+
+    return slugEN === deCodeSlug || slugAR === deCodeSlug;
+  });
+  // console.log("productinfo :: ", productInfo, "slug :: ", deCodeSlug);
+
   if (!productInfo) {
     return <div>Product not found!</div>;
   }
@@ -22,15 +28,15 @@ const page = async ({params}) => {
   // const api = ``
   const res = await fetch(`${api}/product/${id}`);
   const data = await res.json();
-  console.log(data);
-  
+  // console.log(data);
+
   return (
     <main className="flex-1">
       <div className="w-full bg-white dark:bg-slate-900/50">
-        <div className="container mx-auto px-4 sm:px-10 lg:px-10 pt-12 pb-16">
-                            <div className="mb-8">
-          <PathName />
-      </div>
+        <div className="container mx-auto px-4 sm:px-10 lg:px-10n pt-12 pb-16">
+          <div className="mb-8">
+            <PathName />
+          </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-12 gap-y-8">
             <div className="lg:col-span-2 flex flex-col gap-8">
               <div>
@@ -38,8 +44,7 @@ const page = async ({params}) => {
                   className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl shadow-lg"
                   data-alt="A vibrant abstract gradient representing the course's topic"
                   style={{
-                    backgroundImage:
-                      `url(${data.image})`,
+                    backgroundImage: `url(${data.image})`,
                   }}
                 ></div>
               </div>
@@ -52,7 +57,7 @@ const page = async ({params}) => {
                   {data.title[locale]}
                 </h1>
                 <p className="text-slate-600 dark:text-slate-300 text-lg mt-4 max-w-3xl">
-                    {data.description[locale]}
+                  {data.description[locale]}
                 </p>
               </div>
 
@@ -81,19 +86,23 @@ const page = async ({params}) => {
             <div className="lg:col-span-1">
               <div className="sticky top-28 bg-background-light dark:bg-background-dark rounded-xl shadow-lg p-6 border border-slate-200 dark:border-slate-800">
                 <div className="flex justify-between items-center">
-                  <p className={`text-4xl font-bold  dark:text-white ${data.price === 0 ? "text-green-500" : " text-slate-900"}`}>
-                    {data.price === 0 ? "Free" : data.price}
+                  <p
+                    className={`text-4xl font-bold  dark:text-white ${
+                      data.price === 0 ? "text-green-500" : " text-slate-900"
+                    }`}
+                  >
+                    {data.price === 0 ? "Free" : `${data.price} $`}
                   </p>
                   <p className="text-slate-500 dark:text-slate-400 line-through text-lg">
                     $199
                   </p>
                 </div>
                 <p className="text-green-600 dark:text-green-400 font-semibold mt-1">
-                  {data.price === 0 ? "100% off for a limited time" : "50% off for a limited time"}
+                  {data.price === 0
+                    ? "100% off for a limited time"
+                    : "50% off for a limited time"}
                 </p>
-                <button className="mt-6 flex min-w-[84px] w-full items-center justify-center rounded-lg h-14 px-5 bg-primary text-slate-50 text-lg font-bold hover:bg-primary/90 transition-all duration-300 shadow-lg shadow-primary/40 hover:shadow-xl hover:shadow-primary/50 transform hover:-translate-y-1">
-                  <span className="truncate">Enroll Now</span>
-                </button>
+                  <EnrollButton courseId={data.id} locale={locale}/>
                 <div className="text-center text-sm text-slate-500 dark:text-slate-400 mt-4">
                   30-Day Money-Back Guarantee
                 </div>
@@ -153,7 +162,7 @@ const page = async ({params}) => {
           </div>
         </div>
       </div>
-      
+
       <div className="bg-background-light dark:bg-background-dark py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-10 lg:px-10  py-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-16 gap-y-12">

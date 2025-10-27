@@ -51,7 +51,7 @@ export default function CourseCard({
             <h3 className="text-lg font-bold leading-tight line-clamp-2">
               {title[locale]}
             </h3>
-            <span className={`text-xl font-bold   ${price === 0 ? "text-green-500" : "text-primary ml-2"}`}>{price === 0 ? "Free" : price}</span>
+            <span className={`text-xl font-bold   ${price === 0 ? "text-green-500" : "text-primary ml-2"}`}>{price === 0 ? "Free" : `${price} $`}</span>
           </div>
 
           <p className="text-sm text-text-muted-light dark:text-text-muted-dark mb-3 ">

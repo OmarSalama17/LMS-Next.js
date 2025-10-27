@@ -1,67 +1,41 @@
 import PathName from "../../../../app/Components/PathName";
 import React from "react";
+import { getTranslations } from "next-intl/server";
 
-const page = () => {
-  const teamMembers = [
+const page = async () => {
+  const t = await getTranslations("about");
+
+  const teamMembersStatic = [
     {
-      name: "John Doe",
-      role: "CEO & Founder",
-      image:
-        "https://lh3.googleusercontent.com/aida-public/AB6AXuC-Dso_r6Sk2pXkebTtQRV48PNOTHk1WtYdNd2q4Q4mZMWqw_NmU5Rs7WOxAgnuILIAy7-itwnZBagUsF0SznHC9nklnbCv_CyZecVP63mWAMKaGPJxeTk6_6yEa8ub3FbGF9KkOfFGttbo1dloiDBg3sXWRE5u0SMNA3NToleCqDPAhRe8MLaBgSA4YW0fPQkZxKxBAVRzhzh8JX0PBT49K3PG9S5WRr7vOzIdnX_kZPTLIKZLnP5t3bqGVDpK1bs1YBv_FhpFwpV2",
+      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuC-Dso_r6Sk2pXkebTtQRV48PNOTHk1WtYdNd2q4Q4mZMWqw_NmU5Rs7WOxAgnuILIAy7-itwnZBagUsF0SznHC9nklnbCv_CyZecVP63mWAMKaGPJxeTk6_6yEa8ub3FbGF9KkOfFGttbo1dloiDBg3sXWRE5u0SMNA3NToleCqDPAhRe8MLaBgSA4YW0fPQkZxKxBAVRzhzh8JX0PBT49K3PG9S5WRr7vOzIdnX_kZPTLIKZLnP5t3bqGVDpK1bs1YBv_FhpFwpV2",
       facebook: "#",
       twitter: "#",
     },
     {
-      name: "Jane Smith",
-      role: "Head of Education",
-      image:
-        "https://lh3.googleusercontent.com/aida-public/AB6AXuBNbqnw-v5dho_WjARRyY7O9achyHGKRDJ1XkxvG-tJ9VXJpgBWc4oguTpqqH-R2OdcDLtXTm2CzEpGivFm9nkGC9mg4511STD_Z1-q3dBCfvmrnhQ3PiBWb-R6XW9bN512rVn5AUgnNLAuH2P6_fxuudeFbwH2eU5S7-KN_mCXE8Lh2sqtu3Qy3Fxu_okhqPeSJxcDxcUN6-4TixPhpeRYug96BPTTLTltJgOOifZ7q_2YBL0ivLT6yr1E-9m9miGDBZwMMKdC-rbG",
+      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBNbqnw-v5dho_WjARRyY7O9achyHGKRDJ1XkxvG-tJ9VXJpgBWc4oguTpqqH-R2OdcDLtXTm2CzEpGivFm9nkGC9mg4511STD_Z1-q3dBCfvmrnhQ3PiBWb-R6XW9bN512rVn5AUgnNLAuH2P6_fxuudeFbwH2eU5S7-KN_mCXE8Lh2sqtu3Qy3Fxu_okhqPeSJxcDxcUN6-4TixPhpeRYug96BPTTLTltJgOOifZ7q_2YBL0ivLT6yr1E-9m9miGDBZwMMKdC-rbG",
       facebook: "#",
       twitter: "#",
     },
     {
-      name: "Sam Wilson",
-      role: "Lead Developer",
-      image:
-        "https://lh3.googleusercontent.com/aida-public/AB6AXuCz_LVifWMXCpTqegpWgr_avYSrXWvdua6IdQ8Tanc0wcX2hSK2d7-OJcMoTw3yoawZPqceY3Q2u8Mg2s0QBqDtkDlAREE5IMp8VHZKy6Taga9rszacXP-PUsR3QfEMuOvI08whvqMW98Gz-eapE9A1q67SIGtg28qGakkAe6MCdq5OUEsdkCo0hy_uUZxk4We_LQptwIg7f9mmK9v2CkojsFBUKjQmh9623IIOOUaFYgrWZuDC0YeWV7jj9UpfAre1MdZ84GZeHfwX",
+      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCz_LVifWMXCpTqegpWgr_avYSrXWvdua6IdQ8Tanc0wcX2hSK2d7-OJcMoTw3yoawZPqceY3Q2u8Mg2s0QBqDtkDlAREE5IMp8VHZKy6Taga9rszacXP-PUsR3QfEMuOvI08whvqMW98Gz-eapE9A1q67SIGtg28qGakkAe6MCdq5OUEsdkCo0hy_uUZxk4We_LQptwIg7f9mmK9v2CkojsFBUKjQmh9623IIOOUaFYgrWZuDC0YeWV7jj9UpfAre1MdZ84GZeHfwX",
       facebook: "#",
       twitter: "#",
     },
   ];
 
-  const coreValues = [
-    {
-      title: "Innovation",
-      description:
-        "Constantly pushing the boundaries of what's possible in education technology.",
-      icon: "emoji_objects",
-    },
-    {
-      title: "Collaboration",
-      description:
-        "Fostering a community where educators and learners can connect and grow together.",
-      icon: "groups",
-    },
-    {
-      title: "Student-Centric",
-      description:
-        "Placing the needs and success of our learners at the heart of our platform.",
-      icon: "school",
-    },
-    {
-      title: "Excellence",
-      description:
-        "Striving for the highest quality in our product, support, and educational content.",
-      icon: "verified",
-    },
+  const coreValuesStatic = [
+    { icon: "emoji_objects" },
+    { icon: "groups" },
+    { icon: "school" },
+    { icon: "verified" },
   ];
 
   return (
     <div className="flex h-full grow flex-col">
       <div className="container mx-auto px-4 sm:px-8 py-[80px]">
-            <div className="mb-8">
+        <div className="mb-8">
           <PathName />
-      </div>
+        </div>
         <div className="max-w-7xl mx-auto">
           <div className="@container">
             <div className="@[480px]:p-4">
@@ -75,19 +49,18 @@ const page = () => {
               >
                 <div className="flex flex-col gap-2 text-center">
                   <h1 className="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl">
-                    Empowering the Future of Learning.
+                    {t("hero.title")} 
                   </h1>
                   <h2 className="text-white text-base font-normal leading-normal @[480px]:text-lg">
-                    A brief sentence about making education accessible and
-                    engaging.
+                    {t("hero.description")} 
                   </h2>
                 </div>
                 <div className="flex flex-wrap gap-3 justify-center">
                   <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors">
-                    <span className="truncate">Get Started for Free</span>
+                    <span className="truncate">{t("hero.btn1")}</span>{" "}
                   </button>
                   <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-accent-light text-text-light text-base font-bold leading-normal tracking-[0.015em] hover:bg-accent-light/80 transition-colors">
-                    <span className="truncate">Request a Demo</span>
+                    <span className="truncate">{t("hero.btn2")}</span>{" "}
                   </button>
                 </div>
               </div>
@@ -100,15 +73,10 @@ const page = () => {
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="text-3xl font-bold tracking-tight text-text-light dark:text-text-dark sm:text-4xl">
-              Our Mission
+              {t("mission.title")} 
             </h2>
             <p className="mt-6 text-lg leading-8 text-slate-600 dark:text-slate-400">
-              A paragraph or two explaining the purpose of the LMS and its
-              commitment to quality education. We believe in creating a seamless
-              and intuitive platform that empowers both educators and learners
-              to achieve their full potential. Our goal is to break down
-              barriers to education and foster a vibrant community of lifelong
-              learners.
+              {t("mission.description")} 
             </p>
           </div>
           <img
@@ -123,17 +91,21 @@ const page = () => {
         <div className="px-4 sm:px-8 md:px-16 lg:px-24 xl:px-40 max-w-7xl mx-auto">
           <div className="text-center">
             <h2 className="text-3xl font-bold tracking-tight text-text-light dark:text-text-dark sm:text-4xl">
-              The Journey of Edu-Verse
+              {t("journey.title")} 
             </h2>
             <p className="mt-4 text-lg leading-8 text-slate-600 dark:text-slate-400">
-              From a simple idea to a global platform, here's our story.
+              {t("journey.description")} 
             </p>
           </div>
 
           <div className="mt-12 grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] gap-x-4 md:gap-x-8 items-start">
             <div className="hidden md:flex flex-col items-end text-right pr-8">
-              <p className="text-primary text-lg font-semibold">The Idea</p>
-              <p className="text-slate-500 dark:text-slate-400">2020</p>
+              <p className="text-primary text-lg font-semibold">
+                {t("journey.item1.title")}
+              </p>
+              <p className="text-slate-500 dark:text-slate-400">
+                {t("journey.item1.date")}
+              </p>
             </div>
             <div className="flex flex-col items-center gap-2 h-full">
               <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary text-white">
@@ -145,23 +117,25 @@ const page = () => {
             </div>
             <div className="pb-16 pt-2 md:pt-0">
               <p className="text-primary text-lg font-semibold md:hidden">
-                The Idea
+                {t("journey.item1.title")}
               </p>
               <p className="text-slate-500 dark:text-slate-400 md:hidden">
-                2020
+                {t("journey.item1.date")}
               </p>
               <p className="mt-2 text-slate-600 dark:text-slate-400">
-                The initial concept of a user-centric, accessible learning
-                platform was born.
+                {t("journey.item1.text")}
               </p>
             </div>
 
             <div className="pb-16 pt-2 text-right md:text-left">
-              <p className="text-primary text-lg font-semibold">Launch Day</p>
-              <p className="text-slate-500 dark:text-slate-400">2021</p>
+              <p className="text-primary text-lg font-semibold">
+                {t("journey.item2.title")}
+              </p>
+              <p className="text-slate-500 dark:text-slate-400">
+                {t("journey.item2.date")}
+              </p>
               <p className="mt-2 text-slate-600 dark:text-slate-400">
-                After months of development, we officially launched our platform
-                to the public.
+                {t("journey.item2.text")}
               </p>
             </div>
             <div className="flex flex-col items-center gap-2 h-full">
@@ -176,9 +150,11 @@ const page = () => {
 
             <div className="hidden md:flex flex-col items-end text-right pr-8">
               <p className="text-primary text-lg font-semibold">
-                Global Expansion
+                {t("journey.item3.title")}
               </p>
-              <p className="text-slate-500 dark:text-slate-400">2023</p>
+              <p className="text-slate-500 dark:text-slate-400">
+                {t("journey.item3.date")}
+              </p>
             </div>
             <div className="flex flex-col items-center gap-2 h-full">
               <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary text-white">
@@ -189,14 +165,13 @@ const page = () => {
             </div>
             <div className="pt-2 md:pt-0">
               <p className="text-primary text-lg font-semibold md:hidden">
-                Global Expansion
+                {t("journey.item3.title")}
               </p>
               <p className="text-slate-500 dark:text-slate-400 md:hidden">
-                2023
+                {t("journey.item3.date")}
               </p>
               <p className="mt-2 text-slate-600 dark:text-slate-400">
-                We expanded our reach, serving students and instructors in over
-                50 countries.
+                {t("journey.item3.text")}
               </p>
             </div>
           </div>
@@ -207,19 +182,19 @@ const page = () => {
         <div className="px-4 sm:px-8 md:px-16 lg:px-24 xl:px-40 max-w-7xl mx-auto">
           <div className="text-center">
             <h2 className="text-3xl font-bold tracking-tight text-text-light dark:text-text-dark sm:text-4xl">
-              Meet the Team
+              {t("team.title")} 
             </h2>
             <p className="mt-4 text-lg leading-8 text-slate-600 dark:text-slate-400">
-              The passionate people behind our platform.
+              {t("team.description")} 
             </p>
           </div>
 
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {teamMembers.map((member, index) => (
+            {teamMembersStatic.map((member, index) => (
               <div key={index} className="text-center group">
                 <div className="relative inline-block">
                   <img
-                    alt={`Headshot of ${member.name}`}
+                    alt={`Headshot of ${t(`team.members.${index}.name`)}`} 
                     className="h-40 w-40 rounded-full object-cover mx-auto"
                     src={member.image}
                   />
@@ -227,7 +202,7 @@ const page = () => {
                     <div className="flex gap-4">
                       <a
                         className="text-white hover:text-white/80"
-                        href={member.facebook}
+                        href={member.facebook} 
                       >
                         <svg
                           aria-hidden="true"
@@ -244,7 +219,7 @@ const page = () => {
                       </a>
                       <a
                         className="text-white hover:text-white/80"
-                        href={member.twitter}
+                        href={member.twitter} // 4. من المصفوفة الثابتة
                       >
                         <svg
                           aria-hidden="true"
@@ -259,10 +234,10 @@ const page = () => {
                   </div>
                 </div>
                 <h3 className="mt-6 text-xl font-semibold leading-7 tracking-tight text-text-light dark:text-text-dark">
-                  {member.name}
+                  {t(`team.members.${index}.name`)}
                 </h3>
                 <p className="text-base leading-6 text-primary">
-                  {member.role}
+                  {t(`team.members.${index}.role`)}
                 </p>
               </div>
             ))}
@@ -274,24 +249,27 @@ const page = () => {
         <div className="px-4 sm:px-8 md:px-16 lg:px-24 xl:px-40 max-w-7xl mx-auto">
           <div className="text-center">
             <h2 className="text-3xl font-bold tracking-tight text-text-light dark:text-text-dark sm:text-4xl">
-              Our Core Values
+              {t("values.title")}
             </h2>
             <p className="mt-4 text-lg leading-8 text-slate-600 dark:text-slate-400">
-              The principles that guide everything we do.
+              {t("values.description")} 
             </p>
           </div>
 
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-            {coreValues.map((value, index) => (
+
+            {coreValuesStatic.map((value, index) => (
               <div key={index} className="text-center">
                 <div className="flex items-center justify-center w-16 h-16 rounded-full bg-primary text-white mx-auto">
                   <span className="material-symbols-outlined text-4xl">
-                    {value.icon}
+                    {value.icon} 
                   </span>
                 </div>
-                <h3 className="mt-6 text-xl font-semibold">{value.title}</h3>
+                <h3 className="mt-6 text-xl font-semibold">
+                  {t(`values.items.${index}.title`)} 
+                </h3>
                 <p className="mt-2 text-slate-600 dark:text-slate-400">
-                  {value.description}
+                  {t(`values.items.${index}.description`)} 
                 </p>
               </div>
             ))}
@@ -302,16 +280,18 @@ const page = () => {
       <div className="bg-primary">
         <div className="px-4 sm:px-8 md:px-16 lg:px-24 xl:px-40 py-16 sm:py-20 max-w-7xl mx-auto text-center">
           <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Ready to Transform Your Learning Experience?
+            {t("cta.title")} {/* 3. تم الربط */}
           </h2>
 
           <div className="mt-8 flex justify-center gap-4">
             <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-white text-primary text-base font-bold leading-normal tracking-[0.015em] hover:bg-white/90 transition-colors">
-              <span className="truncate">Get Started for Free</span>
+              <span className="truncate">{t("cta.btn1")}</span>{" "}
+              {/* 3. تم الربط */}
             </button>
 
             <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-transparent border border-white text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-white/10 transition-colors">
-              <span className="truncate">Request a Demo</span>
+              <span className="truncate">{t("cta.btn2")}</span>{" "}
+              {/* 3. تم الربط */}
             </button>
           </div>
         </div>
