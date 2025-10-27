@@ -1,9 +1,11 @@
 "use client";
 
+import { useUser } from "@clerk/nextjs";
 import {Link} from "../../../src/i18n/navigation";
 import { usePathname } from "next/navigation";
 
 export default function Sidebar() {
+  const {user} = useUser();
   const pathname = usePathname();
 
   const links = [
@@ -13,6 +15,9 @@ export default function Sidebar() {
     { href: "/dashboard/analytics", label: "Analytics", icon: "analytics" },
     { href: "/dashboard/messages", label: "Messages", icon: "chat" },
   ];
+  if(user?.unsafeMetadata?.role !== "Teacher"){
+    links.splice(2,1)
+    } 
 
   const isActive = (linkHref) => {
     const currentPath = pathname.split("/").pop();
@@ -24,11 +29,13 @@ export default function Sidebar() {
     <div className="fixed top-0 left-0 h-full w-64 bg-card-light dark:bg-card-dark border-r border-gray-200 dark:border-gray-700/50 flex-col justify-between hidden lg:flex">
       <div className="flex flex-col gap-4 p-4">
         <Link href="/" className="flex items-center gap-2 px-3 py-2">
-            <img src="/EduPro Logo Design.png" alt="" />
+            <img src="https://res.cloudinary.com/dr2dnmx76/image/upload/v1761406970/EduProLogoDesign_pg337l.png" alt="" />
         </Link>
 
         <div className="flex flex-col gap-2">
-          {links.map((link) => (
+          {links.map((link) => 
+          {
+            return(
             <Link
               key={link.href}
               href={link.href}
@@ -41,7 +48,7 @@ export default function Sidebar() {
               <span className="material-symbols-outlined">{link.icon}</span>
               <p className="text-sm font-medium">{link.label}</p>
             </Link>
-          ))}
+          )})}
         </div>
       </div>
 

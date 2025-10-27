@@ -7,6 +7,7 @@ import { LightIcon } from "./LightIcon";
 // User related imports (assuming they are correctly configured)
 import { UserButton, useUser } from "@clerk/nextjs"; 
 import { useTranslations } from "next-intl";
+import LanguageSwitcher from "./langSwitcher";
 
 export default function Header() {
   const t = useTranslations("header");
@@ -38,6 +39,7 @@ export default function Header() {
                 src="https://res.cloudinary.com/dr2dnmx76/image/upload/v1761406970/EduProLogoDesign_pg337l.png"
                 alt="Logo"
               />
+
             </div>
 
             <nav className="hidden md:flex items-center gap-8">
@@ -73,8 +75,9 @@ export default function Header() {
                 );
               })}
             </nav>
-
             <div className="flex items-center gap-4">
+              <LanguageSwitcher/>
+
               <div
                 className={`flex items-center p-[5px] border border-[#9b9b9b] cursor-pointer ${
                   theme === "dark"

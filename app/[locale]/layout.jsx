@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import { getMessages } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
 import "./(main)/global.css";
 import { ClerkProvider } from "@clerk/nextjs";
 const inter = Inter({
@@ -21,6 +22,8 @@ export default async function RootLayout({ children, params }) {
   console.log(locale);
 
   return (
+            <NextIntlClientProvider locale={locale} messages={messages}>
+    
         <ClerkProvider>
 
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"} className={inter.className}>
@@ -35,6 +38,7 @@ export default async function RootLayout({ children, params }) {
       </body>
     </html>
         </ClerkProvider>
+        </NextIntlClientProvider>
 
   );
 }

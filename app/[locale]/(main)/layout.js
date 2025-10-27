@@ -1,5 +1,4 @@
 import { Inter } from "next/font/google";
-import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import "./global.css";
 import Header from "../../Components/header";
@@ -23,10 +22,9 @@ export default async function RootLayout({ children, params }) {
   console.log(locale);
 
   return (
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <Header />
-
-          {children}
-        </NextIntlClientProvider>
+    <>
+      <Header />
+      {children}
+    </>
   );
 }

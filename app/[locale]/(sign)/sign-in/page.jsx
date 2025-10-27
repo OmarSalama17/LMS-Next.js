@@ -1,7 +1,7 @@
 "use client";
 
 import { useState , useEffect } from 'react';
-import { useSignIn, useClerk } from '@clerk/nextjs';
+import { useSignIn, useClerk, useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 export default function Page() {
@@ -65,7 +65,6 @@ export default function Page() {
     }
   };
 
-  
 
   return (
     <div className=" flex flex-col lg:flex-row h-screen">
