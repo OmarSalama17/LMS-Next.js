@@ -1,6 +1,7 @@
 import React from "react";
 import PathName from "../../../../Components/PathName";
 import EnrollButton from "../../../../Components/EnrollButton";
+import { getTranslations } from "next-intl/server";
 
 const api = process.env.URL_API;
 async function getAllProducts() {
@@ -9,6 +10,8 @@ async function getAllProducts() {
 }
 const page = async ({ params }) => {
   const { slug, locale } = await params;
+
+  const t = await getTranslations("course_details");
 
   console.log(locale);
   const deCodeSlug = decodeURIComponent(slug);
@@ -22,13 +25,27 @@ const page = async ({ params }) => {
   // console.log("productinfo :: ", productInfo, "slug :: ", deCodeSlug);
 
   if (!productInfo) {
-    return <div>Product not found!</div>;
+    return <div>{t("not_found")}</div>;
   }
   const id = productInfo.id;
-  // const api = ``
   const res = await fetch(`${api}/product/${id}`);
   const data = await res.json();
   // console.log(data);
+
+  const reviews = [
+    {
+      name: t("review_1_name"),
+      img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBqDSWnX-BQnRX9JcwTCTp7LR11ksZLqX9OEhrugbrPwG9hpBg_fNq52VU08j3JWPnocZVVIQp-7EBGZOZm0wz5q3YW-1rWowisjFzk6ecFoMOJFjxuVwYut8cJYEzWLoaz4Gk3ghFwoeJSvh34X0yiCNPLSfhqVfJTIqS02bV4A9S0xa7V2pMm8fh4eH4b1Ht5Tsny72iM7TUED6ZhlUyCIGoiydLhfn5_7HK0-b8qfxASEMQY7FWce4OggmWBm0FK_AKJLDDUFm2F",
+      rating: 4.5,
+      text: t("review_1_text"),
+    },
+    {
+      name: t("review_2_name"),
+      img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCx9BX5IXMmOYsTsWcM0f6NE9JSfdirsNxzO2Wa8_oY4DmpLIfvcNnveaWch5BtvsTilkBW6jtb0dYt4tlS3aJZfjCiqLMKkICo7LTCGluJcrbT7yvv1OGbZsydO2S7BKXR05pPQV041iukfSqYJ4qD36t-GgYF-nA8zfnR5FwHldqeFr6iXXYEtPBIhIPsyHN9VNy5KIKv1Vb2ycmZ1zekONhYdSKN5zuFdawldw8HwPNiJzdZMwlD-OYrzWLXEQOw1Fa7zsDai14K",
+      rating: 5,
+      text: t("review_2_text"),
+    },
+  ];
 
   return (
     <main className="flex-1">
@@ -51,7 +68,7 @@ const page = async ({ params }) => {
 
               <div>
                 <span className="text-primary font-semibold text-sm">
-                  USER EXPERIENCE DESIGN
+                  {t("category_placeholder")}
                 </span>
                 <h1 className="text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white mt-2">
                   {data.title[locale]}
@@ -76,7 +93,7 @@ const page = async ({ params }) => {
                       {data.instructor[locale]}
                     </p>
                     <p className="text-sm text-slate-500 dark:text-slate-400">
-                      Lead at Google
+                      {t("instructor_title_placeholder")}
                     </p>
                   </div>
                 </div>
@@ -87,29 +104,29 @@ const page = async ({ params }) => {
               <div className="sticky top-28 bg-background-light dark:bg-background-dark rounded-xl shadow-lg p-6 border border-slate-200 dark:border-slate-800">
                 <div className="flex justify-between items-center">
                   <p
-                    className={`text-4xl font-bold  dark:text-white ${
+                    className={`text-4xl font-bold dark:text-white ${
                       data.price === 0 ? "text-green-500" : " text-slate-900"
                     }`}
                   >
-                    {data.price === 0 ? "Free" : `${data.price} $`}
+                    {data.price === 0 ? t("price_free") : `${data.price} $`}
                   </p>
                   <p className="text-slate-500 dark:text-slate-400 line-through text-lg">
-                    $199
+                    {t("original_price_placeholder")}
                   </p>
                 </div>
                 <p className="text-green-600 dark:text-green-400 font-semibold mt-1">
                   {data.price === 0
-                    ? "100% off for a limited time"
-                    : "50% off for a limited time"}
+                    ? t("discount_100")
+                    : t("discount_50")}
                 </p>
-                  <EnrollButton courseId={data.id} locale={locale}/>
+                <EnrollButton courseId={data.id} locale={locale} />
                 <div className="text-center text-sm text-slate-500 dark:text-slate-400 mt-4">
-                  30-Day Money-Back Guarantee
+                  {t("money_back")}
                 </div>
 
                 <div className="border-t border-slate-200 dark:border-slate-700 mt-6 pt-5 flex flex-col gap-4">
                   <p className="font-bold text-slate-900 dark:text-white">
-                    Course Inclusions:
+                    {t("inclusions_title")}
                   </p>
                   <div className="flex items-start gap-3 text-slate-700 dark:text-slate-300 text-sm">
                     <span
@@ -118,7 +135,7 @@ const page = async ({ params }) => {
                     >
                       ondemand_video
                     </span>
-                    <span>12 hours of on-demand video</span>
+                    <span>{t("inclusion_video")}</span>
                   </div>
                   <div className="flex items-start gap-3 text-slate-700 dark:text-slate-300 text-sm">
                     <span
@@ -127,7 +144,7 @@ const page = async ({ params }) => {
                     >
                       article
                     </span>
-                    <span>25 articles &amp; resources</span>
+                    <span>{t("inclusion_articles")}</span>
                   </div>
                   <div className="flex items-start gap-3 text-slate-700 dark:text-slate-300 text-sm">
                     <span
@@ -136,7 +153,7 @@ const page = async ({ params }) => {
                     >
                       code
                     </span>
-                    <span>5 downloadable project files</span>
+                    <span>{t("inclusion_files")}</span>
                   </div>
                   <div className="flex items-start gap-3 text-slate-700 dark:text-slate-300 text-sm">
                     <span
@@ -145,7 +162,7 @@ const page = async ({ params }) => {
                     >
                       all_inclusive
                     </span>
-                    <span>Full lifetime access</span>
+                    <span>{t("inclusion_access")}</span>
                   </div>
                   <div className="flex items-start gap-3 text-slate-700 dark:text-slate-300 text-sm">
                     <span
@@ -154,7 +171,7 @@ const page = async ({ params }) => {
                     >
                       workspace_premium
                     </span>
-                    <span>Certificate of completion</span>
+                    <span>{t("inclusion_certificate")}</span>
                   </div>
                 </div>
               </div>
@@ -164,13 +181,13 @@ const page = async ({ params }) => {
       </div>
 
       <div className="bg-background-light dark:bg-background-dark py-16 md:py-24">
-        <div className="container mx-auto px-4 sm:px-10 lg:px-10  py-4">
+        <div className="container mx-auto px-4 sm:px-10 lg:px-10 py-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-16 gap-y-12">
             <div className="lg:col-span-2">
               <div className="flex flex-col gap-12">
                 <div>
                   <h3 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">
-                    What you'll learn
+                    {t("what_you_learn_title")}
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
                     {data.whatLearn.map((item, i) => (
@@ -194,7 +211,7 @@ const page = async ({ params }) => {
 
                 <div>
                   <h3 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">
-                    Course Syllabus
+                    {t("syllabus_title")}
                   </h3>
 
                   <div className="space-y-3">
@@ -246,24 +263,11 @@ const page = async ({ params }) => {
               <div className="flex flex-col gap-10">
                 <div>
                   <h3 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">
-                    Student Reviews
+                    {t("reviews_title")}
                   </h3>
 
                   <div className="space-y-6">
-                    {[
-                      {
-                        name: "Sarah Johnson",
-                        img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBqDSWnX-BQnRX9JcwTCTp7LR11ksZLqX9OEhrugbrPwG9hpBg_fNq52VU08j3JWPnocZVVIQp-7EBGZOZm0wz5q3YW-1rWowisjFzk6ecFoMOJFjxuVwYut8cJYEzWLoaz4Gk3ghFwoeJSvh34X0yiCNPLSfhqVfJTIqS02bV4A9S0xa7V2pMm8fh4eH4b1Ht5Tsny72iM7TUED6ZhlUyCIGoiydLhfn5_7HK0-b8qfxASEMQY7FWce4OggmWBm0FK_AKJLDDUFm2F",
-                        rating: 4.5,
-                        text: `"This course was fantastic! The instructor explained complex topics clearly and the projects were very practical and relevant to the industry today."`,
-                      },
-                      {
-                        name: "Mike Chen",
-                        img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCx9BX5IXMmOYsTsWcM0f6NE9JSfdirsNxzO2Wa8_oY4DmpLIfvcNnveaWch5BtvsTilkBW6jtb0dYt4tlS3aJZfjCiqLMKkICo7LTCGluJcrbT7yvv1OGbZsydO2S7BKXR05pPQV041iukfSqYJ4qD36t-GgYF-nA8zfnR5FwHldqeFr6iXXYEtPBIhIPsyHN9VNy5KIKv1Vb2ycmZ1zekONhYdSKN5zuFdawldw8HwPNiJzdZMwlD-OYrzWLXEQOw1Fa7zsDai14K",
-                        rating: 5,
-                        text: `"An absolutely brilliant course. I learned so much and now feel confident applying for junior UX roles. The syllabus was perfectly structured."`,
-                      },
-                    ].map((review, i) => (
+                    {reviews.map((review, i) => (
                       <div
                         key={i}
                         className="p-6 bg-white dark:bg-slate-800/50 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800"
@@ -300,7 +304,7 @@ const page = async ({ params }) => {
                       </div>
                     ))}
                     <button className="w-full text-center text-primary font-semibold hover:underline">
-                      Show all reviews
+                      {t("show_all_reviews")}
                     </button>
                   </div>
                 </div>

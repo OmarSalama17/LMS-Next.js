@@ -3,11 +3,12 @@ import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import "./(main)/global.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from 'react-hot-toast';
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
   display: "swap",
-  variable: "--font-inter", // 👈 هتستخدمه في Tailwind كـ CSS variable
+  variable: "--font-inter",
 });
 export const dynamic = "force-dynamic";
 
@@ -40,6 +41,7 @@ export default async function RootLayout({ children, params }) {
             />
           </head>
           <body className="bg-background-light dark:bg-[#131c26] font-display text-text-light dark:text-text-dark">
+            <Toaster position="bottom-center" /> 
             {children}
           </body>
         </html>

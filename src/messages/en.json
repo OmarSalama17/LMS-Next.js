@@ -129,7 +129,11 @@
       ],
       "messageLabel": "Your Message",
       "messagePlaceholder": "Write your message here...",
-      "submitButton": "Send Message"
+      "submitButton": "Send Message",
+      "loadingText": "Sending...",
+      "success": "Message sent successfully!",
+      "error_fields": "Please fill out all fields.",
+      "error_server": "Failed to send message. Please try again."
     },
     "info": {
       "title": "Contact Information",
@@ -323,7 +327,11 @@
     "view": {
       "grid": "Grid View",
       "list": "List View"
-    }
+    },
+    "price":"Free",
+    "View Course": "View Course",
+    "By": "By"
+
   },
   "dashboard": {
     "addNewCourse": "Add New Course",
@@ -424,5 +432,39 @@
   "dashboardHeader": {
     "greeting": "Hello, {name} 👋",
     "welcomeMessage": "Welcome to your dashboard."
+  },
+  "paths": {
+    "home": "Home",
+    "courses": "Courses",
+    "profile": "Profile",
+    "dashboard": "Dashboard",
+    "about":"About US",
+    "blogs":"Blogs",
+    "faq":"FAQ",
+    "contact":"Contact"
+  },
+  "course_details": {
+    "not_found": "Product not found!",
+    "category_placeholder": "USER EXPERIENCE DESIGN",
+    "instructor_title_placeholder": "Lead at Google",
+    "price_free": "Free",
+    "original_price_placeholder": "$199",
+    "discount_100": "100% off for a limited time",
+    "discount_50": "50% off for a limited time",
+    "money_back": "30-Day Money-Back Guarantee",
+    "inclusions_title": "Course Inclusions:",
+    "inclusion_video": "12 hours of on-demand video",
+    "inclusion_articles": "25 articles & resources",
+    "inclusion_files": "5 downloadable project files",
+    "inclusion_access": "Full lifetime access",
+    "inclusion_certificate": "Certificate of completion",
+    "what_you_learn_title": "What you'll learn",
+    "syllabus_title": "Course Syllabus",
+    "reviews_title": "Student Reviews",
+    "show_all_reviews": "Show all reviews",
+    "review_1_name": "Sarah Johnson",
+    "review_1_text": "\"This course was fantastic! The instructor explained complex topics clearly and the projects were very practical and relevant to the industry today.\"",
+    "review_2_name": "Mike Chen",
+    "review_2_text": "\"An absolutely brilliant course. I learned so much and now feel confident applying for junior UX roles. The syllabus was perfectly structured.\""
   }
 }
