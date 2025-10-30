@@ -13,14 +13,39 @@ async function getCoursesData() {
   }
   return res.json();
 }
-export async function  generateMetadata({params}) {
+export async function generateMetadata({ params }) {
   const { locale } = await params;
+
+  const title = locale === "en" ? "Courses | EDP" : "الكورسات | EDP";
+  const description =
+    locale === "en"
+      ? "Explore a wide range of online courses on Education Platform (EDP)."
+      : "اكتشف مجموعة واسعة من الكورسات على منصة التعليم EDP.";
+
   return {
-    title: locale === "en" ? "Courses EDP" : "الكورسات",
-    description: locale === "en" ? "Courses EDP" : "الكورسات",
+    title,
+    description,
+    keywords:
+      locale === "en"
+        ? ["courses", "learning", "education", "online learning"]
+        : ["كورسات", "تعليم", "تعلم اونلاين", "منصة تعليمية"],
+    openGraph: {
+      title,
+      description,
+      url: locale === "en" ? "https://edp.com/en/courses" : "https://edp.com/ar/courses",
+      siteName: "Education Platform (EDP)",
+      locale,
+      type: "website",
+    },
+    alternates: {
+      canonical: locale === "en" ? "/en/courses" : "/ar/courses",
+      languages: {
+        en: "/en/courses",
+        ar: "/ar/courses",
+      },
+    },
   };
 }
-
 export default async function Page({ params }) {
 const { locale } = await params;
   const coursesData = await getCoursesData();
@@ -34,6 +59,23 @@ return (
 <Suspense fallback={<Loading />}>
         <CoursesListWrapper initialCourses={coursesData} locale={locale} />
     </Suspense>
+    <script type="application/ld+json">
+{JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": coursesData.map((course, index) => ({
+    "@type": "Course",
+    "position": index + 1,
+    "name": course.title[locale],
+    "description": course.description[locale],
+    "provider": {
+      "@type": "Organization",
+      "name": "EDP",
+      "url": "https://edp.com",
+    },
+  })),
+})}
+</script>
       </NextIntlClientProvider>
   );
 }

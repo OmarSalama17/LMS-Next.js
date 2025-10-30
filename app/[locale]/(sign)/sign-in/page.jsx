@@ -239,15 +239,7 @@ export default function Page() {
                 {
                   name: "Google",
                   img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBHw0_qWarYzOjjO3t4giXywnRnLwfNjf4goPzC_qUrLYQ5EXqy4kM2mAMqGPbb16wvJUq6Eag9EtMQ61MEjFNCgRlm0CARXSaJoimVZWCmoZeTxoX-Zn0ZYwH2v_GZRBbohYaGBfBWKHlZhgtjcL0tZFwXRRLMKStG46CqicSq2EGg3PAcATJIHbqM_CvnmFuIZXJySGQdtkgVTFKEMySPo1G4Z3FiDhx-vS6Osg0T_HT6kHF02gYYMwyi_9lYXxBLIZjYeL5L0YmC",
-                },
-                {
-                  name: "Facebook",
-                  img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAtwYFybn9Mnew9ndQ0oTNN1ixYQOI5eA3OhBXlYX0MMuvj6nJqHX_Av5aAxo4cb1D-swxsF7hB5DcVkz8Xf0gimfSpEEqs_VWYh4x8k618_OHPnWZXuJIqtwzOxqkE6zFYVMYVEhuLVwjLwx91YmM9hZ74OgTzks3BAXULpEEWq-889Ic0RtiW9-4ajqXlUB3I9Yb4znkK0WaZHe1FBb3aK8K-0SzdbjWMB0tWJc-5TxkP3dnA_ArXmwUUT3cP-dw1kkvCYDnbOKLp",
-                },
-                {
-                  name: "LinkedIn",
-                  img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCbad4eOYbClb3gT_CghMcpmODkerfPkW4fAEKc4vkmW6kpqKOyltQ_Kp5vd4ufrBjalYb7sHGGoi5qQ9bwogjWUAEwT79_Ge0lNfM3pTYfxJxTqwqhkvh8ZOU2EJ2pAYuW-kc7jE5lDa3F9mp95bwW11u9Q9n-GrStFVVNsCYdGaIT6lt-9CV6h6WP_xmDS5ZzAwp8mVtJmbgBfkVMFSicNMypHKnqxZ-x6TIxG45B37fBrxBy9w-IZAVRnNbEpxavbK--oiRXctZj",
-                },
+                }
               ].map((social) => (
                 <button
                   key={social.name}

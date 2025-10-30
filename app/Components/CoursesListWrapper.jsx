@@ -114,6 +114,8 @@ const CoursesListWrapper = ({ initialCourses, locale }) => {
       <div className="mb-8">
         <PathName />
       </div>
+      <h1 className="text-[40px] my-[25px] font-bold">{locale === "ar" ? "الدورات" : "Courses"}</h1>
+
       <div className="flex flex-col xl:flex-row gap-12">
         <FilterSidebar
           onApplyFilters={setFilters}
