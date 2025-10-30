@@ -1,11 +1,7 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-// 1. تغيير الـ import: احذف @react-email/render
-//    واستورد "renderToString" من "react-dom/server"
-import { renderToString } from 'react-dom/server'; 
-
-import ContactFormEmail from '../../../emails/ContactFormEmail'; 
+import ContactFormEmail from '../../Components/ContactFormEmail'; 
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -21,28 +17,19 @@ export async function POST(request) {
       );
     }
 
-    // 2. تغيير الدالة: استخدم "renderToString" بدلاً من "render"
-    const emailHtml = renderToString(
-      <ContactFormEmail
+
+    await resend.emails.send({
+      from: 'Contact Form <onboarding@resend.dev>',
+      to: 'omarsalama25x25@gmail.com',
+      subject: `New Message: ${subject}`,
+      reply_to: email,
+      
+      react: <ContactFormEmail
         name={name}
         email={email}
         subject={subject}
         message={message}
       />
-    );
-
-    // 3. (خطوة اختيارية لكنها جيدة) نتأكد أن الـ HTML هو نص
-    if (typeof emailHtml !== 'string') {
-      console.error("Email render failed, output was not a string.");
-      throw new Error("Email template failed to render.");
-    }
-
-    await resend.emails.send({
-      from: 'Contact Form <onboarding@resend.dev>',
-      to: 'YOUR_PERSONAL_EMAIL@gmail.com', // <--- تأكد من تغيير هذا
-      subject: `New Message: ${subject}`,
-      reply_to: email,
-      html: emailHtml, // <-- الآن هذا "نص" مضمون
     });
 
     return NextResponse.json(

@@ -154,23 +154,27 @@ const page = async ({ params }) => {
                       </div>
                       <div className="flex items-center justify-between mt-4">
                         <div className="flex items-center -space-x-2">
-                          <img
+                            {countStudents > 0 ?
+                              <img
                             alt={t("userAvatarAlt")}
                             className="inline-block h-6 w-6 rounded-full ring-2 ring-white dark:ring-gray-800"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRPQl2ILydyUe0pNvv_FCZ8x8R-asXI_bLxxVTLxe6yDNZWy81mH6CgKTzwvIUebxvRnR7LWA8YD6eQ2v-LatMNRyVEYMoaRBqbMKUjshjvV2kYWaToVMWW3TO66DmHSz63nBSmreyy-1L8XKWA7InczVEQqqz1wSmcMevufvpsBlUBBgHdUDjUVgn5yVN2K4lbcDzt38Z1NSqG2ZsRNXc69v4ixksPS8dv0296cnSD32PPMJceXlbPLWgL-_u3fUVCeXOz898lrN1"
                           />
-                          <img
+                          : ""}
+                          {countStudents > 1 ?
+                            <img
                             alt={t("userAvatarAlt")}
                             className="inline-block h-6 w-6 rounded-full ring-2 ring-white dark:ring-gray-800"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCljgeGgM1ItMoqCncJhgK51Ce2Xi7ry-QqNcJ9DRPXKtueX96qFSc9YFIG0cyw8fNrlRC70nymsllRVNwz01LJc4sgcxz1gudLegxlyr61Q7GLKRIqTXwTUOu-NrEA31NGWy_fqf14gUa-CK27uniTcSKPI41lm67odOLAICuuq0Z43DUsJGDVhKeAcgy-p4b2GHYDuVqv7-yWYoDjrLwsnkbEsg1l7jaHV2i5EoJo3zVs0Q8rgfCvKC_RjkoFngpUaON_ZwvpUK6A"
-                          />
-                          <img
+                          /> : ""}
+                          {countStudents > 2 ?
+                            <img
                             alt={t("userAvatarAlt")}
                             className="inline-block h-6 w-6 rounded-full ring-2 ring-white dark:ring-gray-800"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiFhRXGgqPFHJwAxp_iwsZ4zmkAinPk_EcyOvRjT9M0ofAj4DxpCJQHrTIRiU3EXoYFyp1C4_0avzGEmATbhELwVcum4asngi2TPvbpwxpFCfJBfubHO3Jbj-Vfr4rfanf-WTkZCT8qL5glZ2RxI6IDOUgvTT8pKbBormD9KgjQYHoeYC0vaGRV9BUl9ZMxM1d4DJzNI-HF9qehNxW6VE1VvY_0Va3cskSeTUpmXk5gYCVVJbsCTzDrVObdStFab77WM10B1J6xyJ3"
-                          />
+                          />:""}
                           <div className="h-6 w-6 rounded-full ring-2 ring-white dark:ring-gray-800 bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-xs font-semibold text-gray-600 dark:text-gray-300">
-                            +99
+                            {countStudents > 20 ? "+20" : countStudents}
                           </div>
                         </div>
                       </div>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import PathName from "../../../../app/Components/PathName";
 import { useTranslations } from "next-intl";
 
+
 const newsDataStatic = [
   {
     category: "Featured Article",
