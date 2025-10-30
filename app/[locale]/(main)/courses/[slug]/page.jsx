@@ -2,7 +2,8 @@ import React from "react";
 import PathName from "../../../../Components/PathName";
 import EnrollButton from "../../../../Components/EnrollButton";
 import { getTranslations } from "next-intl/server";
-import { notFound } from "next/navigation"; // <--- (اختياري لكن أفضل)
+import { notFound } from "next/navigation"; 
+import Image from "next/image";
 
 const api = process.env.URL_API;
 
@@ -30,13 +31,13 @@ async function getProductBySlug(slug, locale) {
 
 
 export async function generateMetadata({ params }) {
-  const { slug, locale } = params;
+  const { slug, locale } = await params;
 
   const data = await getProductBySlug(slug, locale);
 
   if (!data) {
     return {
-      title: "Course Not Found",
+      title: notFound(),
     };
   }
 
@@ -67,7 +68,7 @@ const data = await getProductBySlug(slug, locale);
   // console.log("productinfo :: ", productInfo, "slug :: ", deCodeSlug);
 
   if (!data) {
-    return <div>{t("not_found")}</div>;
+    return notFound();
   }
 
   // console.log(data);
@@ -98,12 +99,11 @@ const data = await getProductBySlug(slug, locale);
             <div className="lg:col-span-2 flex flex-col gap-8">
               <div>
                 <div
-                  className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl shadow-lg"
+                  className="w-full bg-center bg-no-repeat aspect-video bg-cover overflow-hidden flex items-center rounded-xl shadow-lg"
                   data-alt="A vibrant abstract gradient representing the course's topic"
-                  style={{
-                    backgroundImage: `url(${data.image})`,
-                  }}
-                ></div>
+                >
+                <Image className="w-[954px]" src={data.image} alt={data.title[locale]} width={512}  height={512} priority={true}/>
+                </div>
               </div>
 
               <div>
@@ -123,11 +123,9 @@ const data = await getProductBySlug(slug, locale);
                   <div
                     className="bg-center bg-no-repeat aspect-square rounded-full w-12 h-12"
                     data-alt="Instructor's profile picture"
-                    style={{
-                      backgroundImage:
-                        "url('https://lh3.googleusercontent.com/aida-public/AB6AXuD_sCTOQVHZaVJmSjWxRoIW8pk3WnvvBJ_Arq6ZnJO4qL4drrRl-hGlRZVoFieYUIulufjD4rNhhujgI4oUQ-FwoUsEYyyQy0yM9uYkkjAFQtspKLVPuBuDaX9Bh2OHvbvRD1SSLRNRVDK5t5mZ3By9yedLvgDXLbPxmMg24mgqWuIV_kRNko1wGvGOTWzgSBjuxxzlR2m8vb2ck9lIiPdgHtWLnCOsDigulFhZkWdOEkU_ycPXbREolKtLlz-a3m44i6wFEsqj-tGb')",
-                    }}
-                  ></div>
+                  >
+                    <Image className="rounded-full" src={"https://lh3.googleusercontent.com/aida-public/AB6AXuD_sCTOQVHZaVJmSjWxRoIW8pk3WnvvBJ_Arq6ZnJO4qL4drrRl-hGlRZVoFieYUIulufjD4rNhhujgI4oUQ-FwoUsEYyyQy0yM9uYkkjAFQtspKLVPuBuDaX9Bh2OHvbvRD1SSLRNRVDK5t5mZ3By9yedLvgDXLbPxmMg24mgqWuIV_kRNko1wGvGOTWzgSBjuxxzlR2m8vb2ck9lIiPdgHtWLnCOsDigulFhZkWdOEkU_ycPXbREolKtLlz-a3m44i6wFEsqj-tGb"} width={48} height={48} alt="" />
+                  </div>
                   <div>
                     <p className="font-bold text-slate-900 dark:text-white">
                       {data.instructor[locale]}
@@ -315,8 +313,10 @@ const data = await getProductBySlug(slug, locale);
                         <div className="flex items-center gap-4">
                           <div
                             className="size-12 bg-center bg-no-repeat aspect-square bg-cover rounded-full shrink-0"
-                            style={{ backgroundImage: `url(${review.img})` }}
-                          ></div>
+                            
+                          >
+                            <Image className="rounded-full" width={48} height={48} src={review.img} alt={review.name} />
+                          </div>
                           <div className="flex-1">
                             <p className="font-bold text-slate-900 dark:text-white">
                               {review.name}
