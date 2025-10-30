@@ -1,32 +1,32 @@
 "use client";
-import React, { useState, useMemo , useEffect} from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import CourseCard from "./CoursesCard";
 import FilterSidebar from "./filter";
 import PathName from "./PathName";
-import { useTranslations } from "next-intl"; 
-import { useSearchParams } from 'next/navigation'
+import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
 
 const ITEMS_PER_PAGE = 6;
 
 const CoursesListWrapper = ({ initialCourses, locale }) => {
+  const searchParams = useSearchParams();
 
-  const searchParams = useSearchParams()
-  
-const selectedCategory = searchParams.get("cat")
-  
-  const t = useTranslations("courses"); 
+  const selectedCategory = searchParams.get("cat");
 
+  const t = useTranslations("courses");
 
-  const sortOptions = useMemo(() => [
-    { key: "Newest", label: t('sort.options.newest') },
-    { key: "Most Popular", label: t('sort.options.popular') },
-    { key: "Highest Rated", label: t('sort.options.rated') },
-    { key: "Price: Low to High", label: t('sort.options.price_asc') },
-    { key: "Price: High to Low", label: t('sort.options.price_desc') },
-  ], [t]);
+  const sortOptions = useMemo(
+    () => [
+      { key: "Newest", label: t("sort.options.newest") },
+      { key: "Most Popular", label: t("sort.options.popular") },
+      { key: "Highest Rated", label: t("sort.options.rated") },
+      { key: "Price: Low to High", label: t("sort.options.price_asc") },
+      { key: "Price: High to Low", label: t("sort.options.price_desc") },
+    ],
+    [t]
+  );
 
-
-  const [viewMode, setViewMode] = useState('grid');
+  const [viewMode, setViewMode] = useState("grid");
   const [sortBy, setSortBy] = useState("Newest");
 
   const [filters, setFilters] = useState({
@@ -36,21 +36,22 @@ const selectedCategory = searchParams.get("cat")
   });
 
   const [currentPage, setCurrentPage] = useState(1);
-  
+
   const filteredAndSortedCourses = useMemo(() => {
     let filtered = [...initialCourses];
 
-    if(selectedCategory !== null){
-      filtered = filtered.filter((course) =>
-        course.categories[locale] === searchParams.get("cat") )
-
+    if (selectedCategory !== null) {
+      filtered = filtered.filter(
+        (course) => course.categories[locale] === searchParams.get("cat")
+      );
     }
     // filter categories (uses locale prop, so it works with translated category names)
     if (filters.category) {
-      filtered = filtered.filter((course) =>
-        course.categories[locale] === filters.category )
+      filtered = filtered.filter(
+        (course) => course.categories[locale] === filters.category
+      );
     }
-    
+
     // filter level (uses English keys: "Beginner", "Intermediate", "Advanced")
     if (filters.level.length > 0) {
       filtered = filtered.filter((course) =>
@@ -64,7 +65,7 @@ const selectedCategory = searchParams.get("cat")
     } else if (filters.price === "Paid") {
       filtered = filtered.filter((course) => parseFloat(course.price) > 0);
     }
-    
+
     // filter sort (uses English keys)
     return filtered.sort((a, b) => {
       if (sortBy === "Highest Rated") return b.rating - a.rating;
@@ -75,9 +76,11 @@ const selectedCategory = searchParams.get("cat")
         return parseFloat(b.price) - parseFloat(a.price);
       return 0;
     });
-  }, [sortBy, initialCourses, filters , locale]);
+  }, [sortBy, initialCourses, filters, locale]);
 
-  const totalPages = Math.ceil(filteredAndSortedCourses.length / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(
+    filteredAndSortedCourses.length / ITEMS_PER_PAGE
+  );
 
   // Pagination
   const paginatedCourses = useMemo(() => {
@@ -85,12 +88,12 @@ const selectedCategory = searchParams.get("cat")
     const endIndex = startIndex + ITEMS_PER_PAGE;
 
     return filteredAndSortedCourses.slice(startIndex, endIndex);
-  }, [currentPage, filteredAndSortedCourses]); 
+  }, [currentPage, filteredAndSortedCourses]);
 
   const categoriesWithCounts = useMemo(() => {
     const counts = {};
     for (const course of initialCourses) {
-      const category = course.categories[locale]; 
+      const category = course.categories[locale];
       counts[category] = (counts[category] || 0) + 1;
     }
     return Object.entries(counts).map(([name, count]) => ({
@@ -103,11 +106,10 @@ const selectedCategory = searchParams.get("cat")
     setCurrentPage(1);
   }, [filters, sortBy]);
 
-
   return (
-    <div 
+    <div
       className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-[80px]"
-      dir={locale === 'ar' ? 'rtl' : 'ltr'} 
+      dir={locale === "ar" ? "rtl" : "ltr"}
     >
       <div className="mb-8">
         <PathName />
@@ -119,21 +121,20 @@ const selectedCategory = searchParams.get("cat")
         />
         <main className="w-full xl:w-3/4">
           <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-            
             <p className="text-sm text-text-muted-light dark:text-text-muted-dark">
-              {t('stats.showing')}{" "}
+              {t("stats.showing")}{" "}
               <span className="font-semibold text-text-light dark:text-text-dark">
                 {paginatedCourses.length}
               </span>{" "}
-              {t('stats.of')}{" "}
+              {t("stats.of")}{" "}
               <span className="font-semibold text-text-light dark:text-text-dark">
                 {filteredAndSortedCourses.length}
               </span>{" "}
-              {t('stats.courses')}
+              {t("stats.courses")}
             </p>
 
             <div className="flex items-center gap-2">
-              <span className="text-sm font-medium">{t('sort.label')}</span>
+              <span className="text-sm font-medium">{t("sort.label")}</span>
               <div className="relative">
                 <select
                   value={sortBy}
@@ -151,33 +152,35 @@ const selectedCategory = searchParams.get("cat")
                 </span>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-2">
               <div className="hidden sm:flex h-10 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 p-1">
-                <label 
-                  className="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-md px-3 has-[:checked]:bg-white dark:has-[:checked]:bg-slate-900 has-[:checked]:shadow-sm has-[:checked]:text-primary text-slate-500 dark:text-slate-400 text-sm font-medium leading-normal">
-                  <span className="material-symbols-outlined mr-1">grid_view</span>
-                  <span className="truncate">{t('view.grid')}</span>
-                  <input 
-                    className="sr-only" 
-                    type="radio" 
-                    value="grid" 
+                <label className="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-md px-3 has-[:checked]:bg-white dark:has-[:checked]:bg-slate-900 has-[:checked]:shadow-sm has-[:checked]:text-primary text-slate-500 dark:text-slate-400 text-sm font-medium leading-normal">
+                  <span className="material-symbols-outlined mr-1">
+                    grid_view
+                  </span>
+                  <span className="truncate">{t("view.grid")}</span>
+                  <input
+                    className="sr-only"
+                    type="radio"
+                    value="grid"
                     name="view-toggle"
-                    checked={viewMode === 'grid'} 
-                    onChange={() => setViewMode('grid')} 
+                    checked={viewMode === "grid"}
+                    onChange={() => setViewMode("grid")}
                   />
                 </label>
-                <label 
-                  className="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-md px-3 has-[:checked]:bg-white dark:has-[:checked]:bg-slate-900 has-[:checked]:shadow-sm has-[:checked]:text-primary text-slate-500 dark:text-slate-400 text-sm font-medium leading-normal">
-                  <span className="material-symbols-outlined mr-1">view_list</span>
-                  <span className="truncate">{t('view.list')}</span>
-                  <input 
-                    className="sr-only" 
-                    type="radio" 
-                    value="list" 
+                <label className="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-md px-3 has-[:checked]:bg-white dark:has-[:checked]:bg-slate-900 has-[:checked]:shadow-sm has-[:checked]:text-primary text-slate-500 dark:text-slate-400 text-sm font-medium leading-normal">
+                  <span className="material-symbols-outlined mr-1">
+                    view_list
+                  </span>
+                  <span className="truncate">{t("view.list")}</span>
+                  <input
+                    className="sr-only"
+                    type="radio"
+                    value="list"
                     name="view-toggle"
-                    checked={viewMode === 'list'}
-                    onChange={() => setViewMode('list')}
+                    checked={viewMode === "list"}
+                    onChange={() => setViewMode("list")}
                   />
                 </label>
               </div>
@@ -186,24 +189,29 @@ const selectedCategory = searchParams.get("cat")
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
             {paginatedCourses.map((course) => (
-              <CourseCard key={course.id} {...course} locale={locale} viewMode={viewMode}/>
+              <CourseCard
+                key={course.id}
+                {...course}
+                locale={locale}
+                viewMode={viewMode}
+              />
             ))}
           </div>
         </main>
       </div>
-      
+
       <div className="flex justify-center items-center gap-2 mt-12">
-        {totalPages > 1 && 
+        {totalPages > 1 &&
           Array.from({ length: totalPages }, (_, index) => {
-            const pageNumber = index + 1; 
+            const pageNumber = index + 1;
             return (
               <button
                 key={pageNumber}
                 onClick={() => setCurrentPage(pageNumber)}
                 className={`py-2 px-4 rounded-lg text-sm font-medium transition-colors ${
                   currentPage === pageNumber
-                    ? "bg-primary text-white" 
-                    : "bg-card-light dark:bg-card-dark text-text-light dark:text-text-dark hover:bg-gray-200 dark:hover:bg-gray-700" 
+                    ? "bg-primary text-white"
+                    : "bg-card-light dark:bg-card-dark text-text-light dark:text-text-dark hover:bg-gray-200 dark:hover:bg-gray-700"
                 }`}
               >
                 {pageNumber}

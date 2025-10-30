@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { Link } from "../../src/i18n/navigation";
 
 export default function CourseCard({
@@ -13,7 +14,7 @@ export default function CourseCard({
   viewMode, 
 }) {
   const slug = title[locale].toLowerCase().replace(/ /g, '-');
-  
+  const t = useTranslations("courses");
   const isListView = viewMode === 'list';
 
   return (
@@ -51,11 +52,11 @@ export default function CourseCard({
             <h3 className="text-lg font-bold leading-tight line-clamp-2">
               {title[locale]}
             </h3>
-            <span className={`text-xl font-bold   ${price === 0 ? "text-green-500" : "text-primary ml-2"}`}>{price === 0 ? "Free" : `${price} $`}</span>
+            <span className={`text-xl font-bold w-[]  ${price === 0 ? "text-green-500" : "text-primary ml-2"}`}>{price === 0 ? t("price") : `${price}$`}</span>
           </div>
 
           <p className="text-sm text-text-muted-light dark:text-text-muted-dark mb-3 ">
-            By {instructor[locale]}
+            {t("By")} <span className="font-semibold">{instructor[locale]}</span>
           </p>
 
           <div className="flex items-center text-sm text-secondary mb-4">
@@ -81,7 +82,7 @@ export default function CourseCard({
             href={`/courses/${slug}`}
             className="text-sm font-semibold text-primary hover:underline flex items-center gap-1"
           >
-            View Course{" "}
+            {t("View Course")}{" "}
             <span className="material-symbols-outlined !text-base">
               arrow_forward
             </span>

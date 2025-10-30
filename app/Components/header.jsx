@@ -34,7 +34,8 @@ export default function Header() {
       {({ toggleTheme, theme }) => (
         <header className="relative bg-off-white dark:bg-background-dark shadow-md dark:text-white">
           <div className="container mx-auto flex items-center justify-between whitespace-nowrap px-10 py-4">
-            <div
+            <Link
+              href="/"
               className={`flex items-center gap-4 text-brand-blue ${
                 theme === "dark" ? "bg-white rounded-md p-[2px]" : ""
               }`}
@@ -44,7 +45,7 @@ export default function Header() {
                 src="https://res.cloudinary.com/dr2dnmx76/image/upload/v1761406970/EduProLogoDesign_pg337l.png"
                 alt="Logo"
               />
-            </div>
+            </Link>
 
             {/* 1. تغيير md:flex إلى lg:flex */}
             <nav className="hidden lg:flex items-center gap-8">

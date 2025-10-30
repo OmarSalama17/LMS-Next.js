@@ -16,7 +16,7 @@ export default function LanguageSwitcher({theme}) {
     {
       code: "ar",
       label: "العربية",
-      flag: "/sa.png",
+      flag: "/eg.png",
     },
     {
       code: "en",
