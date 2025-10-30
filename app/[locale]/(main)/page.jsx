@@ -4,6 +4,15 @@ import { getTranslations } from "next-intl/server";
 import {Link} from "../../../src/i18n/navigation";
 import FeaturedCourses from "../../Components/FeaturedCourses";
 
+
+export async function  generateMetadata({params}) {
+  const { locale } = await params;
+  return {
+    title: locale === "en" ? "Home EDP Education Platform" : "الصفحة الرئيسية EDP Education Platform",
+    description: locale === "en" ? "Home EDP Education Platform" : "الصفحة الرئيسية EDP Education Platform",
+  };
+}
+
 export default async function Home({ params }) {
   const { locale } = await params;
   const res = await fetch(`${process.env.URL_API}/product`);

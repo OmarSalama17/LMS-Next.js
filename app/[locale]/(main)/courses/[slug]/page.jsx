@@ -2,11 +2,60 @@ import React from "react";
 import PathName from "../../../../Components/PathName";
 import EnrollButton from "../../../../Components/EnrollButton";
 import { getTranslations } from "next-intl/server";
+import { notFound } from "next/navigation"; // <--- (اختياري لكن أفضل)
 
 const api = process.env.URL_API;
-async function getAllProducts() {
-  const res = await fetch(`${api}/product`);
-  return res.json();
+
+async function getProductBySlug(slug, locale) {
+  const deCodeSlug = decodeURIComponent(slug);
+  
+  const allProductsRes = await fetch(`${api}/product`, { cache: 'no-store' }); 
+  const allProducts = await allProductsRes.json();
+
+  const productInfo = allProducts.find((p) => {
+    const slugEN = p.title["en"].toLowerCase().replace(/ /g, "-");
+    const slugAR = p.title["ar"].toLowerCase().replace(/ /g, "-");
+    return slugEN === deCodeSlug || slugAR === deCodeSlug;
+  });
+
+  if (!productInfo) {
+    return null; 
+  }
+
+  const id = productInfo.id;
+  const res = await fetch(`${api}/product/${id}`);
+  const data = await res.json();
+  return data;
+}
+
+
+export async function generateMetadata({ params }) {
+  const { slug, locale } = params;
+
+  const data = await getProductBySlug(slug, locale);
+
+  if (!data) {
+    return {
+      title: "Course Not Found",
+    };
+  }
+
+  return {
+    title: data.title[locale],
+    description: data.description[locale], 
+    
+    openGraph: {
+      title: data.title[locale],
+      description: data.description[locale],
+      images: [
+        {
+          url: data.image, 
+          width: 1200,
+          height: 630,
+        },
+      ],
+    },
+  };
 }
 const page = async ({ params }) => {
   const { slug, locale } = await params;
@@ -14,22 +63,13 @@ const page = async ({ params }) => {
   const t = await getTranslations("course_details");
 
   console.log(locale);
-  const deCodeSlug = decodeURIComponent(slug);
-  const allProducts = await getAllProducts();
-  const productInfo = allProducts.find((p) => {
-    const slugEN = p.title["en"].toLowerCase().replace(/ /g, "-");
-    const slugAR = p.title["ar"].toLowerCase().replace(/ /g, "-");
-
-    return slugEN === deCodeSlug || slugAR === deCodeSlug;
-  });
+const data = await getProductBySlug(slug, locale);
   // console.log("productinfo :: ", productInfo, "slug :: ", deCodeSlug);
 
-  if (!productInfo) {
+  if (!data) {
     return <div>{t("not_found")}</div>;
   }
-  const id = productInfo.id;
-  const res = await fetch(`${api}/product/${id}`);
-  const data = await res.json();
+
   // console.log(data);
 
   const reviews = [
