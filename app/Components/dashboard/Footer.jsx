@@ -6,7 +6,7 @@ import { LightIcon } from "../LightIcon";
 import { DarkIcon } from "../DarkIcon";
 import ThemeController from "../theme";
 import { SignOutButton } from "@clerk/nextjs";
-import UserProfilePage from "../Profile/page";
+import UserProfilePage from "../Profile/UserProfilePage";
 const Footer = () => {
   const [isOpen, setIsOpen] = useState(false);
 
