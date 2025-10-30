@@ -142,15 +142,12 @@ export default function Page() {
           <div className="flex flex-col lg:flex-row min-h-screen">
             <div className="w-full lg:w-1/2 bg-white dark:bg-slate-900 p-8 flex flex-col justify-center items-center">
               <div className="max-w-md w-full">
-                {/* --- مفتاح تبديل الوضع الداكن --- */}
                 <div className="absolute top-6 right-6 flex items-center gap-4">
                   <span className="material-symbols-outlined text-slate-500 dark:text-slate-400">
                     wb_sunny
                   </span>
 
-                  {/* الكونتينر بتاع الزرار */}
                   <div className="relative inline-block w-10 align-middle select-none z-10">
-                    {/* الدايرة اللي بتتحرك (Handle) */}
                     <input
                       onClick={toggleTheme}
                       type="checkbox"
@@ -174,7 +171,6 @@ export default function Page() {
                 "
                     />
 
-                    {/* الخلفية (Track) */}
                     <label
                       htmlFor="toggle"
                       className="toggle-label 
@@ -195,7 +191,6 @@ export default function Page() {
                     dark_mode
                   </span>
                 </div>
-                {/* --- نهاية مفتاح تبديل الوضع الداكن --- */}
 
                 <Link
                   href="/"
@@ -203,8 +198,8 @@ export default function Page() {
                 >
                   <img
                     className="w-[130px]"
-                    src="/EduPro Logo Design.png"
-                    alt=""
+                    src="https://res.cloudinary.com/dr2dnmx76/image/upload/v1761406970/EduProLogoDesign_pg337l.png"
+                    alt="logo"
                   />
                 </Link>
                 <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2 text-center">
@@ -217,9 +212,7 @@ export default function Page() {
                   <p className="text-red-500 text-center mb-4">{error}</p>
                 )}
 
-                {/* --- نموذج التسجيل --- */}
                 {!pendingVerification ? (
-                  // ----- فورم التسجيل الأساسية (بالديزاين الكامل) -----
                   <form className="space-y-4" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
@@ -233,9 +226,9 @@ export default function Page() {
                           className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-800 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 h-11 placeholder:text-slate-400 dark:placeholder-slate-500 p-3 text-sm font-normal leading-normal shadow-sm"
                           id="first-name"
                           type="text"
-                          value={firstName} // ربط الـ state
-                          onChange={(e) => setFirstName(e.target.value)} // ربط الـ state
-                          placeholder="John"
+                          value={firstName} 
+                          onChange={(e) => setFirstName(e.target.value)}
+                          placeholder="Omar"
                         />
                       </div>
                       <div>
@@ -249,9 +242,9 @@ export default function Page() {
                           className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-800 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 h-11 placeholder:text-slate-400 dark:placeholder-slate-500 p-3 text-sm font-normal leading-normal shadow-sm"
                           id="last-name"
                           type="text"
-                          value={lastName} // ربط الـ state
-                          onChange={(e) => setLastName(e.target.value)} // ربط الـ state
-                          placeholder="Doe"
+                          value={lastName} 
+                          onChange={(e) => setLastName(e.target.value)}
+                          placeholder="Salama"
                         />
                       </div>
                     </div>
@@ -266,8 +259,8 @@ export default function Page() {
                         className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-800 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 h-11 placeholder:text-slate-400 dark:placeholder-slate-500 p-3 text-sm font-normal leading-normal shadow-sm"
                         id="email-or-username"
                         type="text"
-                        value={emailOrUsername} // ربط الـ state
-                        onChange={(e) => setEmailOrUsername(e.target.value)} // ربط الـ state
+                        value={emailOrUsername} 
+                        onChange={(e) => setEmailOrUsername(e.target.value)}
                         placeholder="you@example.com or your_username"
                       />
                     </div>
@@ -282,8 +275,8 @@ export default function Page() {
                         className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-800 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 h-11 placeholder:text-slate-400 dark:placeholder-slate-500 p-3 text-sm font-normal leading-normal shadow-sm"
                         id="password"
                         type="password"
-                        value={password} // ربط الـ state
-                        onChange={(e) => setPassword(e.target.value)} // ربط الـ state
+                        value={password} 
+                        onChange={(e) => setPassword(e.target.value)} 
                         placeholder="••••••••"
                       />
                     </div>
@@ -298,8 +291,8 @@ export default function Page() {
                         className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-800 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 h-11 placeholder:text-slate-400 dark:placeholder-slate-500 p-3 text-sm font-normal leading-normal shadow-sm"
                         id="confirm-password"
                         type="password"
-                        value={confirmPassword} // ربط الـ state
-                        onChange={(e) => setConfirmPassword(e.target.value)} // ربط الـ state
+                        value={confirmPassword} 
+                        onChange={(e) => setConfirmPassword(e.target.value)}
                         placeholder="••••••••"
                       />
                     </div>
@@ -314,8 +307,8 @@ export default function Page() {
                         className="form-select flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-800 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 h-11 placeholder:text-slate-400 dark:placeholder-slate-500 p-3 text-sm font-normal leading-normal shadow-sm appearance-none"
                         id="role"
                         name="role"
-                        value={role} // ربط الـ state
-                        onChange={(e) => setRole(e.target.value)} // ربط الـ state
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
                       >
                         <option value="student">Student</option>
                         <option value="teacher">Teacher</option>
@@ -339,7 +332,7 @@ export default function Page() {
                     </div>
 
                     <button
-                      type="button" // مهم عشان ميحصلش submit للفورم الأساسية
+                      type="button"
                       onClick={handleGoogleSignUp}
                       className="flex items-center justify-center gap-2 w-full h-12 border border-slate-300 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors duration-300 text-base font-medium text-slate-700 dark:text-slate-200 shadow-sm"
                     >
@@ -361,7 +354,6 @@ export default function Page() {
                     </p>
                   </form>
                 ) : (
-                  // ----- فورم التحقق (Verification) (بنفس الستايل) -----
                   <form className="space-y-4" onSubmit={handleVerify}>
                     <h3 className="text-xl font-bold text-slate-900 dark:text-white text-center">
                       Check your Email
@@ -395,10 +387,8 @@ export default function Page() {
                     </div>
                   </form>
                 )}
-                {/* --- نهاية نموذج التسجيل --- */}
               </div>
             </div>
-            {/* --- القسم الأيمن (الترويجي) --- */}
             <div className="hidden lg:flex w-1/2 bg-primary/5 dark:bg-primary/10 p-12 flex-col justify-center items-center relative overflow-hidden">
               <div className="absolute -top-24 -left-24 w-80 h-80 bg-primary/10 dark:bg-primary/20 rounded-full opacity-50"></div>
               <div className="absolute -bottom-32 -right-16 w-96 h-96 bg-primary/10 dark:bg-primary/20 rounded-full opacity-50"></div>
@@ -417,7 +407,6 @@ export default function Page() {
                 </p>
               </div>
             </div>
-            {/* --- نهاية القسم الأيمن --- */}
           </div>
         </div>
       </div>

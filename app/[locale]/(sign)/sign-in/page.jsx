@@ -3,7 +3,7 @@
 import { useState , useEffect } from 'react';
 import { useSignIn, useClerk, useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import {Link} from '../../../../src/i18n/navigation';
 export default function Page() {
   //hooks theme and signin
   const [theme, setTheme] = useState(null); 
@@ -68,7 +68,6 @@ export default function Page() {
 
   return (
     <div className=" flex flex-col lg:flex-row h-screen">
-      {/* الجزء الشمال */}
       <div className="w-full lg:w-1/2 bg-white dark:bg-slate-900 p-8 flex flex-col justify-center items-center">
         <div className="max-w-md w-full">
                           <div className="absolute top-6 right-6 flex items-center gap-4">
@@ -76,9 +75,7 @@ export default function Page() {
                     wb_sunny
                   </span>
 
-                  {/* الكونتينر بتاع الزرار */}
                   <div className="relative inline-block w-10 align-middle select-none z-10">
-                    {/* الدايرة اللي بتتحرك (Handle) */}
                     <input
                     onClick={toggleTheme}
                       type="checkbox"
@@ -102,7 +99,6 @@ export default function Page() {
                 "
                     />
 
-                    {/* الخلفية (Track) */}
                     <label
                       htmlFor="toggle"
                       className="toggle-label 
@@ -124,7 +120,7 @@ export default function Page() {
                   </span>
                 </div>
             <Link href="/" className={`flex items-center gap-4 justify-center gap-4 text-brand-blue mb-4`}>
-              <img className="w-[130px]" src="/EduPro Logo Design.png" alt="" />
+              <img className="w-[130px]" src="https://res.cloudinary.com/dr2dnmx76/image/upload/v1761406970/EduProLogoDesign_pg337l.png" alt="logo" />
             </Link>
 
           <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2 text-center">
@@ -223,7 +219,6 @@ export default function Page() {
 
             <button
               type="submit"
-              // 8. ربط الزرار بالـ loading state
               disabled={isLoading}
               className="w-full bg-primary text-white font-bold py-3 px-4 rounded-lg hover:bg-primary/90 transition-colors duration-300 h-12 text-sm shadow-md shadow-primary/30 disabled:opacity-50"
             >
@@ -267,15 +262,14 @@ export default function Page() {
 
             <p className="text-center text-sm text-slate-500 dark:text-slate-400">
               Don't have an account?{" "}
-              <a className="font-medium text-primary hover:underline" href="#">
+              <Link className="font-medium text-primary hover:underline" href="/sign-up">
                 Sign up
-              </a>
+              </Link>
             </p>
           </form>
         </div>
       </div>
 
-      {/* الجزء اليمين */}
       <div className="hidden lg:flex w-1/2 bg-primary/10 dark:bg-primary/5 p-8 flex-col justify-center items-center relative overflow-hidden">
         <div className="absolute -top-16 -left-16 w-64 h-64 bg-primary/20 dark:bg-primary/10 rounded-full"></div>
         <div className="absolute -bottom-24 -right-16 w-80 h-80 bg-primary/20 dark:bg-primary/10 rounded-full"></div>

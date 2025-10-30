@@ -21,7 +21,7 @@ export async function POST(request) {
 
     const { data, error } = await resend.emails.send({
       from: 'EDP <onboarding@resend.dev>', 
-      to: [email],
+      to: 'omarsalama25x25@gmail.com',
       subject: `🎉 تم التسجيل بنجاح في كورس: ${courseTitle}`,
       
       react: Email({
