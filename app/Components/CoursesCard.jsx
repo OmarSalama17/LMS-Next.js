@@ -35,6 +35,7 @@ export default function CourseCard({
           alt={title[locale]}
           width={426}
           height={320}
+          priority={true}
         />
       </div>
 
