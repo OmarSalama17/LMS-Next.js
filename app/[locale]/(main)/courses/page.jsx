@@ -32,16 +32,16 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title,
       description,
-      url: locale === "en" ? "https://edp.com/en/courses" : "https://edp.com/ar/courses",
+      url: locale === "en" ? "https://lms-next-js-omega.vercel.app/en/courses" : "https://lms-next-js-omega.vercel.app/ar/courses",
       siteName: "Education Platform (EDP)",
       locale,
       type: "website",
     },
     alternates: {
-      canonical: locale === "en" ? "/en/courses" : "/ar/courses",
+      canonical: locale === "en" ? "https://lms-next-js-omega.vercel.app/en/courses" : "https://lms-next-js-omega.vercel.app/ar/courses",
       languages: {
-        en: "/en/courses",
-        ar: "/ar/courses",
+        en: "https://lms-next-js-omega.vercel.app/en/courses",
+        ar: "https://lms-next-js-omega.vercel.app/ar/courses",
       },
     },
   };
