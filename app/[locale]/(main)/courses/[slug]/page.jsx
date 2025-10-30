@@ -1,10 +1,59 @@
 import React from "react";
+import PathName from "../../../../Components/PathName";
+import EnrollButton from "../../../../Components/EnrollButton";
+import { getTranslations } from "next-intl/server";
 
-const page = () => {
+const api = process.env.URL_API;
+async function getAllProducts() {
+  const res = await fetch(`${api}/product`);
+  return res.json();
+}
+const page = async ({ params }) => {
+  const { slug, locale } = await params;
+
+  const t = await getTranslations("course_details");
+
+  console.log(locale);
+  const deCodeSlug = decodeURIComponent(slug);
+  const allProducts = await getAllProducts();
+  const productInfo = allProducts.find((p) => {
+    const slugEN = p.title["en"].toLowerCase().replace(/ /g, "-");
+    const slugAR = p.title["ar"].toLowerCase().replace(/ /g, "-");
+
+    return slugEN === deCodeSlug || slugAR === deCodeSlug;
+  });
+  // console.log("productinfo :: ", productInfo, "slug :: ", deCodeSlug);
+
+  if (!productInfo) {
+    return <div>{t("not_found")}</div>;
+  }
+  const id = productInfo.id;
+  const res = await fetch(`${api}/product/${id}`);
+  const data = await res.json();
+  // console.log(data);
+
+  const reviews = [
+    {
+      name: t("review_1_name"),
+      img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBqDSWnX-BQnRX9JcwTCTp7LR11ksZLqX9OEhrugbrPwG9hpBg_fNq52VU08j3JWPnocZVVIQp-7EBGZOZm0wz5q3YW-1rWowisjFzk6ecFoMOJFjxuVwYut8cJYEzWLoaz4Gk3ghFwoeJSvh34X0yiCNPLSfhqVfJTIqS02bV4A9S0xa7V2pMm8fh4eH4b1Ht5Tsny72iM7TUED6ZhlUyCIGoiydLhfn5_7HK0-b8qfxASEMQY7FWce4OggmWBm0FK_AKJLDDUFm2F",
+      rating: 4.5,
+      text: t("review_1_text"),
+    },
+    {
+      name: t("review_2_name"),
+      img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCx9BX5IXMmOYsTsWcM0f6NE9JSfdirsNxzO2Wa8_oY4DmpLIfvcNnveaWch5BtvsTilkBW6jtb0dYt4tlS3aJZfjCiqLMKkICo7LTCGluJcrbT7yvv1OGbZsydO2S7BKXR05pPQV041iukfSqYJ4qD36t-GgYF-nA8zfnR5FwHldqeFr6iXXYEtPBIhIPsyHN9VNy5KIKv1Vb2ycmZ1zekONhYdSKN5zuFdawldw8HwPNiJzdZMwlD-OYrzWLXEQOw1Fa7zsDai14K",
+      rating: 5,
+      text: t("review_2_text"),
+    },
+  ];
+
   return (
     <main className="flex-1">
       <div className="w-full bg-white dark:bg-slate-900/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-10 lg:px-20 pt-12 pb-16">
+        <div className="container mx-auto px-4 sm:px-10 lg:px-10n pt-12 pb-16">
+          <div className="mb-8">
+            <PathName />
+          </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-12 gap-y-8">
             <div className="lg:col-span-2 flex flex-col gap-8">
               <div>
@@ -12,23 +61,20 @@ const page = () => {
                   className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl shadow-lg"
                   data-alt="A vibrant abstract gradient representing the course's topic"
                   style={{
-                    backgroundImage:
-                      "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBcX9KAyjuTH5AqLGhYiLNkw_HmZkmcWESZOT2-2_JcOwzPBC2DiW5m1-QsasPKBNpuFtNSq4TGJmZSEFBb-fNowSXmOgdb7NvJP9zRJBM6jKqvI7pWLv5ry9HCe6ko3svCiBVQi6SUlzC9PadHP7JSJ4Xegrp1gp47yj4oyOdnQEoCNjVHo83gQ-8mZ0Wofb4S73U6YU-wclFsNYAN33gYNW41rHc-OaFOKnUwIH4jjUFKJ5b3_mRHGglyLhCE9SsrGCuLugw7JguW')",
+                    backgroundImage: `url(${data.image})`,
                   }}
                 ></div>
               </div>
 
               <div>
                 <span className="text-primary font-semibold text-sm">
-                  USER EXPERIENCE DESIGN
+                  {t("category_placeholder")}
                 </span>
                 <h1 className="text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white mt-2">
-                  Introduction to UX Design
+                  {data.title[locale]}
                 </h1>
                 <p className="text-slate-600 dark:text-slate-300 text-lg mt-4 max-w-3xl">
-                  Master the fundamentals of user experience design. Learn to
-                  create intuitive and user-centered digital products from
-                  scratch, from initial research to final prototype.
+                  {data.description[locale]}
                 </p>
               </div>
 
@@ -44,50 +90,12 @@ const page = () => {
                   ></div>
                   <div>
                     <p className="font-bold text-slate-900 dark:text-white">
-                      John Doe
+                      {data.instructor[locale]}
                     </p>
                     <p className="text-sm text-slate-500 dark:text-slate-400">
-                      Lead UX Designer at Google
+                      {t("instructor_title_placeholder")}
                     </p>
                   </div>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <div className="flex items-center text-amber-400">
-                    <span
-                      className="material-symbols-outlined"
-                      style={{ fontSize: 20 }}
-                    >
-                      star
-                    </span>
-                    <span
-                      className="material-symbols-outlined"
-                      style={{ fontSize: 20 }}
-                    >
-                      star
-                    </span>
-                    <span
-                      className="material-symbols-outlined"
-                      style={{ fontSize: 20 }}
-                    >
-                      star
-                    </span>
-                    <span
-                      className="material-symbols-outlined"
-                      style={{ fontSize: 20 }}
-                    >
-                      star
-                    </span>
-                    <span
-                      className="material-symbols-outlined"
-                      style={{ fontSize: 20 }}
-                    >
-                      star_half
-                    </span>
-                  </div>
-                  <span className="text-slate-500 dark:text-slate-400 text-sm font-medium">
-                    4.5 (1,280 reviews)
-                  </span>
                 </div>
               </div>
             </div>
@@ -95,29 +103,30 @@ const page = () => {
             <div className="lg:col-span-1">
               <div className="sticky top-28 bg-background-light dark:bg-background-dark rounded-xl shadow-lg p-6 border border-slate-200 dark:border-slate-800">
                 <div className="flex justify-between items-center">
-                  <p className="text-4xl font-bold text-slate-900 dark:text-white">
-                    $99
+                  <p
+                    className={`text-4xl font-bold dark:text-white ${
+                      data.price === 0 ? "text-green-500" : " text-slate-900"
+                    }`}
+                  >
+                    {data.price === 0 ? t("price_free") : `${data.price} $`}
                   </p>
                   <p className="text-slate-500 dark:text-slate-400 line-through text-lg">
-                    $199
+                    {t("original_price_placeholder")}
                   </p>
                 </div>
                 <p className="text-green-600 dark:text-green-400 font-semibold mt-1">
-                  50% off for a limited time
+                  {data.price === 0
+                    ? t("discount_100")
+                    : t("discount_50")}
                 </p>
-                <button className="mt-6 flex min-w-[84px] w-full items-center justify-center rounded-lg h-14 px-5 bg-primary text-slate-50 text-lg font-bold hover:bg-primary/90 transition-all duration-300 shadow-lg shadow-primary/40 hover:shadow-xl hover:shadow-primary/50 transform hover:-translate-y-1">
-                  <span className="truncate">Enroll Now</span>
-                </button>
-                <button className="mt-3 flex min-w-[84px] w-full items-center justify-center rounded-lg h-12 px-5 bg-slate-200 dark:bg-slate-700/50 text-slate-800 dark:text-slate-200 text-base font-bold hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors">
-                  <span className="truncate">Add to Wishlist</span>
-                </button>
+                <EnrollButton courseId={data.id} locale={locale} />
                 <div className="text-center text-sm text-slate-500 dark:text-slate-400 mt-4">
-                  30-Day Money-Back Guarantee
+                  {t("money_back")}
                 </div>
 
                 <div className="border-t border-slate-200 dark:border-slate-700 mt-6 pt-5 flex flex-col gap-4">
                   <p className="font-bold text-slate-900 dark:text-white">
-                    Course Inclusions:
+                    {t("inclusions_title")}
                   </p>
                   <div className="flex items-start gap-3 text-slate-700 dark:text-slate-300 text-sm">
                     <span
@@ -126,7 +135,7 @@ const page = () => {
                     >
                       ondemand_video
                     </span>
-                    <span>12 hours of on-demand video</span>
+                    <span>{t("inclusion_video")}</span>
                   </div>
                   <div className="flex items-start gap-3 text-slate-700 dark:text-slate-300 text-sm">
                     <span
@@ -135,7 +144,7 @@ const page = () => {
                     >
                       article
                     </span>
-                    <span>25 articles &amp; resources</span>
+                    <span>{t("inclusion_articles")}</span>
                   </div>
                   <div className="flex items-start gap-3 text-slate-700 dark:text-slate-300 text-sm">
                     <span
@@ -144,7 +153,7 @@ const page = () => {
                     >
                       code
                     </span>
-                    <span>5 downloadable project files</span>
+                    <span>{t("inclusion_files")}</span>
                   </div>
                   <div className="flex items-start gap-3 text-slate-700 dark:text-slate-300 text-sm">
                     <span
@@ -153,7 +162,7 @@ const page = () => {
                     >
                       all_inclusive
                     </span>
-                    <span>Full lifetime access</span>
+                    <span>{t("inclusion_access")}</span>
                   </div>
                   <div className="flex items-start gap-3 text-slate-700 dark:text-slate-300 text-sm">
                     <span
@@ -162,7 +171,7 @@ const page = () => {
                     >
                       workspace_premium
                     </span>
-                    <span>Certificate of completion</span>
+                    <span>{t("inclusion_certificate")}</span>
                   </div>
                 </div>
               </div>
@@ -170,25 +179,18 @@ const page = () => {
           </div>
         </div>
       </div>
-      
+
       <div className="bg-background-light dark:bg-background-dark py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-10 lg:px-20">
+        <div className="container mx-auto px-4 sm:px-10 lg:px-10 py-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-16 gap-y-12">
-            {/* Left side - What you'll learn + Course syllabus */}
             <div className="lg:col-span-2">
               <div className="flex flex-col gap-12">
-                {/* What you'll learn */}
                 <div>
                   <h3 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">
-                    What you'll learn
+                    {t("what_you_learn_title")}
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
-                    {[
-                      "Understand the core principles and methodologies of modern UX design.",
-                      "Effectively conduct user research, synthesize findings, and create user personas.",
-                      "Develop wireframes and create interactive, high-fidelity prototypes using Figma.",
-                      "Plan and execute usability tests to validate and iterate on your designs.",
-                    ].map((item, i) => (
+                    {data.whatLearn.map((item, i) => (
                       <div
                         key={i}
                         className="flex items-start gap-3 p-4 rounded-lg bg-white dark:bg-slate-800/50 shadow-sm"
@@ -200,49 +202,20 @@ const page = () => {
                           check_circle
                         </span>
                         <span className="text-slate-700 dark:text-slate-300">
-                          {item}
+                          {item[locale]}
                         </span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Course Syllabus */}
                 <div>
                   <h3 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">
-                    Course Syllabus
+                    {t("syllabus_title")}
                   </h3>
 
                   <div className="space-y-3">
-                    {[
-                      {
-                        num: "01",
-                        title: "Introduction to UX & Design Thinking",
-                        lessons: [
-                          "Lesson 1: What is UX Design? (12:35)",
-                          "Lesson 2: The UX Design Process Overview (15:50)",
-                          "Lesson 3: Key Roles in a Modern Product Team (10:10)",
-                        ],
-                      },
-                      {
-                        num: "02",
-                        title: "User Research & Analysis",
-                        lessons: [
-                          "Lesson 1: Conducting Effective User Interviews (22:15)",
-                          "Lesson 2: Creating Surveys That Get Results (18:40)",
-                          "Lesson 3: Deep Dive into Competitive Analysis (16:05)",
-                        ],
-                      },
-                      {
-                        num: "03",
-                        title: "Prototyping, Testing & Iteration",
-                        lessons: [
-                          "Lesson 1: Low-Fidelity Wireframing Techniques (14:30)",
-                          "Lesson 2: High-Fidelity Prototyping in Figma (25:00)",
-                          "Lesson 3: Planning and Conducting Usability Testing (19:20)",
-                        ],
-                      },
-                    ].map((section, i) => (
+                    {data.courseSyllabus.map((section, i) => (
                       <details
                         key={i}
                         className="group rounded-xl bg-white dark:bg-slate-800/50 shadow-sm overflow-hidden"
@@ -251,10 +224,10 @@ const page = () => {
                         <summary className="flex cursor-pointer items-center justify-between p-5 font-medium text-slate-900 dark:text-white list-none">
                           <div className="flex items-center gap-4">
                             <span className="text-primary font-bold text-lg">
-                              {section.num}
+                              {section.moduleNumber}
                             </span>
                             <span className="font-semibold text-lg">
-                              {section.title}
+                              {section.moduleTitle[locale]}
                             </span>
                           </div>
                           <span className="ml-4 shrink-0 transition duration-300 group-open:rotate-180">
@@ -274,7 +247,7 @@ const page = () => {
                                 >
                                   play_circle
                                 </span>
-                                <span>{lesson}</span>
+                                <span>{lesson[locale]}</span>
                               </div>
                             ))}
                           </div>
@@ -286,29 +259,15 @@ const page = () => {
               </div>
             </div>
 
-            {/* Right side - Student Reviews */}
             <div className="lg:col-span-1">
               <div className="flex flex-col gap-10">
                 <div>
                   <h3 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">
-                    Student Reviews
+                    {t("reviews_title")}
                   </h3>
 
                   <div className="space-y-6">
-                    {[
-                      {
-                        name: "Sarah Johnson",
-                        img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBqDSWnX-BQnRX9JcwTCTp7LR11ksZLqX9OEhrugbrPwG9hpBg_fNq52VU08j3JWPnocZVVIQp-7EBGZOZm0wz5q3YW-1rWowisjFzk6ecFoMOJFjxuVwYut8cJYEzWLoaz4Gk3ghFwoeJSvh34X0yiCNPLSfhqVfJTIqS02bV4A9S0xa7V2pMm8fh4eH4b1Ht5Tsny72iM7TUED6ZhlUyCIGoiydLhfn5_7HK0-b8qfxASEMQY7FWce4OggmWBm0FK_AKJLDDUFm2F",
-                        rating: 4.5,
-                        text: `"This course was fantastic! The instructor explained complex topics clearly and the projects were very practical and relevant to the industry today."`,
-                      },
-                      {
-                        name: "Mike Chen",
-                        img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCx9BX5IXMmOYsTsWcM0f6NE9JSfdirsNxzO2Wa8_oY4DmpLIfvcNnveaWch5BtvsTilkBW6jtb0dYt4tlS3aJZfjCiqLMKkICo7LTCGluJcrbT7yvv1OGbZsydO2S7BKXR05pPQV041iukfSqYJ4qD36t-GgYF-nA8zfnR5FwHldqeFr6iXXYEtPBIhIPsyHN9VNy5KIKv1Vb2ycmZ1zekONhYdSKN5zuFdawldw8HwPNiJzdZMwlD-OYrzWLXEQOw1Fa7zsDai14K",
-                        rating: 5,
-                        text: `"An absolutely brilliant course. I learned so much and now feel confident applying for junior UX roles. The syllabus was perfectly structured."`,
-                      },
-                    ].map((review, i) => (
+                    {reviews.map((review, i) => (
                       <div
                         key={i}
                         className="p-6 bg-white dark:bg-slate-800/50 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800"
@@ -345,7 +304,7 @@ const page = () => {
                       </div>
                     ))}
                     <button className="w-full text-center text-primary font-semibold hover:underline">
-                      Show all reviews
+                      {t("show_all_reviews")}
                     </button>
                   </div>
                 </div>

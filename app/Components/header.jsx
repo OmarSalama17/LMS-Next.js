@@ -1,99 +1,241 @@
 "use client";
 import Link from "next/link";
 import ThemeController from "./theme";
+import { usePathname } from "../../src/i18n/navigation";
+import { DarkIcon } from "./DarkIcon";
+import { LightIcon } from "./LightIcon";
+import { UserButton, useUser } from "@clerk/nextjs";
+import { useTranslations } from "next-intl";
+import LanguageSwitcher from "./langSwitcher";
+import { useState } from "react";
 
 export default function Header() {
-  // 1️⃣ روابط التنقل
+  const t = useTranslations("header");
+  const pathname = usePathname();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const navLinks = [
-    { label: "Home", href: "/", active: false },
-    { label: "Courses", href: "/courses", active: true },
-    { label: "About Us", href: "/about", active: false },
-    { label: "Contact", href: "/contact", active: false },
-    { label: "Blog", href: "/blog", active: false },
-    { label: "FAQ", href: "/faq", active: false },
+    { label: t("nav.home"), href: "/" },
+    { label: t("nav.courses"), href: "/courses" },
+    { label: t("nav.about"), href: "/about" },
+    { label: t("nav.contact"), href: "/contact" },
+    { label: t("nav.blog"), href: "/blogs" },
+    { label: t("nav.faq"), href: "/faq" },
   ];
+
+  const { user } = useUser();
+
+  const handleLinkClick = () => {
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <ThemeController>
-      {({ toggleTheme }) => (
-        <header className="  bg-off-white dark:bg-background-dark shadow-sm  dark:text-white">
-          <div className="container mx-auto  flex items-center justify-between whitespace-nowrap px-10 py-4">
-            {/* Logo + Title */}
-            <div className="flex items-center gap-4 text-brand-blue">
-              <div className="size-8">
-                <svg
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M12 2L1 9l4 1.5V17a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-6.5L23 9l-11-7zm-3 8h6v2H9v-2zm0 4h6v2H9v-2z"></path>
-                </svg>
-              </div>
-              <h2 className="text-2xl font-bold leading-tight tracking-[-0.015em]">
-                LMS
-              </h2>
-            </div>
+      {({ toggleTheme, theme }) => (
+        <header className="relative bg-off-white dark:bg-background-dark shadow-md dark:text-white">
+          <div className="container mx-auto flex items-center justify-between whitespace-nowrap px-10 py-4">
+            <Link
+              href="/"
+              className={`flex items-center gap-4 text-brand-blue ${
+                theme === "dark" ? "bg-white rounded-md p-[2px]" : ""
+              }`}
+            >
+              <img
+                className="w-[130px]"
+                src="https://res.cloudinary.com/dr2dnmx76/image/upload/v1761406970/EduProLogoDesign_pg337l.png"
+                alt="Logo"
+              />
+            </Link>
 
-            {/* Navigation Links */}
-            <nav className="hidden md:flex items-center gap-8">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`text-sm leading-normal font-medium ${
-                    link.active
-                      ? "text-brand-blue font-bold"
-                      : "text-neutral-gray hover:text-brand-blue"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
+            {/* 1. تغيير md:flex إلى lg:flex */}
+            <nav className="hidden lg:flex items-center gap-8">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`text-sm leading-normal font-medium relative ${
+                      isActive
+                        ? "text-brand-blue font-extrabold"
+                        : `
+                        text-neutral-gray hover:text-brand-blue 
+                        after:content-[''] 
+                        after:absolute
+                        after:left-0
+                        after:bottom-0 
+                        after:w-full
+                        after:h-0.5 
+                        after:bg-brand-blue
+                        after:scale-x-0
+                        after:origin-right
+                        after:transition-transform
+                        after:duration-300
+                        after:ease-out
+                        hover:after:scale-x-100
+                        `
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
             </nav>
 
-            {/* Right-side Icons & Actions */}
+            {/* الأزرار والتحكم */}
             <div className="flex items-center gap-4">
-              <button className="text-neutral-gray hover:text-brand-blue">
-                <span className="material-symbols-outlined">settings</span>
-              </button>
-
-              <button className="relative text-neutral-gray hover:text-brand-blue">
-                <span className="material-symbols-outlined">notifications</span>
-                <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-vibrant-orange"></span>
-              </button>
-
-              <div className="flex items-center">
-                <span className="material-symbols-outlined text-neutral-gray">
-                  light_mode
-                </span>
-                <label className="relative inline-flex items-center cursor-pointer mx-2">
-                  <input
-                    className="sr-only peer"
-                    type="checkbox"
-                    value=""
-                    onClick={() => toggleTheme()}
-                  />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-brand-blue"></div>
-                </label>
-                <span className="material-symbols-outlined text-neutral-gray">
-                  dark_mode
-                </span>
+              {/* 2. إخفاء مبدل اللغة على الشاشات الأصغر من lg */}
+              <div className="hidden lg:flex">
+                <LanguageSwitcher theme={theme} />
               </div>
 
               <div
-                className="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
-                data-alt="User profile avatar"
-                style={{
-                  backgroundImage:
-                    'url("https://lh3.googleusercontent.com/aida-public/AB6AXuAE7vR78B-yRqQHix2zDZM1eUMv9bni3Xu5HEdAAVfkgbUx8ZmR8pPRKXovN7i7-iaOyxn-73nJJIt2bXuQOuP4EZTqvhJ8ziKWbVKpuOaz_GPu-PrFPWC2OQml6n7FX4F4e5lNl-QO6cSGXPA3wE67OKvjq3pqEj9-j2LKN4QStnA8DNXyn69-hEugrL09ftwPyyJivmWHjpXXG9Q1XNIQ8sg4AvRCubaEbdyZxAj2muD5U18QDP3DSUQZ7mtLEYS7jtTtBwOqO4Xf")',
-                }}
-              ></div>
+                className={`flex items-center p-[5px] border border-[#9b9b9b] cursor-pointer ${
+                  theme === "dark"
+                    ? "bg-[#27293d] rounded-md hover:shadow-lg transition ease-out hover:text-[black] duration-300 hover:bg-zinc-200"
+                    : "rounded-md bg-[#ffffff] border-[aliceblue] shadow-sm hover:shadow-lg transition ease-out hover:text-[white] duration-300 hover:bg-blue-950"
+                }`}
+                onClick={toggleTheme}
+              >
+                {theme === "dark" ? <LightIcon /> : <DarkIcon />}
+              </div>
 
-              <button className="md:hidden text-neutral-gray">
-                <span className="material-symbols-outlined">menu</span>
+              {/* 3. تغيير md:flex إلى lg:flex */}
+              <div className="hidden lg:flex items-center gap-4">
+                {!user ? (
+                  <>
+                    <Link
+                      href={"/sign-in"}
+                      className={`relative flex items-center justify-center font-medium text-[14px] 
+                        text-neutral-gray 
+                        hover:text-brand-blue 
+                        after:content-[''] 
+                        after:absolute
+                        after:left-0
+                        after:bottom-0 
+                        after:w-full
+                        after:h-0.5 
+                        after:bg-brand-blue
+                        after:scale-x-0
+                        after:origin-right
+                        after:transition-transform
+                        after:duration-300
+                        after:ease-out
+                        hover:after:scale-x-100
+                      `}
+                    >
+                      <span className="material-symbols-outlined">login</span>
+                      {t("auth.login")}
+                    </Link>
+                    <Link
+                      href={"/sign-up"}
+                      className={`relative flex items-center justify-center font-medium text-[14px] 
+                        text-neutral-gray 
+                        hover:text-brand-blue 
+                        after:content-[''] 
+                        after:absolute
+                        after:left-0
+                        after:bottom-0 
+                        after:w-full
+                        after:h-0.5 
+                        after:bg-brand-blue
+                        after:scale-x-0
+                        after:origin-right
+                        after:transition-transform
+                        after:duration-300
+                        after:ease-out
+                        hover:after:scale-x-100
+                      `}
+                    >
+                      <span className="material-symbols-outlined">person</span>
+                      {t("auth.signup")}
+                    </Link>
+                  </>
+                ) : null}
+              </div>
+
+              <UserButton afterSignOutUrl="/">
+                <UserButton.MenuItems>
+                  <UserButton.Link
+                    label={t("auth.dashboard")}
+                    labelIcon={
+                      <span className="material-symbols-outlined !text-[16px]">
+                        dashboard
+                      </span>
+                    }
+                    href="/dashboard"
+                  />
+                </UserButton.MenuItems>
+              </UserButton>
+
+              {/* 4. تغيير md:hidden إلى lg:hidden */}
+              <button
+                className="lg:hidden text-neutral-gray" // التغيير هنا
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label="Toggle mobile menu"
+              >
+                <span className="material-symbols-outlined">
+                  {isMobileMenuOpen ? "close" : "menu"}
+                </span>
               </button>
             </div>
           </div>
+
+          {/* 5. تغيير md:hidden إلى lg:hidden */}
+          {isMobileMenuOpen && (
+            <div className="lg:hidden absolute top-full left-0 right-0 z-50 bg-off-white dark:bg-background-dark shadow-xl border-t border-gray-200 dark:border-gray-700">
+              <nav className="flex flex-col gap-4 p-6">
+                {/* روابط القائمة */}
+                {navLinks.map((link) => {
+                  const isActive = pathname === link.href;
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className={`text-base font-medium p-2 rounded-md text-center ${
+                        isActive
+                          ? "text-brand-blue font-extrabold bg-blue-50 dark:bg-blue-900/30"
+                          : "text-neutral-gray hover:text-brand-blue hover:bg-gray-100 dark:hover:bg-gray-800"
+                      }`}
+                      onClick={handleLinkClick}
+                    >
+                      {link.label}
+                    </Link>
+                  );
+                })}
+
+                <hr className="w-full border-t border-gray-300 dark:border-gray-700 my-2" />
+
+                {/* 6. إضافة مبدل اللغة هنا في قائمة الموبايل */}
+                <div className="flex justify-center py-2">
+                  <LanguageSwitcher theme={theme} />
+                </div>
+
+                {/* روابط تسجيل الدخول للموبايل */}
+                {!user && (
+                  <>
+                    <hr className="w-full border-t border-gray-300 dark:border-gray-700 my-2" />
+                    <Link
+                      href={"/sign-in"}
+                      className="text-base font-medium text-neutral-gray hover:text-brand-blue flex items-center justify-center gap-2 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+                      onClick={handleLinkClick}
+                    >
+                      <span className="material-symbols-outlined">login</span>
+                      {t("auth.login")}
+                    </Link>
+                    <Link
+                      href={"/sign-up"}
+                      className="text-base font-medium text-neutral-gray hover:text-brand-blue flex items-center justify-center gap-2 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+                      onClick={handleLinkClick}
+                    >
+                      <span className="material-symbols-outlined">person</span>
+                      {t("auth.signup")}
+                    </Link>
+                  </>
+                )}
+              </nav>
+            </div>
+          )}
         </header>
       )}
     </ThemeController>

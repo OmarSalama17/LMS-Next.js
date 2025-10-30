@@ -1,78 +1,122 @@
-import React from "react";
-import Link from "next/link";
+import React , {useState} from "react";
+import { useTranslations } from "next-intl";
+import { useRouter } from "../../src/i18n/navigation";
+import { useSearchParams } from 'next/navigation'; // <--- استيراد مهم
+const levelKeys = ["Beginner", "Intermediate", "Advanced"];
+const priceKeys = ["Free", "Paid", "All"];
 
-const categories = [
+const FilterSidebar = ({onApplyFilters , categories}) => {
+const searchParams = useSearchParams() // <--- تعريف الـ Hook
+const router = useRouter()
+const selectedCat = searchParams.get("cat")
+  const t = useTranslations("filter");
 
-  { name: "Web Development", count: 23 },
-  { name: "UI/UX Design", count: 15 },
-  { name: "Data Science", count: 18 },
-  { name: "Business", count: 12 },
-  { name: "Marketing", count: 8 },
-];
+  const levels = levelKeys.map(key => ({ 
+    key: key, 
+    label: t(`level.${key.toLowerCase()}`) 
+  }));
+  
+  const prices = priceKeys.map(key => ({
+    key: key,
+    label: t(`price.${key.toLowerCase()}`)
+  }));
 
-const levels = ["Beginner", "Intermediate", "Advanced"];
 
-const prices = ["Free", "Paid", "All"];
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedLevel, setSelectedLevel] = useState([]); 
+  const [selectedPrice, setSelectedPrice] = useState("All");
 
-const FilterSidebar = () => {
+  const handleLevelChange = (levelKey) => {
+    setSelectedLevel((prevSelected) => {
+      if (prevSelected.includes(levelKey)) {
+        return prevSelected.filter((l) => l !== levelKey);
+      } else {
+        return [...prevSelected, levelKey];
+      }
+    }); 
+  };
+  
+  const handleApply = () => {
+    const filters = {
+      category: selectedCategory,
+      level: selectedLevel,
+      price: selectedPrice,
+    }
+    if (selectedCat !== null) {
+      router.push("/courses")
+    }
+    onApplyFilters(filters);
+
+  }
+
   return (
-    <aside className="w-full xl:w-1/4 xl:sticky xl:top-28 self-start">
+    <aside className="w-full xl:w-1/4 xl:sticky xl:top-[60px] self-start">
       <div className="bg-card-light dark:bg-card-dark rounded-xl p-6 shadow-sm">
         <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
-          <span className="material-symbols-outlined">filter_list</span> Filters
+          <span className="material-symbols-outlined">filter_list</span> {t("title")}
         </h2>
         <div className="space-y-6">
-          {/* Category Section */}
           <div>
-            <h3 className="font-semibold mb-4">Category</h3>
+            <h3 className="font-semibold mb-4">{t("category.title")}</h3>
             <div className="space-y-3">
-              {categories.map((category, index) => (
-                <Link
+              <button
+                onClick={()=> setSelectedCategory(null)}
+                className={`flex items-center justify-between w-full text-sm font-medium hover:text-primary transition-colors ${!selectedCategory ? "text-primary font-bold" : ""}`}
+              >
+                <span>{t("category.all")}</span>
+              </button>
+              {categories.map((category, index) => {
+                return(
+                <button
                   key={index}
-                  className="flex items-center justify-between text-sm font-medium hover:text-primary transition-colors"
-                  href="#"
+                  className={`flex items-center justify-between w-full text-sm font-medium hover:text-primary transition-colors ${
+                    selectedCategory === category.name ? "text-primary font-bold" : ""
+                  }`}
+                  onClick={()=> setSelectedCategory(category.name)}
                 >
                   <span>{category.name}</span>
                   <span className="text-xs text-text-muted-light dark:text-text-muted-dark">
                     {category.count}
                   </span>
-                </Link>
-              ))}
+                </button>
+              )})}
             </div>
           </div>
 
-          <div className="border-t border-border-light dark:border-border-dark my-6"></div>
-
-          {/* Level Section */}
+          {/* <div className="border-t border-border-light dark:border-border-dark my-6"></div>
           <div>
-            <h3 className="font-semibold mb-4">Level</h3>
+            <h3 className="font-semibold mb-4">{t("level.title")}</h3>
             <div className="space-y-3">
               {levels.map((level, index) => (
-                <label key={index} className="flex items-center text-sm">
+                <label key={index} className="flex items-center text-sm cursor-pointer">
                   <input
                     className="h-4 w-4 rounded text-primary focus:ring-primary border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark mr-3"
                     type="checkbox"
+                    checked={selectedLevel.includes(level.key)}
+                    onChange={()=> handleLevelChange(level.key)}
                   />
-                  {level}
+                  {level.label}
                 </label>
               ))}
             </div>
-          </div>
+          </div> */}
 
           <div className="border-t border-border-light dark:border-border-dark my-6"></div>
 
-          {/* Price Section */}
           <div>
-            <h3 className="font-semibold mb-4">Price</h3>
+            <h3 className="font-semibold mb-4">{t("price.title")}</h3>
             <div className="space-y-3">
               {prices.map((price, index) => (
-                <label key={index} className="flex items-center text-sm">
+                <label key={index} className="flex items-center text-sm cursor-pointer">
                   <input
                     className="h-4 w-4 text-primary focus:ring-primary border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark mr-3"
                     name="price"
                     type="radio"
+                    value={price.key}
+                    checked={selectedPrice === price.key}
+                    onChange={(e) => setSelectedPrice(e.target.value)}
                   />
-                  {price}
+                  {price.label}
                 </label>
               ))}
             </div>
@@ -80,10 +124,11 @@ const FilterSidebar = () => {
 
           <div className="border-t border-border-light dark:border-border-dark my-6"></div>
 
-          {/* Apply Filters Button */}
-          <button className="w-full bg-primary text-white font-bold py-2.5 px-4 rounded-lg hover:bg-opacity-90 transition-all flex items-center justify-center gap-2">
+          <button className="w-full bg-primary text-white font-bold py-2.5 px-4 rounded-lg hover:bg-opacity-90 transition-all flex items-center justify-center gap-2"
+          onClick={handleApply}
+          >
             <span className="material-symbols-outlined">filter_alt</span>
-            Apply Filters
+            {t("apply")}
           </button>
         </div>
       </div>

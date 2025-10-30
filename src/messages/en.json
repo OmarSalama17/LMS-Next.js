@@ -1,6 +1,470 @@
 {
   "home": {
-    "title": "Welcome to our website",
-    "description": "Explore our platform"
+    "landing": {
+      "title": "Unlock Your Potential.",
+      "primary": " Master New Skills.",
+      "description": "Join millions of learners from around the globe. Discover expert-led courses and accelerate your journey to success today.",
+      "btn1": "Find Your Course",
+      "btn2": "Start Teaching"
+    },
+    "Categories": {
+      "title": "Explore Popular Categories",
+      "description": "Dive into subjects that spark your curiosity.",
+      "Category1": "Programming",
+      "Category2": "Design",
+      "Category3": "Business",
+      "Category4": "View All"
+    },
+    "review": {
+      "review1": {
+        "title": "LearnSphere completely transformed my career. The courses are practical, engaging, and taught by true industry experts. Highly recommended!",
+        "name": "Jane Doe",
+        "role": "Web Developer"
+      },
+      "review2": {
+        "title": "The flexibility of learning on my own schedule was a game changer. I could finally pursue my passion for data science without quitting my job.",
+        "name": "John Smith",
+        "role": "Data Analyst"
+      }
+    },
+    "learners": {
+      "title": "Join Millions of Learners",
+      "description": "Embark on your learning journey today. With expert instructors and a global community, you're in good company",
+      "btn": "Start Learning",
+      "btn2": "Become an Instructor"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "Empowering the Future of Learning.",
+      "description": "A brief sentence about making education accessible and engaging.",
+      "btn1": "Get Started for Free",
+      "btn2": "Request a Demo"
+    },
+    "mission": {
+      "title": "Our Mission",
+      "description": "A paragraph or two explaining the purpose of the LMS and its commitment to quality education. We believe in creating a seamless and intuitive platform that empowers both educators and learners to achieve their full potential. Our goal is to break down barriers to education and foster a vibrant community of lifelong learners."
+    },
+    "journey": {
+      "title": "The Journey of Edu-Verse",
+      "description": "From a simple idea to a global platform, here's our story.",
+      "item1": {
+        "title": "The Idea",
+        "date": "2020",
+        "text": "The initial concept of a user-centric, accessible learning platform was born."
+      },
+      "item2": {
+        "title": "Launch Day",
+        "date": "2021",
+        "text": "After months of development, we officially launched our platform to the public."
+      },
+      "item3": {
+        "title": "Global Expansion",
+        "date": "2023",
+        "text": "We expanded our reach, serving students and instructors in over 50 countries."
+      }
+    },
+    "team": {
+      "title": "Meet the Team",
+      "description": "The passionate people behind our platform.",
+      "members": [
+        {
+          "name": "John Doe",
+          "role": "CEO & Founder"
+        },
+        {
+          "name": "Jane Smith",
+          "role": "Head of Education"
+        },
+        {
+          "name": "Sam Wilson",
+          "role": "Lead Developer"
+        }
+      ]
+    },
+    "values": {
+      "title": "Our Core Values",
+      "description": "The principles that guide everything we do.",
+      "items": [
+        {
+          "title": "Innovation",
+          "description": "Constantly pushing the boundaries of what's possible in education technology."
+        },
+        {
+          "title": "Collaboration",
+          "description": "Fostering a community where educators and learners can connect and grow together."
+        },
+        {
+          "title": "Student-Centric",
+          "description": "Placing the needs and success of our learners at the heart of our platform."
+        },
+        {
+          "title": "Excellence",
+          "description": "Striving for the highest quality in our product, support, and educational content."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Ready to Transform Your Learning Experience?",
+      "btn1": "Get Started for Free",
+      "btn2": "Request a Demo"
+    }
+  },
+  "contact": {
+    "hero": {
+      "title": "We're here to help.",
+      "description": "Have a question or need assistance? Fill out the form below, and we'll get back to you as soon as possible."
+    },
+    "form": {
+      "nameLabel": "Your Name",
+      "namePlaceholder": "Enter your name",
+      "emailLabel": "Your Email",
+      "emailPlaceholder": "Enter your email address",
+      "subjectLabel": "Subject",
+      "subjectOptions": [
+        "General Inquiry",
+        "Technical Support",
+        "Billing",
+        "Feedback"
+      ],
+      "messageLabel": "Your Message",
+      "messagePlaceholder": "Write your message here...",
+      "submitButton": "Send Message",
+      "loadingText": "Sending...",
+      "success": "Message sent successfully!",
+      "error_fields": "Please fill out all fields.",
+      "error_server": "Failed to send message. Please try again."
+    },
+    "info": {
+      "title": "Contact Information",
+      "email": "support@lms.com",
+      "phone": "+1 (555) 123-4567",
+      "hours": "Mon - Fri, 9:00 AM - 5:00 PM EST"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "description": "Have a common question? Check out our FAQ page for quick answers.",
+      "link": "Go to FAQ"
+    },
+    "social": {
+      "title": "Follow Us"
+    }
+  },
+  "news": {
+    "title": "LMS News & Updates",
+    "categories": {
+      "all": "All",
+      "updates": "Product Updates",
+      "tips": "Study Tips",
+      "resources": "Instructor Resources",
+      "platform": "Platform News"
+    },
+    "featured": {
+      "tag": "Featured Article",
+      "read_more": "Read More",
+      "by": "By"
+    },
+    "cta": {
+      "title": "Stay in the Loop",
+      "description": "Get the latest news, updates, and study tips delivered right to your inbox.",
+      "placeholder": "Enter your email address",
+      "button": "Subscribe"
+    },
+    "data": [
+      {
+        "category": "Featured Article",
+        "title": "The Future of Learning: How AI is Revolutionizing Education",
+        "description": "Discover how artificial intelligence is shaping the next generation of learning tools and platforms, personalizing student experiences, and empowering educators like never before.",
+        "author": "Admin"
+      },
+      {
+        "category": "Study Tips",
+        "title": "5 Essential Study Tips for Online Students",
+        "author": "Jane Doe - May 28, 2024"
+      },
+      {
+        "category": "Product Updates",
+        "title": "New Feature: Introducing Collaborative Whiteboards",
+        "author": "Admin - May 25, 2024"
+      },
+      {
+        "category": "Instructor Resources",
+        "title": "Instructor Spotlight: Dr. Evelyn Reed",
+        "author": "By Staff Writer - May 22, 2024"
+      },
+      {
+        "category": "Study Tips",
+        "title": "Maximizing Student Engagement in Virtual Classrooms",
+        "author": "By John Smith - May 20, 2024"
+      },
+      {
+        "category": "Platform News",
+        "title": "The Gamification of Learning: A Deep Dive",
+        "author": "By Dr. Alan Grant - May 18, 2024"
+      },
+      {
+        "category": "Platform News",
+        "title": "Security Update: Enhanced Data Protection for Your Account",
+        "author": "By Security Team - May 15, 2024"
+      }
+    ]
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "searchPlaceholder": "Search for answers...",
+    "sidebar": {
+      "general": "General",
+      "account": "Account",
+      "courses": "Courses",
+      "billing": "Billing"
+    },
+    "feedback": {
+      "prompt": "Was this answer helpful?",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "cta": {
+      "title": "Can't find an answer?",
+      "description": "Our support team is here to help. Contact us for any further questions.",
+      "button": "Contact Support"
+    },
+    "modal": {
+      "title": "Important Notification",
+      "message": "This is a sample notification message. You can use this to display important updates or alerts to your users.",
+      "gotIt": "Got it",
+      "cancel": "Cancel"
+    },
+    "data": [
+      {
+        "category": "General",
+        "question": "What is the LMS platform?",
+        "answer": "Our LMS platform is a comprehensive online learning environment designed to help instructors create and deliver engaging courses, and for students to access high-quality educational content anytime, anywhere."
+      },
+      {
+        "category": "General",
+        "question": "How do I enroll in a course?",
+        "answer": "To enroll in a course, simply browse our course catalog, select the course you're interested in, and click the 'Enroll Now' button. You may need to create an account or log in to complete the enrollment process."
+      },
+      {
+        "category": "Courses",
+        "question": "Can I access courses on mobile devices?",
+        "answer": "Yes, our platform is fully responsive and accessible on all devices, including desktops, tablets, and smartphones. You can learn on the go, anytime, anywhere."
+      },
+      {
+        "category": "Account",
+        "question": "How can I update my profile picture and details?",
+        "answer": "You can update your profile by navigating to the 'Settings' section of your account dashboard. Look for the 'Profile Management' tab to change your picture, name, and contact information."
+      },
+      {
+        "category": "Account",
+        "question": "What if I forget my password?",
+        "answer": "On the login screen, click 'Forgot Password,' enter your registered email address, and follow the instructions sent to your inbox to reset your password."
+      },
+      {
+        "category": "Billing",
+        "question": "What payment methods are accepted?",
+        "answer": "We accept all major credit cards (Visa, MasterCard, Amex) and PayPal. For corporate billing options, please contact our support team."
+      },
+      {
+        "category": "Billing",
+        "question": "How do I get an invoice for my purchase?",
+        "answer": "Invoices are automatically generated and can be downloaded from the 'Billing History' section of your account dashboard after a successful payment."
+      }
+    ],
+    "noResultsMessage": "No results found."
+  },
+  "header": {
+    "nav": {
+      "home": "Home",
+      "courses": "Courses",
+      "about": "About Us",
+      "contact": "Contact",
+      "blog": "Blog",
+      "faq": "FAQ"
+    },
+    "auth": {
+      "login": "Login",
+      "signup": "Sign Up",
+      "dashboard": "Go To Dashboard"
+    }
+  },
+  "filter": {
+    "title": "Filters",
+    "category": {
+      "title": "Category",
+      "all": "All Categories"
+    },
+    "level": {
+      "title": "Level",
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    },
+    "price": {
+      "title": "Price",
+      "free": "Free",
+      "paid": "Paid",
+      "all": "All"
+    },
+    "apply": "Apply Filters"
+  },
+  "courses": {
+    "stats": {
+      "showing": "Showing",
+      "of": "of",
+      "courses": "courses"
+    },
+    "sort": {
+      "label": "Sort by:",
+      "options": {
+        "newest": "Newest",
+        "popular": "Most Popular",
+        "rated": "Highest Rated",
+        "price_asc": "Price: Low to High",
+        "price_desc": "Price: High to Low"
+      }
+    },
+    "view": {
+      "grid": "Grid View",
+      "list": "List View"
+    },
+    "price":"Free",
+    "View Course": "View Course",
+    "By": "By"
+
+  },
+  "dashboard": {
+    "addNewCourse": "Add New Course",
+    "generalStatistics": "General Statistics",
+    "totalCourses": "Total Courses",
+    "totalStudents": "Total Students",
+    "myCourses": "My Courses",
+    "viewAll": "View All",
+    "userAvatarAlt": "User Avatar"
+  },
+  "analytics": {
+    "completionRate": "Completion Rate",
+    "activeStudents": "Active Students",
+    "averageScore": "Average Score",
+    "engagementLevel": "Engagement Level",
+    "engagementValueHigh": "High",
+    "performanceOverTime": "Performance Over Time",
+    "enrollments": "Enrollments",
+    "last30Days": "Last 30 days",
+    "week1": "Week 1",
+    "week2": "Week 2",
+    "week3": "Week 3",
+    "week4": "Week 4",
+    "completionStatus": "Completion Status",
+    "statusCompleted": "Completed",
+    "statusInProgress": "In Progress",
+    "statusNotStarted": "Not Started",
+    "studentPerformanceTitle": "Student Performance",
+    "studentPerformanceSubtitle": "Detailed breakdown of individual student progress.",
+    "table": {
+      "studentName": "Student Name",
+      "progress": "Progress",
+      "lastActive": "Last Active",
+      "avgScore": "Average Score",
+      "actions": "Actions",
+      "viewDetails": "View Details"
+    }
+  },
+  "myCourses": {
+    "addNewCourse": "Add New Course",
+    "noCoursesMessage": "You are not enrolled in any courses yet.",
+    "browseCourses": "Browse Courses",
+    "editLabel": "Edit course",
+    "deleteLabel": "Delete course",
+    "toast": {
+      "loading": "Deleting course...",
+      "success": "Course deleted successfully!",
+      "error": "An error occurred while deleting the course."
+    }
+  },
+  "addCourse": {
+    "back": "Back",
+    "title": "Add New Course",
+    "form": {
+      "sectionTitle": "Course Details",
+      "courseTitle": "Course Title",
+      "courseTitlePlaceholder": "Enter course title",
+      "coursePrice": "Course price",
+      "coursePricePlaceholder": "Enter course price",
+      "courseDescription": "Course Description",
+      "courseDescriptionPlaceholder": "Enter course description",
+      "category": "Category",
+      "categorySelect": "Select a category",
+      "categories": {
+        "development": "Development",
+        "design": "Design",
+        "business": "Business",
+        "marketing": "Marketing"
+      },
+      "pricing": "Pricing",
+      "pricingFree": "Free",
+      "pricingPaid": "Paid",
+      "syllabusTitle": "Title of Course Syllabus",
+      "syllabusTitlePlaceholder": "Title of Course Syllabus",
+      "syllabusDescription": "Course Syllabus",
+      "syllabusDescriptionPlaceholder": "Course Syllabus",
+      "whatLearn": "What you'll learn",
+      "whatLearnPlaceholder": "What you'll learn",
+      "saveDraft": "Save Draft",
+      "nextStep": "Next Step",
+      "saving": "Saving..."
+    },
+    "toast": {
+      "userNotLoaded": "User not loaded yet. Please wait.",
+      "translating": "Translating course details...",
+      "savingToApi": "Saving course to API...",
+      "success": "Course added and translated successfully!",
+      "error": "An error occurred: {message}"
+    }
+  },
+  "sidebar": {
+    "logoAlt": "EduPro Logo",
+    "dashboard": "Dashboard",
+    "myCourses": "My Courses",
+    "students": "Students",
+    "analytics": "Analytics"
+  },
+  "dashboardHeader": {
+    "greeting": "Hello, {name} 👋",
+    "welcomeMessage": "Welcome to your dashboard."
+  },
+  "paths": {
+    "home": "Home",
+    "courses": "Courses",
+    "profile": "Profile",
+    "dashboard": "Dashboard",
+    "about":"About US",
+    "blogs":"Blogs",
+    "faq":"FAQ",
+    "contact":"Contact"
+  },
+  "course_details": {
+    "not_found": "Product not found!",
+    "category_placeholder": "USER EXPERIENCE DESIGN",
+    "instructor_title_placeholder": "Lead at Google",
+    "price_free": "Free",
+    "original_price_placeholder": "$199",
+    "discount_100": "100% off for a limited time",
+    "discount_50": "50% off for a limited time",
+    "money_back": "30-Day Money-Back Guarantee",
+    "inclusions_title": "Course Inclusions:",
+    "inclusion_video": "12 hours of on-demand video",
+    "inclusion_articles": "25 articles & resources",
+    "inclusion_files": "5 downloadable project files",
+    "inclusion_access": "Full lifetime access",
+    "inclusion_certificate": "Certificate of completion",
+    "what_you_learn_title": "What you'll learn",
+    "syllabus_title": "Course Syllabus",
+    "reviews_title": "Student Reviews",
+    "show_all_reviews": "Show all reviews",
+    "review_1_name": "Sarah Johnson",
+    "review_1_text": "\"This course was fantastic! The instructor explained complex topics clearly and the projects were very practical and relevant to the industry today.\"",
+    "review_2_name": "Mike Chen",
+    "review_2_text": "\"An absolutely brilliant course. I learned so much and now feel confident applying for junior UX roles. The syllabus was perfectly structured.\""
   }
 }

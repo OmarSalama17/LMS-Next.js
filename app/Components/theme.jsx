@@ -1,10 +1,13 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function ThemeController({ children }) {
+  const [theme, setTheme] = useState(null); 
+
   useEffect(() => {
-    const theme = localStorage.getItem('theme');
-    if (theme === 'dark') {
+    const storedTheme = localStorage.getItem('theme') || 'light'; 
+    setTheme(storedTheme);
+    if (storedTheme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
@@ -12,15 +15,21 @@ export default function ThemeController({ children }) {
   }, []);
 
   const toggleTheme = () => {
-    if (document.documentElement.classList.contains('dark')) {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    } else {
+    const newTheme = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+    
+    setTheme(newTheme); 
+    localStorage.setItem('theme', newTheme);
+    
+    if (newTheme === 'dark') {
       document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
     }
   };
 
-  // نخلي الزرار موجود في أي كومبوننت بعد كده
-  return children({ toggleTheme });
+  if (theme === null) {
+    return null; 
+  }
+
+  return children({ toggleTheme, theme });
 }
