@@ -1,6 +1,7 @@
 import PathName from "../../../../app/Components/PathName";
 import React from "react";
 import { getTranslations } from "next-intl/server";
+import Image from "next/image";
 
 export async function  generateMetadata({params}) {
   const { locale } = await params;
@@ -86,7 +87,9 @@ const page = async () => {
               {t("mission.description")} 
             </p>
           </div>
-          <img
+          <Image
+            width={512}
+            height={512}
             alt="Team collaborating in a modern office"
             className="rounded-xl shadow-lg"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0mz9-tcVWJe5HPiHNu99msPyZZ2uGURJG_BQOyjefY7bU8QudN1-Wfa_Xgr87nN0c1nTRG_9Zfs2yxMMqlUWLJg8_5xsvFqkEex6WEuz5Z6KCNBzewQ_mquiOPWXTW-GulVLyD1eo80wfYfH8X7-F5AQ_uHpSc1IFj0URk95y8wY_V_K10YViSW9MvRN85w0kL13uKu87kZsuSr_Zk0Ash_p8ZeNPbPqpwdojpGlx_By8mCVQwEuZI_-KIuR9kjPaYHwhT8WuMWSO"
@@ -200,7 +203,9 @@ const page = async () => {
             {teamMembersStatic.map((member, index) => (
               <div key={index} className="text-center group">
                 <div className="relative inline-block">
-                  <img
+                  <Image
+                    width={160}
+                    height={160}
                     alt={`Headshot of ${t(`team.members.${index}.name`)}`} 
                     className="h-40 w-40 rounded-full object-cover mx-auto"
                     src={member.image}

@@ -4,6 +4,7 @@ import { useState , useEffect } from 'react';
 import { useSignIn, useClerk, useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import {Link} from '../../../../src/i18n/navigation';
+import Image from 'next/image';
 export default function Page() {
   //hooks theme and signin
   const [theme, setTheme] = useState(null); 
@@ -119,8 +120,8 @@ export default function Page() {
                     dark_mode
                   </span>
                 </div>
-            <Link href="/" className={`flex items-center gap-4 justify-center gap-4 text-brand-blue mb-4`}>
-              <img className="w-[130px]" src="https://res.cloudinary.com/dr2dnmx76/image/upload/v1761406970/EduProLogoDesign_pg337l.png" alt="logo" />
+            <Link href="/" className={`flex items-center gap-4 justify-center  text-brand-blue mb-4`}>
+              <Image className="" width={130} height={38} src="https://res.cloudinary.com/dr2dnmx76/image/upload/v1761406970/EduProLogoDesign_pg337l.png" alt="logo" />
             </Link>
 
           <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2 text-center">
@@ -246,7 +247,7 @@ export default function Page() {
                   type="button"
                   className="flex items-center justify-center gap-2 w-full h-12 border border-slate-300 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors duration-300 text-sm font-medium text-slate-700 dark:text-slate-200"
                 >
-                  <img alt={social.name} src={social.img} className="w-5 h-5" />
+                  <Image width={20} height={20} alt={social.name} src={social.img}  />
                   <span>{social.name}</span>
                 </button>
               ))}
@@ -266,10 +267,12 @@ export default function Page() {
         <div className="absolute -top-16 -left-16 w-64 h-64 bg-primary/20 dark:bg-primary/10 rounded-full"></div>
         <div className="absolute -bottom-24 -right-16 w-80 h-80 bg-primary/20 dark:bg-primary/10 rounded-full"></div>
         <div className="z-10 text-center max-w-lg">
-          <img
+          <Image
             alt="A person receiving guidance on a computer."
             className="rounded-xl shadow-2xl mb-8 w-full"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCndtY2P4r5XHeySigVH4XOexPj-W1YoEk-Pc6VN2aZYCWzZd8JuqY3PTNzQJ--hqizMsmVn-67hgc4Sokbd15ns1hsToEaGsuxU3VOA_3lwEEkvtq5QhYDRQhcjhuPYjeB9ndMYHB-SA5a4WoB8rL4d_vG5XEsQ64VKpkJ3xPWOslfpY6rPjlHz2zwOTJbzhFYPBfsjC0gLQrM4WVT-DH9nVCXnfR3EFB4eoYeJWhKxPJV_HXeKQzEnheo8q08CCFyQW7VfyHw4_LB"
+            width={500}
+            height={500}
           />
           <h3 className="text-3xl font-bold text-slate-800 dark:text-white mb-4">
             "The best investment you can make is in yourself."

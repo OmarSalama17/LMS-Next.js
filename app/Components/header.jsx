@@ -8,6 +8,7 @@ import { UserButton, useUser } from "@clerk/nextjs";
 import { useTranslations } from "next-intl";
 import LanguageSwitcher from "./langSwitcher";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Header() {
   const t = useTranslations("header");
@@ -40,7 +41,9 @@ export default function Header() {
                 theme === "dark" ? "bg-white rounded-md p-[2px]" : ""
               }`}
             >
-              <img
+              <Image
+                width={130}
+                height={38}
                 className="w-[130px]"
                 src="https://res.cloudinary.com/dr2dnmx76/image/upload/v1761406970/EduProLogoDesign_pg337l.png"
                 alt="Logo"

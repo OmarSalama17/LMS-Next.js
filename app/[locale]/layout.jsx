@@ -6,14 +6,15 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "react-hot-toast";
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
   display: "swap",
   variable: "--font-inter",
+  weight: ["400", "500", "700"],
 });
+
+
 export const dynamic = "force-dynamic";
 
-
-export async function  generateMetadata({params}) {
+export async function generateMetadata({ params }) {
   const { locale } = await params;
   return {
     title: locale === "en" ? "EDP Academy" : "EDP Academy",
@@ -31,13 +32,9 @@ export default async function RootLayout({ children, params }) {
         <html
           lang={locale}
           dir={locale === "ar" ? "rtl" : "ltr"}
-          className={inter.className}
+          className={`${inter.className}`}
         >
           <head>
-            <link
-              href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap"
-              rel="stylesheet"
-            />
             <link
               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
               rel="stylesheet"

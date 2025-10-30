@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useSignUp } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Page() {
   const [theme, setTheme] = useState(null);
@@ -196,7 +197,9 @@ export default function Page() {
                   href="/"
                   className={`flex items-center justify-center gap-4 text-brand-blue mb-4`}
                 >
-                  <img
+                  <Image
+                    width={130}
+                    height={38}
                     className="w-[130px]"
                     src="https://res.cloudinary.com/dr2dnmx76/image/upload/v1761406970/EduProLogoDesign_pg337l.png"
                     alt="logo"
@@ -336,7 +339,9 @@ export default function Page() {
                       onClick={handleGoogleSignUp}
                       className="flex items-center justify-center gap-2 w-full h-12 border border-slate-300 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors duration-300 text-base font-medium text-slate-700 dark:text-slate-200 shadow-sm"
                     >
-                      <img
+                      <Image
+                        width={20}
+                        height={20}
                         alt="Google"
                         className="w-5 h-5"
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHw0_qWarYzOjjO3t4giXywnRnLwfNjf4goPzC_qUrLYQ5EXqy4kM2mAMqGPbb16wvJUq6Eag9EtMQ61MEjFNCgRlm0CARXSaJoimVZWCmoZeTxoX-Zn0ZYwH2v_GZRBbohYaGBfBWKHlZhgtjcL0tZFwXRRLMKStG46CqicSq2EGg3PAcATJIHbqM_CvnmFuIZXJySGQdtkgVTFKEMySPo1G4Z3FiDhx-vS6Osg0T_HT6kHF02gYYMwyi_9lYXxBLIZjYeL5L0YmC" // استخدم اللينك الصح لو عندك
@@ -393,7 +398,9 @@ export default function Page() {
               <div className="absolute -top-24 -left-24 w-80 h-80 bg-primary/10 dark:bg-primary/20 rounded-full opacity-50"></div>
               <div className="absolute -bottom-32 -right-16 w-96 h-96 bg-primary/10 dark:bg-primary/20 rounded-full opacity-50"></div>
               <div className="z-10 text-center max-w-lg">
-                <img
+                <Image
+                  width={512}
+                  height={512}
                   alt="Students collaborating around a laptop."
                   className="rounded-xl shadow-2xl mb-8 w-full"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-vy_YsoeUyazPcWcEG5rjb6fcBOlaYx666760B6w9-Ad8Y9xu9Eic5x1L-W4tkrMcjWlX6QpS_-2ebdVhcyW3B7OW1Olqh4c3b1pS0hjLbnD5ngX51gAfnnE8MxrP7ub0X1B9xxx0P2DD7iKjVHP7j9qHTT94067AbwdpBzDjiODC9IUvW26wq7DKG5r7MImsJNlprwsRSIRbw0WbI6YY8IxBVYO6IxVQYvheUBEd6IOQCtoz9S6ie8nQu9Idl7EWLro9pnAlUWJk"
