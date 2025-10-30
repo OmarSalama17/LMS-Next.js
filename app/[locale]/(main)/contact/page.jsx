@@ -2,8 +2,15 @@ import PathName from "../../../Components/PathName";
 import { getTranslations } from "next-intl/server";
 import ContactForm from "../../../Components/ContactForm"; 
 
+export async function  generateMetadata({params}) {
+  const { locale } = await params;
+  return {
+    title: locale === "en" ? "Contact" : "اتصل بنا",
+    description: locale === "en" ? "Contact" : "اتصل بنا",
+  };
+}
 export default async function page() {
-  const t = await getTranslations("contact");
+const t = await getTranslations("contact");
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">

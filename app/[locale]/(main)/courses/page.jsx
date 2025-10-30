@@ -13,13 +13,12 @@ async function getCoursesData() {
   }
   return res.json();
 }
-function pick(obj, keys) {
-  return keys.reduce((acc, key) => {
-    if (obj && Object.prototype.hasOwnProperty.call(obj, key)) {
-      acc[key] = obj[key];
-    }
-    return acc;
-  }, {});
+export async function  generateMetadata({params}) {
+  const { locale } = await params;
+  return {
+    title: locale === "en" ? "Courses EDP" : "الكورسات",
+    description: locale === "en" ? "Courses EDP" : "الكورسات",
+  };
 }
 
 export default async function Page({ params }) {

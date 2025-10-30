@@ -2,6 +2,13 @@ import PathName from "../../../../app/Components/PathName";
 import React from "react";
 import { getTranslations } from "next-intl/server";
 
+export async function  generateMetadata({params}) {
+  const { locale } = await params;
+  return {
+    title: locale === "en" ? "About" : "من نحن",
+    description: locale === "en" ? "About" : "من نحن",
+  };
+}
 const page = async () => {
   const t = await getTranslations("about");
 

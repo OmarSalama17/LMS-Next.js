@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import PathName from "../../../Components/PathName";
 import { useTranslations } from "next-intl";
 
+
+
 export default function FAQPage() {
   const t = useTranslations("faq");
 
