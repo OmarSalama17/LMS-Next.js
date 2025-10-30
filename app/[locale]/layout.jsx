@@ -39,6 +39,10 @@ export default async function RootLayout({ children, params }) {
               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
               rel="stylesheet"
             />
+            <link 
+            rel="preconnect" 
+            href="https://creative-bunny-4.clerk.accounts.dev" 
+          />
             <link rel="icon" href="/favicon.ico" sizes="any" />
           </head>
           <body className="bg-background-light dark:bg-[#131c26] font-display text-text-light dark:text-text-dark">

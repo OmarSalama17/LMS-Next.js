@@ -1,15 +1,20 @@
 import Image from "next/image";
-import DarkVeil from './Prism';
+import DarkVeil from "./Prism";
 import { getTranslations } from "next-intl/server";
-import {Link} from "../../../src/i18n/navigation";
+import { Link } from "../../../src/i18n/navigation";
 import FeaturedCourses from "../../Components/FeaturedCourses";
 
-
-export async function  generateMetadata({params}) {
+export async function generateMetadata({ params }) {
   const { locale } = await params;
   return {
-    title: locale === "en" ? "Home EDP Education Platform" : "الصفحة الرئيسية EDP Education Platform",
-    description: locale === "en" ? "Home EDP Education Platform" : "الصفحة الرئيسية EDP Education Platform",
+    title:
+      locale === "en"
+        ? "Home EDP Education Platform"
+        : "الصفحة الرئيسية EDP Education Platform",
+    description:
+      locale === "en"
+        ? "Home EDP Education Platform"
+        : "الصفحة الرئيسية EDP Education Platform",
   };
 }
 
@@ -17,7 +22,7 @@ export default async function Home({ params }) {
   const { locale } = await params;
   const res = await fetch(`${process.env.URL_API}/product`);
   const data = await res.json();
-const t = await getTranslations("home");
+  const t = await getTranslations("home");
   const categories = [
     {
       title: t("Categories.Category1"),
@@ -26,7 +31,7 @@ const t = await getTranslations("home");
       bgColor: "bg-primary",
       isViewAll: false,
       alt: "Laptop with code on screen",
-      href: "/courses?cat=Programming"
+      href: "/courses?cat=Programming",
     },
     {
       title: t("Categories.Category2"),
@@ -35,7 +40,7 @@ const t = await getTranslations("home");
       bgColor: "bg-[#fb5607]",
       isViewAll: false,
       alt: "Person sketching on a tablet",
-      href: "/courses?cat=Design"
+      href: "/courses?cat=Design",
     },
     {
       title: t("Categories.Category3"),
@@ -44,7 +49,7 @@ const t = await getTranslations("home");
       bgColor: "bg-[#ffbe0b]",
       isViewAll: false,
       alt: "Business meeting with charts",
-      href: "/courses?cat=Business"
+      href: "/courses?cat=Business",
     },
     {
       title: t("Categories.Category4"),
@@ -53,7 +58,7 @@ const t = await getTranslations("home");
       bgColor: "bg-gray-300 ",
       isViewAll: true,
       alt: "",
-      href: "/courses"
+      href: "/courses",
     },
   ];
 
@@ -63,8 +68,7 @@ const t = await getTranslations("home");
       role: t("review.review1.role"),
       image:
         "https://lh3.googleusercontent.com/aida-public/AB6AXuDRJPnvSWiwTZYGmKJdi_vF9LZS7Id1splML7iE7YozeG3U_gy5tiRwLn-4iqghxBALg-fuIvOXMj0Y8EOq8InUKQUzqbq2pYD6naexPCiN1DVGMg25fg-cVxeXFnKl3SysV3h9lvH_n_mAkKPrHQniIDh7o-uT9_8yl5AH0Qcd7iSDe0wpnxYrQTYBnDDWy8kba0lUuTInIgw8mLAjgV7NRP1-EZw-FDrTHak0PBsX36Viw70qEMi3DBWzBFVfYVJGMXTJMsz0CYQf",
-      quote:
-        t("review.review1.title"),
+      quote: t("review.review1.title"),
       rating: 5,
     },
     {
@@ -72,8 +76,7 @@ const t = await getTranslations("home");
       role: t("review.review2.role"),
       image:
         "https://lh3.googleusercontent.com/aida-public/AB6AXuB6wTuX84Bgo33yeqvduWYiSN0WQVq-orNsZAUri2qfkIiO7sXlR3TPNwhFvH4F9MO-QNqJgWyA2LZxMI_aAaV-46JFj8-lpIAJBOKjG6Ayt2uZQlJOsItwQM9Kv0Qu4Qim6CituVKJx5EVG1zMLUFufenOn6GFESMhXrE3jH0z34bRJw5HdBwnYF8zjMkwNuyk0KsmLEq-WlM_CaiJZQ38kW-VYVi5vCJPP8TFpIMJp5jlCdkWnFi5ZSEDpvPJ73Ji2nImx8jW5ldC",
-      quote:
-        t("review.review2.title"),
+      quote: t("review.review2.title"),
       rating: 5,
     },
   ];
@@ -111,7 +114,7 @@ const t = await getTranslations("home");
   return (
     <main>
       <section className="relative overflow-hidden bg-white dark:bg-background-dd">
- <DarkVeil />
+        <DarkVeil />
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36">
           <div
             className="absolute inset-0 -z-10 sphere-animation-placeholder opacity-10 dark:opacity-20"
@@ -149,12 +152,18 @@ const t = await getTranslations("home");
             <div className="lg:col-span-2 relative h-96 lg:h-auto lg:self-stretch">
               <div className="absolute inset-0 flex items-center justify-center p-4">
                 <div className="w-full h-full relative">
-                  <img
+                  <Image
+                    width={469}
+                    height={500}
+                    priority={true}
                     className="absolute top-0 left-0 w-3/4 h-3/4 object-cover rounded-3xl shadow-soft dark:shadow-soft-dark border border-white/20 dark:border-gray-800/50 transform -rotate-12 hover:rotate-0 hover:scale-105 transition-transform duration-500"
                     alt="Female student smiling and learning on a laptop"
                     src="https://www.atomcamp.com/wp-content/uploads/2024/01/image-1-1024x705.png"
                   />
-                  <img
+                  <Image
+                    width={417}
+                    height={444}
+                    priority={true}
                     className="absolute bottom-0 right-0 w-2/3 h-2/3 object-cover rounded-3xl shadow-soft dark:shadow-soft-dark border border-white/20 dark:border-gray-800/50 transform rotate-12 hover:rotate-0 hover:scale-105 transition-transform duration-500 z-10"
                     alt="Male instructor teaching in a classroom"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhcfBbw8ccJ_HiMT7UKnTQVNWmBuQngi5w4kjRo462WWfO_45k70r1mbEpHr_OlfVbAJdXmMeyua7JsCqqboZkqIdtG7eBAh2o9PLizGFD6zzasnM7XrDGGMx--6U6WyZ794GwZStTjhfVDDKdTcqxrzaCQitEdTTY7_xh-ya8I8ppeQo9jCIaqfEz1C8usWjWehMNNViq5GHjyXPOUT2uBjm0HmqQ41In_fkRPshRIwVgpQyJY_c53WNtWVn0T9JH_idh8vYcUveu"
@@ -181,7 +190,7 @@ const t = await getTranslations("home");
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {categories.map((cat, index) => (
               <Link
-              href={`${cat.href}`}
+                href={`${cat.href}`}
                 key={index}
                 className={`group relative overflow-hidden rounded-xl border border-gray-200  hover:shadow-xl hover:-translate-y-2 transition-all duration-300 ${
                   cat.isViewAll
@@ -192,7 +201,9 @@ const t = await getTranslations("home");
                 {!cat.isViewAll && (
                   <>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                    <img
+                    <Image
+                      width={342}
+                      height={320}
                       className="h-80 w-full object-cover"
                       src={cat.img}
                       alt={cat.alt}
@@ -234,43 +245,47 @@ const t = await getTranslations("home");
         </div>
       </section>
 
-            <FeaturedCourses data={data} locale={locale}/>
+      <FeaturedCourses data={data} locale={locale} />
 
-    <section className="py-20 sm:py-24">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold text-center mb-12 tracking-tight dark:text-white">
-          Voices of Our Learners
-        </h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className="bg-white dark:bg-gray-800/50 p-8 rounded-xl shadow-soft border border-gray-200 dark:border-gray-700/50 flex flex-col sm:flex-row items-start gap-6"
-            >
-              <img
-                className="w-20 h-20 rounded-full"
-                src={testimonial.image}
-                alt={`Avatar of student ${testimonial.name}`}
-              />
-              <div className="flex-1">
-                <div className="flex text-secondary mb-2">
-                  {renderStars(testimonial.rating)}
-                </div>
-                <p className="text-gray-600 dark:text-gray-300 italic mb-4">
-                  {testimonial.quote}
-                </p>
-                <div>
-                  <p className="font-bold text-lg dark:text-white">{testimonial.name}</p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                    {testimonial.role}
+      <section className="py-20 sm:py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl font-bold text-center mb-12 tracking-tight dark:text-white">
+            Voices of Our Learners
+          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <div
+                key={index}
+                className="bg-white dark:bg-gray-800/50 p-8 rounded-xl shadow-soft border border-gray-200 dark:border-gray-700/50 flex flex-col sm:flex-row items-start gap-6"
+              >
+                <Image
+                  width={80}
+                  height={80}
+                  className="w-20 h-20 rounded-full"
+                  src={testimonial.image}
+                  alt={`Avatar of student ${testimonial.name}`}
+                />
+                <div className="flex-1">
+                  <div className="flex text-secondary mb-2">
+                    {renderStars(testimonial.rating)}
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-300 italic mb-4">
+                    {testimonial.quote}
                   </p>
+                  <div>
+                    <p className="font-bold text-lg dark:text-white">
+                      {testimonial.name}
+                    </p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      {testimonial.role}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
       <section className="py-24 sm:py-32">
         <div className="max-w-screen-lg mx-auto px-4 sm:px-6 lg:px-8">
@@ -282,7 +297,7 @@ const t = await getTranslations("home");
                 {t("learners.title")}
               </h2>
               <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">
-                  {t("learners.description")}
+                {t("learners.description")}
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <button

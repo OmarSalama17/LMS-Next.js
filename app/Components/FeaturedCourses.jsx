@@ -1,6 +1,7 @@
 "use client";
 import React, { useMemo } from "react";
 import EnrollButton from "./EnrollButton";
+import Image from "next/image";
 
 const FeaturedCourses = ({ data, locale }) => {
   const featuredCourses = useMemo(() => {
@@ -50,7 +51,10 @@ const FeaturedCourses = ({ data, locale }) => {
               key={index}
               className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-soft dark:shadow-soft-dark border border-gray-200 dark:border-gray-700 flex flex-col"
             >
-              <img
+              <Image
+                width={467}
+                height={224}
+                priority={true}
                 className="h-56 w-full object-cover"
                 src={course.image}
                 alt={course.title}
