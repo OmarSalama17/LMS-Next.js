@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import Link from "../../src/i18n/navigation";
 import ThemeController from "./theme";
 import { usePathname } from "../../src/i18n/navigation";
 import { DarkIcon } from "./DarkIcon";
@@ -10,18 +10,18 @@ import LanguageSwitcher from "./langSwitcher";
 import { useState } from "react";
 import Image from "next/image";
 
-export default function Header({locale}) {
+export default function Header() {
   const t = useTranslations("header");
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { label: t("nav.home"), href: `${locale}/` },
-    { label: t("nav.courses"), href: `${locale}/courses` },
-    { label: t("nav.about"), href: `${locale}/about` },
-    { label: t("nav.contact"), href: `${locale}/contact` },
-    { label: t("nav.blog"), href: `${locale}/blogs` },
-    { label: t("nav.faq"), href: `${locale}/faq` },
+    { label: t("nav.home"), href: "/" },
+    { label: t("nav.courses"), href: "/courses" },
+    { label: t("nav.about"), href: "/about" },
+    { label: t("nav.contact"), href: "/contact" },
+    { label: t("nav.blog"), href: "/blogs" },
+    { label: t("nav.faq"), href: "/faq" },
   ];
 
   const { user } = useUser();
