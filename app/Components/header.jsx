@@ -1,5 +1,5 @@
 "use client";
-import Link from "../../src/i18n/navigation";
+import {Link} from "../../src/i18n/navigation";
 import ThemeController from "./theme";
 import { usePathname } from "../../src/i18n/navigation";
 import { DarkIcon } from "./DarkIcon";
