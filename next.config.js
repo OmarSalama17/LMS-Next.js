@@ -4,8 +4,6 @@ const withNextIntl = createNextIntlPlugin();
  
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    trailingSlash: false,
-
   images: {
     domains: [
       'lh3.googleusercontent.com',
