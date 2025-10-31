@@ -18,7 +18,7 @@ export default async function RootLayout({ children, params }) {
 
   return (
     <>
-      <Header />
+      <Header locale={locale}/>
       {children}
     </>
   );

@@ -10,18 +10,18 @@ import LanguageSwitcher from "./langSwitcher";
 import { useState } from "react";
 import Image from "next/image";
 
-export default function Header() {
+export default function Header({locale}) {
   const t = useTranslations("header");
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { label: t("nav.home"), href: "/" },
-    { label: t("nav.courses"), href: "/courses" },
-    { label: t("nav.about"), href: "/about" },
-    { label: t("nav.contact"), href: "/contact" },
-    { label: t("nav.blog"), href: "/blogs" },
-    { label: t("nav.faq"), href: "/faq" },
+    { label: t("nav.home"), href: `${locale}/` },
+    { label: t("nav.courses"), href: `${locale}/courses` },
+    { label: t("nav.about"), href: `${locale}/about` },
+    { label: t("nav.contact"), href: `${locale}/contact` },
+    { label: t("nav.blog"), href: `${locale}/blogs` },
+    { label: t("nav.faq"), href: `${locale}/faq` },
   ];
 
   const { user } = useUser();
