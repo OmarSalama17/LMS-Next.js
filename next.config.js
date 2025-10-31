@@ -11,6 +11,10 @@ const nextConfig = {
       'res.cloudinary.com',
       'public-media.interaction-design.org',
       'www.atomcamp.com',
+      'media.licdn.com',
+      'www.graphicpear.com',
+      'static-assets.codecademy.com',
+      'flagcdn.com',
     ],
   },
 };

@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import { getMessages } from "next-intl/server";
 import "./global.css";
 import Header from "../../Components/header";
+import Footer from "../../Components/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -20,6 +21,7 @@ export default async function RootLayout({ children, params }) {
     <>
       <Header />
       {children}
+      <Footer/>
     </>
   );
 }

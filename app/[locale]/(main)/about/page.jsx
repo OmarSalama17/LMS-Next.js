@@ -6,7 +6,7 @@ import Image from "next/image";
 export async function  generateMetadata({params}) {
   const { locale } = await params;
   return {
-    title: locale === "en" ? "About" : "من نحن",
+    title: locale === "en" ? "About | EDP" : "من نحن | EDP",
     description: locale === "en" ? "About" : "من نحن",
   };
 }

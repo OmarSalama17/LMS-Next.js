@@ -151,7 +151,7 @@
     }
   },
   "news": {
-    "title": "LMS News & Updates",
+    "title": "EDP News & Updates",
     "categories": {
       "all": "All",
       "updates": "Product Updates",
@@ -466,5 +466,27 @@
     "review_1_text": "\"This course was fantastic! The instructor explained complex topics clearly and the projects were very practical and relevant to the industry today.\"",
     "review_2_name": "Mike Chen",
     "review_2_text": "\"An absolutely brilliant course. I learned so much and now feel confident applying for junior UX roles. The syllabus was perfectly structured.\""
+  },
+"footer": {
+    "brand": "LearnSphere",
+    "tagline": "Your universe of learning.",
+    "nav": {
+      "courses": "Courses",
+      "development": "Development",
+      "design": "Design",
+      "business": "Business",
+      "company": "Company",
+      "about": "About Us",
+      "careers": "Careers",
+      "blog": "Blog",
+      "support": "Support",
+      "help": "Help Center",
+      "contact": "Contact Us",
+      "legal": "Legal",
+      "terms": "Terms",
+      "privacy": "Privacy"
+    },
+    "copyright": "© 2024 LearnSphere, Inc. All rights reserved.",
+    "social": "Facebook"
   }
 }

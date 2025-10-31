@@ -2,6 +2,7 @@
 import { usePathname, useRouter } from "../../src/i18n/navigation";
 // import { usePathname, useRouter } from '@/src/i18n/navigation';
 import { useLocale } from "next-intl";
+import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
 export default function LanguageSwitcher({theme}) {
@@ -51,7 +52,9 @@ export default function LanguageSwitcher({theme}) {
       >
         <div className="flex gap-1 items-center">
           <div>
-            <img
+            <Image
+              width={20}
+              height={20}
               className="w-[20px] h-[20px] rounded-full"
               src={link + selectedLang.flag}
               alt={`${selectedLang.label} flag`}
@@ -87,7 +90,9 @@ export default function LanguageSwitcher({theme}) {
               onClick={() => handleLanguageChange(lang)}
               className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-gray-100 rounded-lg transition"
             >
-              <img
+              <Image
+                width={20}
+                height={20}
                 src={link + lang.flag}
                 alt={`${lang.label} flag`}
                 className="w-[20px] h-[20px] rounded-full"

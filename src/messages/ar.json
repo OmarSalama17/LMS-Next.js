@@ -130,10 +130,10 @@
             "messageLabel": "رسالتك",
             "messagePlaceholder": "اكتب رسالتك هنا...",
             "submitButton": "إرسال الرسالة",
-      "loadingText": "جاري الإرسال...",
-      "success": "تم إرسال الرسالة بنجاح!",
-      "error_fields": "يرجى ملء جميع الحقول.",
-      "error_server": "فشل إرسال الرسالة. يرجى المحاولة لاحقاً."
+            "loadingText": "جاري الإرسال...",
+            "success": "تم إرسال الرسالة بنجاح!",
+            "error_fields": "يرجى ملء جميع الحقول.",
+            "error_server": "فشل إرسال الرسالة. يرجى المحاولة لاحقاً."
         },
         "info": {
             "title": "معلومات الاتصال",
@@ -151,7 +151,7 @@
         }
     },
     "news": {
-        "title": "أخبار وتحديثات LMS",
+        "title": "أخبار وتحديثات EDP",
         "categories": {
             "all": "الكل",
             "updates": "تحديثات المنتج",
@@ -328,7 +328,7 @@
             "grid": "عرض شبكي",
             "list": "عرض قائمة"
         },
-        "price":"مجانا",
+        "price": "مجانا",
         "View Course": "عرض الدورة",
         "By": "بواسطة"
     },
@@ -433,37 +433,59 @@
         "welcomeMessage": "مرحباً بك في لوحة التحكم الخاصة بك."
     },
     "paths": {
-    "home": "الرئيسية",
-    "courses": "الدورات",
-    "profile": "الملف الشخصي",
-    "dashboard": "لوحة التحكم",
-    "about":"من نحن",
-    "blogs":"المدونات",
-    "faq":"الأسئلة الشائعة",
-    "contact":"اتصل بنا"
-  },
-  "course_details": {
-    "not_found": "المنتج غير موجود!",
-    "category_placeholder": "تصميم تجربة المستخدم",
-    "instructor_title_placeholder": "قائد فريق في جوجل",
-    "price_free": "مجاني",
-    "original_price_placeholder": "$199",
-    "discount_100": "خصم 100% لفترة محدودة",
-    "discount_50": "خصم 50% لفترة محدودة",
-    "money_back": "ضمان استرجاع الأموال لمدة 30 يومًا",
-    "inclusions_title": "محتويات الدورة:",
-    "inclusion_video": "12 ساعة من الفيديوهات عند الطلب",
-    "inclusion_articles": "25 مقالة ومصدر تعليمي",
-    "inclusion_files": "5 ملفات مشروع قابلة للتحميل",
-    "inclusion_access": "وصول كامل مدى الحياة",
-    "inclusion_certificate": "شهادة إتمام الدورة",
-    "what_you_learn_title": "ماذا ستتعلم",
-    "syllabus_title": "منهج الدورة",
-    "reviews_title": "آراء الطلاب",
-    "show_all_reviews": "عرض كل الآراء",
-    "review_1_name": "سارة جونسون",
-    "review_1_text": "\"هذه الدورة كانت رائعة! قام المحاضر بشرح المواضيع المعقدة بوضوح وكانت المشاريع عملية جداً وذات صلة بالصناعة اليوم.\"",
-    "review_2_name": "مايك تشين",
-    "review_2_text": "\"دورة ممتازة بكل معنى الكلمة. تعلمت الكثير وأشعر الآن بالثقة للتقديم على وظائف UX للمبتدئين. المنهج كان منظماً بشكل مثالي.\""
-  }
+        "home": "الرئيسية",
+        "courses": "الدورات",
+        "profile": "الملف الشخصي",
+        "dashboard": "لوحة التحكم",
+        "about": "من نحن",
+        "blogs": "المدونات",
+        "faq": "الأسئلة الشائعة",
+        "contact": "اتصل بنا"
+    },
+    "course_details": {
+        "not_found": "المنتج غير موجود!",
+        "category_placeholder": "تصميم تجربة المستخدم",
+        "instructor_title_placeholder": "قائد فريق في جوجل",
+        "price_free": "مجاني",
+        "original_price_placeholder": "$199",
+        "discount_100": "خصم 100% لفترة محدودة",
+        "discount_50": "خصم 50% لفترة محدودة",
+        "money_back": "ضمان استرجاع الأموال لمدة 30 يومًا",
+        "inclusions_title": "محتويات الدورة:",
+        "inclusion_video": "12 ساعة من الفيديوهات عند الطلب",
+        "inclusion_articles": "25 مقالة ومصدر تعليمي",
+        "inclusion_files": "5 ملفات مشروع قابلة للتحميل",
+        "inclusion_access": "وصول كامل مدى الحياة",
+        "inclusion_certificate": "شهادة إتمام الدورة",
+        "what_you_learn_title": "ماذا ستتعلم",
+        "syllabus_title": "منهج الدورة",
+        "reviews_title": "آراء الطلاب",
+        "show_all_reviews": "عرض كل الآراء",
+        "review_1_name": "سارة جونسون",
+        "review_1_text": "\"هذه الدورة كانت رائعة! قام المحاضر بشرح المواضيع المعقدة بوضوح وكانت المشاريع عملية جداً وذات صلة بالصناعة اليوم.\"",
+        "review_2_name": "مايك تشين",
+        "review_2_text": "\"دورة ممتازة بكل معنى الكلمة. تعلمت الكثير وأشعر الآن بالثقة للتقديم على وظائف UX للمبتدئين. المنهج كان منظماً بشكل مثالي.\""
+    },
+    "footer": {
+        "brand": "LearnSphere",
+        "tagline": "عالمك الخاص للتعلم.",
+        "nav": {
+            "courses": "الدورات",
+            "development": "التطوير",
+            "design": "التصميم",
+            "business": "الأعمال",
+            "company": "الشركة",
+            "about": "من نحن",
+            "careers": "الوظائف",
+            "blog": "المدونة",
+            "support": "الدعم",
+            "help": "مركز المساعدة",
+            "contact": "تواصل معنا",
+            "legal": "قانوني",
+            "terms": "الشروط",
+            "privacy": "الخصوصية"
+        },
+        "copyright": "© 2024 ليرن سفير. جميع الحقوق محفوظة.",
+        "social": "فيسبوك"
+    }
 }

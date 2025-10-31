@@ -7,14 +7,11 @@ import FeaturedCourses from "../../Components/FeaturedCourses";
 export async function generateMetadata({ params }) {
   const { locale } = await params;
   return {
-    title:
-      locale === "en"
-        ? "Home EDP Education Platform"
-        : "الصفحة الرئيسية EDP Education Platform",
+    title: locale === "en" ? "Home | EDP" : "الصفحة الرئيسية | EDP",
     description:
       locale === "en"
-        ? "Home EDP Education Platform"
-        : "الصفحة الرئيسية EDP Education Platform",
+        ? "Unlock your potential with EDP Education Platform. Discover thousands of online courses in tech, business, and more. Start learning from expert instructors today."
+        : "أطلق العنان لإمكاناتك مع منصة EDP التعليمية. اكتشف آلاف الكورسات الأونلاين في التكنولوجيا والأعمال والمزيد. ابدأ التعلم مع أفضل المدربين اليوم.",
   };
 }
 
