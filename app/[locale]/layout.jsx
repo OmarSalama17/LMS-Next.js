@@ -27,7 +27,7 @@ export default async function RootLayout({ children, params }) {
   console.log(locale);
 
   return (
-    <ClerkProvider>
+    <ClerkProvider >
       <NextIntlClientProvider locale={locale} messages={messages}>
         <html
           lang={locale}

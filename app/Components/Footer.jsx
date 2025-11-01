@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { Link } from "../../src/i18n/navigation";
+import Image from "next/image";
 
 const Footer = () => {
   const t = useTranslations("footer");
@@ -10,31 +11,31 @@ const Footer = () => {
     {
       title: t("nav.courses"),
       links: [
-        { label: t("nav.development"), href: "/courses?cat=programming" },
-        { label: t("nav.design"), href: "/courses?cat=design" },
-        { label: t("nav.business"), href: "/courses?cat=business" },
+        { label: t("nav.development"), href: "courses?cat=Programming" },
+        { label: t("nav.design"), href: "courses?cat=Design" },
+        { label: t("nav.business"), href: "courses?cat=Business" },
       ],
     },
     {
       title: t("nav.company"),
       links: [
-        { label: t("nav.about"), href: "/about" },
-        { label: t("nav.careers"), href: "/careers" },
-        { label: t("nav.blog"), href: "/blogs" },
+        { label: t("nav.about"), href: "about" },
+        { label: t("nav.careers"), href: "/areers" },
+        { label: t("nav.blog"), href: "blogs" },
       ],
     },
     {
       title: t("nav.support"),
       links: [
-        { label: t("nav.help"), href: "/help" },
-        { label: t("nav.contact"), href: "/contact" },
+        { label: t("nav.help"), href: "help" },
+        { label: t("nav.contact"), href: "contact" },
       ],
     },
     {
       title: t("nav.legal"),
       links: [
-        { label: t("nav.terms"), href: "/terms" },
-        { label: t("nav.privacy"), href: "/privacy" },
+        { label: t("nav.terms"), href: "terms" },
+        { label: t("nav.privacy"), href: "privacy" },
       ],
     },
   ];
@@ -43,19 +44,21 @@ const Footer = () => {
     <footer className="bg-white dark:bg-gray-900/50 border-t border-gray-200 dark:border-gray-800">
       <div className="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
-          {/* --- Brand Info --- */}
           <div className="col-span-2 lg:col-span-1">
             <div className="flex items-center gap-2 text-primary">
-              <span className="material-symbols-outlined text-3xl">public</span>
-              {/* 2. استخدمنا الترجمة هنا */}
-              <h2 className="text-xl font-bold">{t("brand")}</h2>
+              <Image
+                width={130}
+                height={38}
+                className="w-[130px] h-auto"
+                src="https://res.cloudinary.com/dr2dnmx76/image/upload/v1761406970/EduProLogoDesign_pg337l.png"
+                alt="Logo"
+              />
             </div>
             <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
               {t("tagline")}
             </p>
           </div>
 
-          {/* 3. عملنا Map على الـ navSections --- */}
           {navSections.map((section) => (
             <div key={section.title}>
               <h3 className="text-sm font-semibold tracking-wider uppercase">
@@ -78,13 +81,11 @@ const Footer = () => {
           ))}
         </div>
 
-        {/* --- Bottom Bar --- */}
         <div className="mt-8 border-t border-gray-200 dark:border-gray-700 pt-8 flex flex-col md:flex-row items-center justify-between">
           <p className="text-base text-gray-400 order-2 md:order-1 mt-4 md:mt-0">
             {t("copyright")}
           </p>
           <div className="flex space-x-6 order-1 md:order-2">
-            {/* اللينكات الخارجية زي السوشيال ميديا الأفضل تفضل <a> */}
             <a
               className="text-gray-400 hover:text-gray-500"
               href="#" // <-- لينك صفحة الفيسبوك

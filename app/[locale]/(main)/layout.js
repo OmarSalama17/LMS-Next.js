@@ -3,6 +3,7 @@ import { getMessages } from "next-intl/server";
 import "./global.css";
 import Header from "../../Components/header";
 import Footer from "../../Components/Footer";
+import SplashScreen from "../../Components/SplashScreen";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,6 +20,7 @@ export default async function RootLayout({ children, params }) {
 
   return (
     <>
+    <SplashScreen/>
       <Header />
       {children}
       <Footer/>

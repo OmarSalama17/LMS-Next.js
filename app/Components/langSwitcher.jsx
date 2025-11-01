@@ -1,6 +1,5 @@
 "use client";
 import { usePathname, useRouter } from "../../src/i18n/navigation";
-// import { usePathname, useRouter } from '@/src/i18n/navigation';
 import { useLocale } from "next-intl";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
