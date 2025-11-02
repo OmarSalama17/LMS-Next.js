@@ -328,10 +328,9 @@
       "grid": "Grid View",
       "list": "List View"
     },
-    "price":"Free",
+    "price": "Free",
     "View Course": "View Course",
     "By": "By"
-
   },
   "dashboard": {
     "addNewCourse": "Add New Course",
@@ -372,14 +371,18 @@
   },
   "myCourses": {
     "addNewCourse": "Add New Course",
-    "noCoursesMessage": "You are not enrolled in any courses yet.",
-    "browseCourses": "Browse Courses",
-    "editLabel": "Edit course",
-    "deleteLabel": "Delete course",
+    "noCoursesMessage": "You have not enrolled in any courses yet.",
+    "browseCourses": "Browse Available Courses",
+    "editLabel": "Edit",
+    "deleteLabel": "Delete",
+    "confirmDeleteTitle": "Confirm Deletion",
+    "confirmDeleteMessage": "Are you sure you want to delete this course? This action cannot be undone.",
+    "deleteConfirm": "Yes, Delete",
+    "cancel": "Cancel",
     "toast": {
-      "loading": "Deleting course...",
+      "loading": "Deleting...",
       "success": "Course deleted successfully!",
-      "error": "An error occurred while deleting the course."
+      "error": "An error occurred during deletion."
     }
   },
   "addCourse": {
@@ -438,10 +441,10 @@
     "courses": "Courses",
     "profile": "Profile",
     "dashboard": "Dashboard",
-    "about":"About US",
-    "blogs":"Blogs",
-    "faq":"FAQ",
-    "contact":"Contact"
+    "about": "About US",
+    "blogs": "Blogs",
+    "faq": "FAQ",
+    "contact": "Contact"
   },
   "course_details": {
     "not_found": "Product not found!",
@@ -467,7 +470,7 @@
     "review_2_name": "Mike Chen",
     "review_2_text": "\"An absolutely brilliant course. I learned so much and now feel confident applying for junior UX roles. The syllabus was perfectly structured.\""
   },
-"footer": {
+  "footer": {
     "brand": "LearnSphere",
     "tagline": "Your universe of learning.",
     "nav": {

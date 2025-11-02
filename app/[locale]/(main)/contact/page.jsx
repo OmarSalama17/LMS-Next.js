@@ -1,6 +1,7 @@
 import PathName from "../../../Components/PathName";
 import { getTranslations } from "next-intl/server";
 import ContactForm from "../../../Components/ContactForm"; 
+import { Toaster } from "react-hot-toast";
 
 export async function  generateMetadata({params}) {
   const { locale } = await params;
@@ -14,6 +15,7 @@ const t = await getTranslations("contact");
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+            <Toaster position="bottom-center" />
       <div className="mb-8">
         <PathName />
       </div>

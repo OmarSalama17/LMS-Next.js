@@ -370,15 +370,19 @@
         }
     },
     "myCourses": {
-        "addNewCourse": "أضف دورة جديدة",
-        "noCoursesMessage": "أنت غير مسجل في أي دورات بعد.",
-        "browseCourses": "تصفح الدورات",
-        "editLabel": "تعديل الدورة",
-        "deleteLabel": "حذف الدورة",
+        "addNewCourse": "إضافة مساق جديد",
+        "noCoursesMessage": "لم تقم بتسجيل أي مساقات بعد.",
+        "browseCourses": "تصفح المساقات المتاحة",
+        "editLabel": "تعديل",
+        "deleteLabel": "حذف",
+        "confirmDeleteTitle": "تأكيد الحذف",
+        "confirmDeleteMessage": "هل أنت متأكد من حذف هذا المساق؟ لن تتمكن من التراجع عن هذا الإجراء.",
+        "deleteConfirm": "نعم، احذف",
+        "cancel": "إلغاء",
         "toast": {
-            "loading": "جاري حذف الكورس...",
-            "success": "تم حذف الكورس بنجاح!",
-            "error": "حدث خطأ أثناء حذف الكورس."
+            "loading": "جاري الحذف...",
+            "success": "تم حذف المساق بنجاح!",
+            "error": "حدث خطأ أثناء الحذف."
         }
     },
     "addCourse": {

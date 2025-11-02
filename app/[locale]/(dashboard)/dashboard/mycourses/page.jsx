@@ -43,10 +43,7 @@ export default async function DashboardPage({ params }) {
   } else {
     const res = await fetch(`${MOCK_API_URL}`);
     const data = await res.json();
-    const filter = data.filter(
-      (course) =>
-        course.userId === user.id 
-    );
+    const filter = data.filter((course) => course.userId === user.id);
     enrolledCourses = filter;
   }
 

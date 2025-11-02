@@ -3,7 +3,6 @@ import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import "./(main)/global.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import { Toaster } from "react-hot-toast";
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
@@ -46,7 +45,6 @@ export default async function RootLayout({ children, params }) {
             <link rel="icon" href="/favicon.ico" sizes="any" />
           </head>
           <body className="bg-background-light dark:bg-[#131c26] font-display text-text-light dark:text-text-dark">
-            <Toaster position="bottom-center" />
             {children}
           </body>
         </html>
