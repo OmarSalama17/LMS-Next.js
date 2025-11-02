@@ -5,7 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 const EditProduct = ({ setOpen, open, locale }) => {
   const t = useTranslations("addCourse");
   const [isLoading, setIsLoading] = useState(false);
-
+const [activeTab, setActiveTab] = useState('basic');
   const [formData, setFormData] = useState({
     title: open.title[locale],
     description: open.description[locale],
@@ -161,126 +161,144 @@ const EditProduct = ({ setOpen, open, locale }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col gap-2 items-center justify-center bg-[#00000078]">
-              <Toaster position="top-center" />
-      <div
-        className="font-bold bg-white rounded-lg px-[10px] py-[5px] cursor-pointer"
-        onClick={() => setOpen(false)}
+    <div 
+      className="fixed inset-0 z-50 flex flex-col gap-2 items-center justify-center bg-black/60 p-4"
+    >
+      
+      <div 
+        className="w-full max-w-3xl bg-white dark:bg-card-dark rounded-xl shadow-2xl p-6 md:p-8 flex flex-col relative max-h-[90vh] overflow-y-auto"
       >
-        ✕
-      </div>
-      <div className="w-full max-w-3xl bg-white dark:bg-card-dark rounded-xl shadow-2xl p-6 flex flex-col items-center text-center">
-        <form className="space-y-6" onSubmit={handleSubmit}>
-          <label className="flex flex-col flex-1">
-            <p className="text-slate-700 dark:text-slate-300 text-base font-medium leading-normal pb-2">
-              {t("form.courseTitle")}
-            </p>
-            <input
-              className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark h-14 placeholder:text-slate-400 dark:placeholder-slate-500 p-[15px] text-base font-normal leading-normal"
-              placeholder={t("form.courseTitlePlaceholder")}
-              name="title"
-              value={formData.title}
-              onChange={handleChange}
-              disabled={isLoading}
-            />
-          </label>
-          <label className="flex flex-col flex-1">
-            <p className="text-slate-700 dark:text-slate-300 text-base font-medium leading-normal pb-2">
-              {t("form.coursePrice")}
-            </p>
-            <input
-              className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark h-14 placeholder:text-slate-400 dark:placeholder-slate-500 p-[15px] text-base font-normal leading-normal"
-              placeholder={t("form.coursePricePlaceholder")}
-              type="number"
-              name="price"
-              value={formData.price}
-              onChange={handleChange}
-              disabled={isLoading}
-            />
-          </label>
-          <label className="flex flex-col flex-1">
-            <p className="text-slate-700 dark:text-slate-300 text-base font-medium leading-normal pb-2">
-              {t("form.courseDescription")}
-            </p>
-            <div className="rounded-lg border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark focus-within:ring-2 focus-within:ring-primary/50">
-              <div className="p-2 border-b border-slate-300 dark:border-slate-700 flex items-center gap-2"></div>
-              <textarea
-                className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-b-lg text-slate-900 dark:text-white focus:outline-none ring-0 border-0 bg-transparent min-h-36 placeholder:text-slate-400 dark:placeholder-slate-500 p-[15px] text-base font-normal leading-normal"
-                placeholder={t("form.courseDescriptionPlaceholder")}
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                disabled={isLoading}
-              />
-            </div>
-          </label>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <label className="flex flex-col flex-1">
-              <p className="text-slate-700 dark:text-slate-300 text-base font-medium leading-normal pb-2">
-                {t("form.category")}
-              </p>
-              <select
-                className="form-select flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark h-14 placeholder:text-slate-400 dark:placeholder-slate-500 p-[15px] text-base font-normal leading-normal"
-                name="category"
-                value={formData.category}
-                onChange={handleChange}
-                disabled={isLoading}
+        
+        {/* [ديزاين] زرار الإغلاق وعنوان المودال زي ما هما */}
+        <button
+          className="font-bold text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 absolute top-4 right-4 text-2xl"
+          onClick={() => setOpen(false)}
+        >
+          ✕
+        </button>
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 text-left">
+        </h2>
+
+        {/* [تعديل جذري] الفورم هتفضل موجودة بره عشان الـ onSubmit يشتغل */}
+        <form onSubmit={handleSubmit}>
+
+          {/* [ديزاين جديد] شريط التابات (Tabs Navigation) */}
+          <div className="border-b border-gray-200 dark:border-gray-700">
+            <nav className="flex flex-wrap gap-6 -mb-px">
+              <button
+                type="button" // مهم أوي عشان الفورم متعملش submit
+                onClick={() => setActiveTab('basic')}
+                className={`py-4 px-1 font-medium text-sm ${
+                  activeTab === 'basic'
+                    ? 'border-b-2 border-primary text-primary'
+                    : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
+                }`}
               >
-                <option value="">{t("form.categorySelect")}</option>
-                <option value="development">
-                  {t("form.categories.development")}
-                </option>
-                <option value="design">{t("form.categories.design")}</option>
-                <option value="business">
-                  {t("form.categories.business")}
-                </option>
-                <option value="marketing">
-                  {t("form.categories.marketing")}
-                </option>
-              </select>
-            </label>
-            <div>
-              <p className="text-slate-700 dark:text-slate-300 text-base font-medium leading-normal pb-2">
-                {t("form.pricing")}
-              </p>
-              <div className="flex gap-4 items-center h-14">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    className="form-radio text-primary focus:ring-primary/50 border-slate-300 dark:border-slate-600 bg-background-light dark:bg-slate-800"
-                    name="pricing"
-                    type="radio"
-                    value="free"
-                    checked={formData.pricing === "free"}
-                    onChange={handleChange}
-                    disabled={isLoading}
-                  />
-                  <span className="text-slate-700 dark:text-slate-300">
-                    {t("form.pricingFree")}
-                  </span>
-                </label>
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    className="form-radio text-primary focus:ring-primary/50 border-slate-300 dark:border-slate-600 bg-background-light dark:bg-slate-800"
-                    name="pricing"
-                    type="radio"
-                    value="paid"
-                    checked={formData.pricing === "paid"}
-                    onChange={handleChange}
-                    disabled={isLoading}
-                  />
-                  <span className="text-slate-700 dark:text-slate-300">
-                    {t("form.pricingPaid")}
-                  </span>
-                </label>
-              </div>
-            </div>
-            <div>
+                {t("form.tabs.basic") || "المعلومات الأساسية"}
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab('content')}
+                className={`py-4 px-1 font-medium text-sm ${
+                  activeTab === 'content'
+                    ? 'border-b-2 border-primary text-primary'
+                    : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
+                }`}
+              >
+                {t("form.tabs.content") || "محتوى الدورة"}
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab('pricing')}
+                className={`py-4 px-1 font-medium text-sm ${
+                  activeTab === 'pricing'
+                    ? 'border-b-2 border-primary text-primary'
+                    : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
+                }`}
+              >
+                {t("form.tabs.pricing") || "التسعير"}
+              </button>
+            </nav>
+          </div>
+
+          {/* [ديزاين جديد] محتوى التابات (Tabs Content) */}
+          <div className="py-6">
+            
+            {/* التاب الأول: المعلومات الأساسية */}
+            <div className={activeTab === 'basic' ? 'space-y-6' : 'hidden'}>
               <label className="flex flex-col flex-1">
-                <p className="text-slate-700 dark:text-slate-300 text-base font-medium leading-normal pb-2">
+                <p className="text-slate-700 dark:text-slate-300 text-base font-medium leading-normal pb-2 text-left">
+                  {t("form.courseTitle")}
+                </p>
+                <input
+                  className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark h-14 placeholder:text-slate-400 dark:placeholder-slate-500 p-[15px] text-base font-normal leading-normal disabled:opacity-50"
+                  placeholder={t("form.courseTitlePlaceholder")}
+                  name="title"
+                  value={formData.title}
+                  onChange={handleChange}
+                  disabled={isLoading}
+                />
+              </label>
+              
+              <label className="flex flex-col flex-1">
+                <p className="text-slate-700 dark:text-slate-300 text-base font-medium leading-normal pb-2 text-left">
+                  {t("form.courseDescription")}
+                </p>
+                <div className="rounded-lg border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark focus-within:ring-2 focus-within:ring-primary/50">
+                  <div className="p-2 border-b border-slate-300 dark:border-slate-700 flex items-center gap-2"></div>
+                  <textarea
+                    className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-b-lg text-slate-900 dark:text-white focus:outline-none ring-0 border-0 bg-transparent min-h-36 placeholder:text-slate-400 dark:placeholder-slate-500 p-[15px] text-base font-normal leading-normal disabled:opacity-50"
+                    placeholder={t("form.courseDescriptionPlaceholder")}
+                    name="description"
+                    value={formData.description}
+                    onChange={handleChange}
+                    disabled={isLoading}
+                  />
+                </div>
+              </label>
+              
+              <label className="flex flex-col flex-1">
+                <p className="text-slate-700 dark:text-slate-300 text-base font-medium leading-normal pb-2 text-left">
+                  {t("form.category")}
+                </p>
+                <select
+                  className="form-select flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark h-14 placeholder:text-slate-400 dark:placeholder-slate-500 p-[15px] text-base font-normal leading-normal disabled:opacity-50"
+                  name="category"
+                  value={formData.category}
+                  onChange={handleChange}
+                  disabled={isLoading}
+                >
+                  <option value="">{t("form.categorySelect")}</option>
+                  <option value="development">{t("form.categories.development")}</option>
+                  <option value="design">{t("form.categories.design")}</option>
+                  <option value="business">{t("form.categories.business")}</option>
+                  <option value="marketing">{t("form.categories.marketing")}</option>
+                </select>
+              </label>
+            </div>
+
+            {/* التاب الثاني: محتوى الدورة */}
+            <div className={activeTab === 'content' ? 'space-y-6' : 'hidden'}>
+              <label className="flex flex-col flex-1">
+                <p className="text-slate-700 dark:text-slate-300 text-base font-medium leading-normal pb-2 text-left">
+                  {t("form.whatLearn")}
+                </p>
+                <input
+                  className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark h-14 placeholder:text-slate-400 dark:placeholder-slate-500 p-[15px] text-base font-normal leading-normal disabled:opacity-50"
+                  placeholder={t("form.whatLearnPlaceholder")}
+                  name="whatLearn"
+                  value={formData.whatLearn}
+                  onChange={handleChange}
+                  disabled={isLoading}
+                />
+              </label>
+              
+              <label className="flex flex-col flex-1">
+                <p className="text-slate-700 dark:text-slate-300 text-base font-medium leading-normal pb-2 text-left">
                   {t("form.syllabusTitle")}
                 </p>
                 <input
-                  className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark h-14 placeholder:text-slate-400 dark:placeholder-slate-500 p-[15px] text-base font-normal leading-normal"
+                  className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark h-14 placeholder:text-slate-400 dark:placeholder-slate-500 p-[15px] text-base font-normal leading-normal disabled:opacity-50"
                   placeholder={t("form.syllabusTitlePlaceholder")}
                   name="titleSyllabus"
                   value={formData.titleSyllabus}
@@ -288,12 +306,13 @@ const EditProduct = ({ setOpen, open, locale }) => {
                   disabled={isLoading}
                 />
               </label>
+              
               <label className="flex flex-col flex-1">
-                <p className="text-slate-700 dark:text-slate-300 text-base font-medium leading-normal pb-2">
+                <p className="text-slate-700 dark:text-slate-300 text-base font-medium leading-normal pb-2 text-left">
                   {t("form.syllabusDescription")}
                 </p>
                 <input
-                  className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark h-14 placeholder:text-slate-400 dark:placeholder-slate-500 p-[15px] text-base font-normal leading-normal"
+                  className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark h-14 placeholder:text-slate-400 dark:placeholder-slate-500 p-[15px] text-base font-normal leading-normal disabled:opacity-50"
                   placeholder={t("form.syllabusDescriptionPlaceholder")}
                   name="descriptionSyllabus"
                   value={formData.descriptionSyllabus}
@@ -302,21 +321,64 @@ const EditProduct = ({ setOpen, open, locale }) => {
                 />
               </label>
             </div>
-            <label className="flex flex-col flex-1">
-              <p className="text-slate-700 dark:text-slate-300 text-base font-medium leading-normal pb-2">
-                {t("form.whatLearn")}
-              </p>
-              <input
-                className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark h-14 placeholder:text-slate-400 dark:placeholder-slate-500 p-[15px] text-base font-normal leading-normal"
-                placeholder={t("form.whatLearnPlaceholder")}
-                name="whatLearn"
-                value={formData.whatLearn}
-                onChange={handleChange}
-                disabled={isLoading}
-              />
-            </label>
+
+            {/* التاب الثالث: التسعير */}
+            <div className={activeTab === 'pricing' ? 'grid grid-cols-1 md:grid-cols-2 gap-6' : 'hidden'}>
+              <label className="flex flex-col flex-1">
+                <p className="text-slate-700 dark:text-slate-300 text-base font-medium leading-normal pb-2 text-left">
+                  {t("form.coursePrice")}
+                </p>
+                <input
+                  className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark h-14 placeholder:text-slate-400 dark:placeholder-slate-500 p-[15px] text-base font-normal leading-normal disabled:opacity-50"
+                  placeholder={t("form.coursePricePlaceholder")}
+                  type="number"
+                  name="price"
+                  value={formData.price}
+                  onChange={handleChange}
+                  disabled={isLoading}
+                />
+              </label>
+              
+              <div>
+                <p className="text-slate-700 dark:text-slate-300 text-base font-medium leading-normal pb-2 text-left">
+                  {t("form.pricing")}
+                </p>
+                <div className="flex gap-4 items-center h-14">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      className="form-radio text-primary focus:ring-primary/50 border-slate-300 dark:border-slate-600 bg-background-light dark:bg-slate-800"
+                      name="pricing"
+                      type="radio"
+                      value="free"
+                      checked={formData.pricing === "free"}
+                      onChange={handleChange}
+                      disabled={isLoading}
+                    />
+                    <span className="text-slate-700 dark:text-slate-300">
+                      {t("form.pricingFree")}
+                    </span>
+                  </label>
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      className="form-radio text-primary focus:ring-primary/50 border-slate-300 dark:border-slate-600 bg-background-light dark:bg-slate-800"
+                      name="pricing"
+                      type="radio"
+                      value="paid"
+                      checked={formData.pricing === "paid"}
+                      onChange={handleChange}
+                      disabled={isLoading}
+                    />
+                    <span className="text-slate-700 dark:text-slate-300">
+                      {t("form.pricingPaid")}
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="flex justify-end gap-4 pt-6">
+          
+          {/* [ديزاين جديد] زرار الـ Submit بقى تحت التابات ومفصول بخط */}
+          <div className="flex justify-end gap-4 pt-6 border-t border-gray-200 dark:border-gray-700">
             <button
               className="px-6 py-3 rounded-lg bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               type="submit"

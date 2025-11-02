@@ -415,7 +415,12 @@
       "whatLearnPlaceholder": "What you'll learn",
       "saveDraft": "Save Draft",
       "nextStep": "Next Step",
-      "saving": "Saving..."
+      "saving": "Saving...",
+      "tabs": {
+        "basic": "Basic Information",
+        "content": "Course Content",
+        "pricing": "Pricing"
+      }
     },
     "toast": {
       "userNotLoaded": "User not loaded yet. Please wait.",
