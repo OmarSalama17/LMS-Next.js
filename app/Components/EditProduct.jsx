@@ -5,7 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 const EditProduct = ({ setOpen, open, locale }) => {
   const t = useTranslations("addCourse");
   const [isLoading, setIsLoading] = useState(false);
-const [activeTab, setActiveTab] = useState('basic');
+  const [activeTab, setActiveTab] = useState("basic");
   const [formData, setFormData] = useState({
     title: open.title[locale],
     description: open.description[locale],
@@ -161,59 +161,48 @@ const [activeTab, setActiveTab] = useState('basic');
   };
 
   return (
-    <div 
-      className="fixed inset-0 z-50 flex flex-col gap-2 items-center justify-center bg-black/60 p-4"
-    >
-      
-      <div 
-        className="w-full max-w-3xl bg-white dark:bg-card-dark rounded-xl shadow-2xl p-6 md:p-8 flex flex-col relative max-h-[90vh] overflow-y-auto"
-      >
-        
-        {/* [ديزاين] زرار الإغلاق وعنوان المودال زي ما هما */}
+    <div className="fixed inset-0 z-50 flex flex-col gap-2 items-center justify-center bg-black/60 p-4">
+      <div className="w-full max-w-3xl bg-white dark:bg-card-dark rounded-xl shadow-2xl p-6 md:p-8 flex flex-col relative max-h-[90vh] overflow-y-auto">
         <button
           className="font-bold text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 absolute top-4 right-4 text-2xl"
           onClick={() => setOpen(false)}
         >
           ✕
         </button>
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 text-left">
-        </h2>
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 text-left"></h2>
 
-        {/* [تعديل جذري] الفورم هتفضل موجودة بره عشان الـ onSubmit يشتغل */}
         <form onSubmit={handleSubmit}>
-
-          {/* [ديزاين جديد] شريط التابات (Tabs Navigation) */}
           <div className="border-b border-gray-200 dark:border-gray-700">
             <nav className="flex flex-wrap gap-6 -mb-px">
               <button
-                type="button" // مهم أوي عشان الفورم متعملش submit
-                onClick={() => setActiveTab('basic')}
+                type="button"
+                onClick={() => setActiveTab("basic")}
                 className={`py-4 px-1 font-medium text-sm ${
-                  activeTab === 'basic'
-                    ? 'border-b-2 border-primary text-primary'
-                    : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
+                  activeTab === "basic"
+                    ? "border-b-2 border-primary text-primary"
+                    : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                 }`}
               >
                 {t("form.tabs.basic") || "المعلومات الأساسية"}
               </button>
               <button
                 type="button"
-                onClick={() => setActiveTab('content')}
+                onClick={() => setActiveTab("content")}
                 className={`py-4 px-1 font-medium text-sm ${
-                  activeTab === 'content'
-                    ? 'border-b-2 border-primary text-primary'
-                    : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
+                  activeTab === "content"
+                    ? "border-b-2 border-primary text-primary"
+                    : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                 }`}
               >
                 {t("form.tabs.content") || "محتوى الدورة"}
               </button>
               <button
                 type="button"
-                onClick={() => setActiveTab('pricing')}
+                onClick={() => setActiveTab("pricing")}
                 className={`py-4 px-1 font-medium text-sm ${
-                  activeTab === 'pricing'
-                    ? 'border-b-2 border-primary text-primary'
-                    : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
+                  activeTab === "pricing"
+                    ? "border-b-2 border-primary text-primary"
+                    : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                 }`}
               >
                 {t("form.tabs.pricing") || "التسعير"}
@@ -221,11 +210,8 @@ const [activeTab, setActiveTab] = useState('basic');
             </nav>
           </div>
 
-          {/* [ديزاين جديد] محتوى التابات (Tabs Content) */}
           <div className="py-6">
-            
-            {/* التاب الأول: المعلومات الأساسية */}
-            <div className={activeTab === 'basic' ? 'space-y-6' : 'hidden'}>
+            <div className={activeTab === "basic" ? "space-y-6" : "hidden"}>
               <label className="flex flex-col flex-1">
                 <p className="text-slate-700 dark:text-slate-300 text-base font-medium leading-normal pb-2 text-left">
                   {t("form.courseTitle")}
@@ -239,7 +225,7 @@ const [activeTab, setActiveTab] = useState('basic');
                   disabled={isLoading}
                 />
               </label>
-              
+
               <label className="flex flex-col flex-1">
                 <p className="text-slate-700 dark:text-slate-300 text-base font-medium leading-normal pb-2 text-left">
                   {t("form.courseDescription")}
@@ -256,7 +242,7 @@ const [activeTab, setActiveTab] = useState('basic');
                   />
                 </div>
               </label>
-              
+
               <label className="flex flex-col flex-1">
                 <p className="text-slate-700 dark:text-slate-300 text-base font-medium leading-normal pb-2 text-left">
                   {t("form.category")}
@@ -269,16 +255,21 @@ const [activeTab, setActiveTab] = useState('basic');
                   disabled={isLoading}
                 >
                   <option value="">{t("form.categorySelect")}</option>
-                  <option value="development">{t("form.categories.development")}</option>
+                  <option value="development">
+                    {t("form.categories.development")}
+                  </option>
                   <option value="design">{t("form.categories.design")}</option>
-                  <option value="business">{t("form.categories.business")}</option>
-                  <option value="marketing">{t("form.categories.marketing")}</option>
+                  <option value="business">
+                    {t("form.categories.business")}
+                  </option>
+                  <option value="marketing">
+                    {t("form.categories.marketing")}
+                  </option>
                 </select>
               </label>
             </div>
 
-            {/* التاب الثاني: محتوى الدورة */}
-            <div className={activeTab === 'content' ? 'space-y-6' : 'hidden'}>
+            <div className={activeTab === "content" ? "space-y-6" : "hidden"}>
               <label className="flex flex-col flex-1">
                 <p className="text-slate-700 dark:text-slate-300 text-base font-medium leading-normal pb-2 text-left">
                   {t("form.whatLearn")}
@@ -292,7 +283,7 @@ const [activeTab, setActiveTab] = useState('basic');
                   disabled={isLoading}
                 />
               </label>
-              
+
               <label className="flex flex-col flex-1">
                 <p className="text-slate-700 dark:text-slate-300 text-base font-medium leading-normal pb-2 text-left">
                   {t("form.syllabusTitle")}
@@ -306,7 +297,7 @@ const [activeTab, setActiveTab] = useState('basic');
                   disabled={isLoading}
                 />
               </label>
-              
+
               <label className="flex flex-col flex-1">
                 <p className="text-slate-700 dark:text-slate-300 text-base font-medium leading-normal pb-2 text-left">
                   {t("form.syllabusDescription")}
@@ -322,8 +313,13 @@ const [activeTab, setActiveTab] = useState('basic');
               </label>
             </div>
 
-            {/* التاب الثالث: التسعير */}
-            <div className={activeTab === 'pricing' ? 'grid grid-cols-1 md:grid-cols-2 gap-6' : 'hidden'}>
+            <div
+              className={
+                activeTab === "pricing"
+                  ? "grid grid-cols-1 md:grid-cols-2 gap-6"
+                  : "hidden"
+              }
+            >
               <label className="flex flex-col flex-1">
                 <p className="text-slate-700 dark:text-slate-300 text-base font-medium leading-normal pb-2 text-left">
                   {t("form.coursePrice")}
@@ -338,7 +334,7 @@ const [activeTab, setActiveTab] = useState('basic');
                   disabled={isLoading}
                 />
               </label>
-              
+
               <div>
                 <p className="text-slate-700 dark:text-slate-300 text-base font-medium leading-normal pb-2 text-left">
                   {t("form.pricing")}
@@ -376,8 +372,7 @@ const [activeTab, setActiveTab] = useState('basic');
               </div>
             </div>
           </div>
-          
-          {/* [ديزاين جديد] زرار الـ Submit بقى تحت التابات ومفصول بخط */}
+
           <div className="flex justify-end gap-4 pt-6 border-t border-gray-200 dark:border-gray-700">
             <button
               className="px-6 py-3 rounded-lg bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
