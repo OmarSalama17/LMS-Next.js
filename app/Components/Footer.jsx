@@ -67,7 +67,6 @@ const Footer = () => {
               <ul className="mt-4 space-y-4">
                 {section.links.map((link) => (
                   <li key={link.label}>
-                    {/* 4. استخدمنا كومبوننت Link المستورد */}
                     <Link
                       className="text-base text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-white"
                       href={link.href}
@@ -88,7 +87,7 @@ const Footer = () => {
           <div className="flex space-x-6 order-1 md:order-2">
             <a
               className="text-gray-400 hover:text-gray-500"
-              href="#" // <-- لينك صفحة الفيسبوك
+              href="https://www.facebook.com/omar.salama.760748" 
               target="_blank"
               rel="noopener noreferrer"
             >
