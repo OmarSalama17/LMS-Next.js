@@ -82,7 +82,7 @@ const FeaturedCourses = ({ data, locale }) => {
                   >
                     {course.price ? `$${course.price}` : "Free"}
                   </div>
-                  <EnrollButton courseId={data.id} locale={locale}/>
+                  <EnrollButton courseId={course.id} locale={locale}/>
                 </div>
               </div>
             </div>

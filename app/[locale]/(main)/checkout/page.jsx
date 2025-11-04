@@ -6,10 +6,20 @@ import toast, { Toaster } from "react-hot-toast";
 import { enrollCourseAction } from "../../../actions/enrollCourse";
 import { useUser } from "@clerk/nextjs";
 import { send } from "process";
+import { useLocale } from "next-intl";
 
 export default function Page() {
   const router = useRouter(); 
   const { user } = useUser();
+
+  if (!user) {
+    router.push("/sign-in");
+    return null;
+  }
+  if(user.unsafeMetadata.role !== "student") {
+    router.push("/dashboard");
+    return null;
+  }
 
   const [course, setCourse] = useState(null);
   const [fetchLoading, setFetchLoading] = useState(true);
@@ -168,10 +178,10 @@ const sendEmail = async (userEmail, userName) => {
         <div className="w-full md:w-3/5 lg:w-2/3 order-2 md:order-1">
           <div className="bg-white dark:bg-background-dark/50 rounded-xl shadow-sm p-6 md:p-8">
             <h1 className="text-3xl font-bold tracking-tight">
-              Secure Payment
+              {locale === "en" ? "Secure Payment" : "الدفع الآمن"}
             </h1>
             <p className="text-accent mt-2">
-              Complete your purchase by providing your payment details.
+              {locale === "en" ? "Complete your purchase by providing your payment details." : "أكمل عملية الشراء الخاصة بك عن طريق تقديم تفاصيل الدفع الخاصة بك."}
             </p>
 
             <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 flex flex-col sm:flex-row-reverse items-center gap-4">
@@ -195,7 +205,7 @@ const sendEmail = async (userEmail, userName) => {
         <div className="w-full md:w-2/5 lg:w-1/3 order-1 md:order-2">
           <div className="bg-white dark:bg-background-dark/50 rounded-xl shadow-sm p-6 md:p-8">
             <h2 className="text-lg font-semibold text-text-primary dark:text-white">
-              Order Summary
+              {locale === "en" ? "Order Summary" : "ملخص الطلب"}
             </h2>
             <div className="mt-6 flow-root">
               <div className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -211,13 +221,13 @@ const sendEmail = async (userEmail, userName) => {
             </div>
             <div className="mt-6 border-t border-gray-200 dark:border-gray-700 pt-6 space-y-4">
               <div className="flex justify-between text-sm text-accent">
-                <p>Subtotal</p>
+                <p>{locale === "en" ? "Total" : "المجموع"}</p>
                 <p className="text-text-primary dark:text-white">
                   ${course.price}
                 </p>
               </div>
               <div className="flex justify-between text-base font-semibold text-text-primary dark:text-white">
-                <p>Total</p>
+                <p>{locale === "en" ? "Total" : "المجموع"}</p>
                 <p>${course.price}</p>
               </div>
             </div>

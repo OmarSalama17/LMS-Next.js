@@ -3,6 +3,7 @@ import DarkVeil from "./Prism";
 import { getTranslations } from "next-intl/server";
 import { Link } from "../../../src/i18n/navigation";
 import FeaturedCourses from "../../Components/FeaturedCourses";
+import LetterGlitch from "../../Components/LetterGlitch";
 
 export async function generateMetadata({ params }) {
   const { locale } = await params;
@@ -111,61 +112,63 @@ export default async function Home({ params }) {
   return (
     <main>
       <section className="relative overflow-hidden bg-white dark:bg-background-dd">
-        <DarkVeil />
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36">
-          <div
-            className="absolute inset-0 -z-10 sphere-animation-placeholder opacity-10 dark:opacity-20"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle, #3a86ff 30%, transparent 80%)",
-              animation: "pulse 6s infinite alternate",
-              transform: "scale(1.5)",
-            }}
-          ></div>
+        { <LetterGlitch /> }
+        <div className="relative bg-[#0000007a]"> 
+          <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36">
+            <div
+              className="absolute inset-0 -z-10 sphere-animation-placeholder opacity-10 dark:opacity-20"
+              style={{
+                backgroundImage:
+                  "radial-gradient(circle, #3a86ff 30%, transparent 80%)",
+                animation: "pulse 6s infinite alternate",
+                transform: "scale(1.5)",
+              }}
+            ></div>
 
-          <div className="grid lg:grid-cols-5 gap-16 items-center">
-            <div className="lg:col-span-3 text-center lg:text-left">
-              <h1 className="text-5xl sm:text-6xl lg:text-8xl font-extrabold tracking-tighter text-text-light dark:text-white leading-tight">
-                {t("landing.title")}
-                <span className="text-primary"> {t("landing.primary")}</span>
-              </h1>
-              <p className="mt-8 max-w-2xl mx-auto lg:mx-0 text-xl sm:text-2xl text-gray-600 dark:text-gray-400">
-                {t("landing.description")}
-              </p>
+            <div className="grid lg:grid-cols-5 gap-16 items-center">
+              <div className="lg:col-span-3 text-center lg:text-left">
+                <h1 className="text-5xl sm:text-6xl lg:text-8xl font-extrabold tracking-tighter text-gray-400 dark:text-white leading-tight">
+                  {t("landing.title")}
+                  <span className="text-primary"> {t("landing.primary")}</span>
+                </h1>
+                <p className="mt-8 max-w-2xl mx-auto lg:mx-0 text-xl sm:text-2xl text-white dark:text-gray-400">
+                  {t("landing.description")}
+                </p>
 
-              <div className="mt-12 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                <button className="w-full sm:w-auto px-10 py-5 text-xl font-bold rounded-full bg-primary text-white hover:bg-primary/90 transition-all duration-300 transform hover:scale-105 shadow-lg">
-                  {t("landing.btn1")}
-                </button>
-                <button className="w-full sm:w-auto px-10 py-5 text-xl font-bold rounded-full bg-primary-light dark:bg-gray-800 text-primary dark:text-text-dark hover:bg-primary/20 dark:hover:bg-gray-700 transition-colors flex items-center gap-2 group">
-                  <span>{t("landing.btn2")}</span>
-                  <span className="material-symbols-outlined transition-transform group-hover:translate-x-1">
-                    arrow_forward
-                  </span>
-                </button>
+                <div className="mt-12 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                  <button className="w-full sm:w-auto px-10 py-5 text-xl font-bold rounded-full bg-primary text-white hover:bg-primary/90 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    {t("landing.btn1")}
+                  </button>
+                  <button className="w-full sm:w-auto px-10 py-5 text-xl font-bold rounded-full bg-primary-light dark:bg-gray-800 text-primary dark:text-text-dark hover:bg-primary/20 dark:hover:bg-gray-700 transition-colors flex items-center gap-2 group">
+                    <span>{t("landing.btn2")}</span>
+                    <span className="material-symbols-outlined transition-transform group-hover:translate-x-1">
+                      arrow_forward
+                    </span>
+                  </button>
+                </div>
               </div>
-            </div>
 
-            <div className="lg:col-span-2 relative h-96 lg:h-auto lg:self-stretch">
-              <div className="absolute inset-0 flex items-center justify-center p-4">
-                <div className="w-full h-full relative">
-                  <Image
-                    width={469}
-                    height={500}
-                    priority={true}
-                    className="absolute top-0 left-0 w-3/4 h-3/4 object-cover rounded-3xl shadow-soft dark:shadow-soft-dark border border-white/20 dark:border-gray-800/50 transform -rotate-12 hover:rotate-0 hover:scale-105 transition-transform duration-500"
-                    alt="Female student smiling and learning on a laptop"
-                    src="https://www.atomcamp.com/wp-content/uploads/2024/01/image-1-1024x705.png"
-                  />
-                  <Image
-                    width={417}
-                    height={444}
-                    priority={true}
-                    className="absolute bottom-0 right-0 w-2/3 h-2/3 object-cover rounded-3xl shadow-soft dark:shadow-soft-dark border border-white/20 dark:border-gray-800/50 transform rotate-12 hover:rotate-0 hover:scale-105 transition-transform duration-500 z-10"
-                    alt="Male instructor teaching in a classroom"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhcfBbw8ccJ_HiMT7UKnTQVNWmBuQngi5w4kjRo462WWfO_45k70r1mbEpHr_OlfVbAJdXmMeyua7JsCqqboZkqIdtG7eBAh2o9PLizGFD6zzasnM7XrDGGMx--6U6WyZ794GwZStTjhfVDDKdTcqxrzaCQitEdTTY7_xh-ya8I8ppeQo9jCIaqfEz1C8usWjWehMNNViq5GHjyXPOUT2uBjm0HmqQ41In_fkRPshRIwVgpQyJY_c53WNtWVn0T9JH_idh8vYcUveu"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent-purple/10 dark:from-primary/20 dark:to-accent-purple/20 rounded-3xl -z-10 blur-2xl"></div>
+              <div className="lg:col-span-2 relative h-96 lg:h-auto lg:self-stretch">
+                <div className="absolute inset-0 flex items-center justify-center p-4">
+                  <div className="w-full h-full relative">
+                    <Image
+                      width={469}
+                      height={500}
+                      priority={true}
+                      className="absolute top-0 left-0 w-3/4 h-3/4 object-cover rounded-3xl shadow-soft dark:shadow-soft-dark border border-white/20 dark:border-gray-800/50 transform -rotate-12 hover:rotate-0 hover:scale-105 transition-transform duration-500"
+                      alt="Female student smiling and learning on a laptop"
+                      src="https://www.atomcamp.com/wp-content/uploads/2024/01/image-1-1024x705.png"
+                    />
+                    <Image
+                      width={417}
+                      height={444}
+                      priority={true}
+                      className="absolute bottom-0 right-0 w-2/3 h-2/3 object-cover rounded-3xl shadow-soft dark:shadow-soft-dark border border-white/20 dark:border-gray-800/50 transform rotate-12 hover:rotate-0 hover:scale-105 transition-transform duration-500 z-10"
+                      alt="Male instructor teaching in a classroom"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhcfBbw8ccJ_HiMT7UKnTQVNWmBuQngi5w4kjRo462WWfO_45k70r1mbEpHr_OlfVbAJdXmMeyua7JsCqqboZkqIdtG7eBAh2o9PLizGFD6zzasnM7XrDGGMx--6U6WyZ794GwZStTjhfVDDKdTcqxrzaCQitEdTTY7_xh-ya8I8ppeQo9jCIaqfEz1C8usWjWehMNNViq5GHjyXPOUT2uBjm0HmqQ41In_fkRPshRIwVgpQyJY_c53WNtWVn0T9JH_idh8vYcUveu"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent-purple/10 dark:from-primary/20 dark:to-accent-purple/20 rounded-3xl -z-10 blur-2xl"></div>
+                  </div>
                 </div>
               </div>
             </div>
