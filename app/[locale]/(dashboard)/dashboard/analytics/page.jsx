@@ -1,6 +1,6 @@
 import Analytics from "../../../../Components/dashboard/Analytics";
 import { auth, clerkClient, currentUser } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 const MOCK_API_URL = "https://68f816d9deff18f212b51c45.mockapi.io/api/product";
 
@@ -9,14 +9,12 @@ const page = async ({ params }) => {
   const { userId } = await auth();
   const user = await currentUser();
   if (user.unsafeMetadata.role !== "teacher") {
-    return null;
+    return notFound();
   }
-  
+
   if (!userId || !user) {
     return redirect(`/${locale}/sign-in`);
   }
-
-
 
   const clerk = await clerkClient();
   const users = await clerk.users.getUserList({ limit: 100 });

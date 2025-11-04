@@ -29,6 +29,7 @@ export default function Sidebar({
 
   if (role === "student") {
     links.splice(2, 1);
+    links.splice(3, 1);
   }
 
   if (isMobile) {
