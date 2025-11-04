@@ -6,7 +6,7 @@ import { useUser } from "@clerk/nextjs";
 import { useRouter } from "../../../src/i18n/navigation";
 import { Toaster, toast } from "react-hot-toast";
 import { useTranslations } from "next-intl";
-import EditProduct from "../EditProduct";
+import EditProduct from "./EditProduct";
 
 const MOCK_API_URL = "https://68f816d9deff18f212b51c45.mockapi.io/api/product";
 

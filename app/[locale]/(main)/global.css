@@ -87,7 +87,10 @@ body {
       color-mix(in srgb, transparent, var(--clerk-color-warning, #fff) 11%) 6px,
       color-mix(in srgb, transparent, var(--clerk-color-warning, #fff) 11%) 12px);
 }
-
+.cl-userButtonAvatarBox{
+  width: 40px !important;
+  height: 40px !important;
+}
 /* loader */
 /* HTML: <div class="loader"></div> */
 .loader {

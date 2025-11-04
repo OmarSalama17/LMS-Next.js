@@ -435,7 +435,8 @@
     "dashboard": "Dashboard",
     "myCourses": "My Courses",
     "students": "Students",
-    "analytics": "Analytics"
+    "analytics": "Analytics",
+    "messages": "Messages"
   },
   "dashboardHeader": {
     "greeting": "Hello, {name} 👋",
@@ -474,6 +475,19 @@
     "review_1_text": "\"This course was fantastic! The instructor explained complex topics clearly and the projects were very practical and relevant to the industry today.\"",
     "review_2_name": "Mike Chen",
     "review_2_text": "\"An absolutely brilliant course. I learned so much and now feel confident applying for junior UX roles. The syllabus was perfectly structured.\""
+  },
+    "Chat": {
+    "loadingUser": "Loading user data...",
+    "publicChat": "Public Chat",
+    "loading": "Loading...",
+    "connectedAs": "Connected as {firstName}",
+    "loadingMessages": "Loading messages...",
+    "errorPrefix": "An error occurred: ",
+    "deleteTitle": "Delete",
+    "placeholder": "Type your message here...",
+    "errorFetch": "Failed to fetch messages",
+    "errorSend": "Failed to send message",
+    "errorDelete": "Failed to delete message"
   },
   "footer": {
     "brand": "LearnSphere",

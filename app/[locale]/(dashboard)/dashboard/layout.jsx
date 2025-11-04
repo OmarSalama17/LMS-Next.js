@@ -19,6 +19,7 @@ export default async  function RootLayout({ children , params })
 const { locale } = await params;
   return (
 <>
+          
           <div className="flex h-full grow">
             <Sidebar locale={locale} />
             {children}
