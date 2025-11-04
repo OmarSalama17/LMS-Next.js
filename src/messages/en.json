@@ -354,20 +354,25 @@
     "week2": "Week 2",
     "week3": "Week 3",
     "week4": "Week 4",
+    "week5": "Week 5",
+    "week6": "Week 6",
+    "week7": "Week 7",
     "completionStatus": "Completion Status",
     "statusCompleted": "Completed",
     "statusInProgress": "In Progress",
     "statusNotStarted": "Not Started",
     "studentPerformanceTitle": "Student Performance",
-    "studentPerformanceSubtitle": "Detailed breakdown of individual student progress.",
+    "studentPerformanceSubtitle": "Overview of recent student performance",
     "table": {
       "studentName": "Student Name",
       "progress": "Progress",
       "lastActive": "Last Active",
-      "avgScore": "Average Score",
+      "avgScore": "Avg. Score",
       "actions": "Actions",
       "viewDetails": "View Details"
-    }
+    },
+    "engagementValueMedium": "Medium",
+    "engagementValueLow": "Low"
   },
   "myCourses": {
     "addNewCourse": "Add New Course",
@@ -476,7 +481,7 @@
     "review_2_name": "Mike Chen",
     "review_2_text": "\"An absolutely brilliant course. I learned so much and now feel confident applying for junior UX roles. The syllabus was perfectly structured.\""
   },
-    "Chat": {
+  "Chat": {
     "loadingUser": "Loading user data...",
     "publicChat": "Public Chat",
     "loading": "Loading...",
