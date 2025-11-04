@@ -8,10 +8,15 @@ const page = async ({ params }) => {
   const { locale } = params;
   const { userId } = await auth();
   const user = await currentUser();
-
+  if (user.unsafeMetadata.role !== "teacher") {
+    return null;
+  }
+  
   if (!userId || !user) {
     return redirect(`/${locale}/sign-in`);
   }
+
+
 
   const clerk = await clerkClient();
   const users = await clerk.users.getUserList({ limit: 100 });
@@ -80,13 +85,9 @@ const page = async ({ params }) => {
     firstName: student.firstName,
     lastName: student.lastName,
 
-    // === السطر الذي تم إصلاحه ===
-    // نستخدم new Date() لضمان تحويل القيمة (سواء كانت رقم أو نص)
-    // إلى تاريخ يمكن تحويله إلى نص آمن
     lastActiveAt: student.lastActiveAt
       ? new Date(student.lastActiveAt).toISOString()
       : null,
-    // =============================
   }));
 
   return (

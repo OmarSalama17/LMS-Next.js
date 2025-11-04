@@ -14,15 +14,13 @@ import {
 } from "recharts";
 import Image from "next/image";
 
-// === دالة timeAgo معدلة (أكثر أمانًا) ===
 function timeAgo(dateString, locale) {
   try {
     const date = new Date(dateString);
 
-    // التحقق إذا كان التاريخ صالحًا
     if (isNaN(date.getTime())) {
       console.warn("Invalid date string passed to timeAgo:", dateString);
-      return "N/A"; // إرجاع قيمة احتياطية
+      return "N/A"; 
     }
 
     const now = new Date();
@@ -45,7 +43,7 @@ function timeAgo(dateString, locale) {
     return rtf.format(-years, "year");
   } catch (error) {
     console.error("Error in timeAgo function:", error);
-    return "N/A"; // إرجاع قيمة احتياطية في حالة حدوث أي خطأ
+    return "N/A"; 
   }
 }
 
@@ -54,7 +52,6 @@ const Analytics = ({ enrolledCourses, countStudents, studentList = [] }) => {
   const t = useTranslations("analytics");
 
   const dynamicData = useMemo(() => {
-    // ... (كل منطق useMemo يبقى كما هو، لم يتغير) ...
     const totalStudents = countStudents || 0;
 
     const completionRate = Math.floor(Math.random() * 21) + 75;
@@ -154,7 +151,6 @@ const Analytics = ({ enrolledCourses, countStudents, studentList = [] }) => {
         <Header />
         <div className="flex flex-1 flex-col ml-0 p-4">
           
-          {/* === الكروت العلوية (موجودة هنا) === */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 ">
             <div className="flex flex-col gap-2 rounded-xl p-6 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
               <p className="text-base font-medium text-gray-600 dark:text-gray-300">
@@ -209,7 +205,6 @@ const Analytics = ({ enrolledCourses, countStudents, studentList = [] }) => {
             </div>
           </div>
           
-          {/* === المخططات (موجودة هنا) === */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
             <div className="lg:col-span-2 flex flex-col gap-4 rounded-xl border border-gray-200 dark:border-gray-700 p-6 bg-white dark:bg-gray-800">
               <div className="flex justify-between items-start">
@@ -358,7 +353,6 @@ const Analytics = ({ enrolledCourses, countStudents, studentList = [] }) => {
             </div>
           </div>
 
-          {/* === جدول الطلاب (موجود هنا) === */}
           <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden">
             <div className="p-6">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
@@ -390,14 +384,13 @@ const Analytics = ({ enrolledCourses, countStudents, studentList = [] }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {/* === تعديل الجدول (أكثر أمانًا) === */}
                   {studentList.map((student) => {
                     const fakeProgress = Math.floor(Math.random() * 81) + 20;
                     const fakeScore = Math.floor(Math.random() * 31) + 70;
 
                     return (
                       <tr
-                        key={student?.id} // إضافة ?.
+                        key={student?.id} 
                         className="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/30"
                       >
                         <th
@@ -406,13 +399,12 @@ const Analytics = ({ enrolledCourses, countStudents, studentList = [] }) => {
                         >
                           <div className="flex items-center gap-3">
                             <Image
-                              src={student?.imageUrl || "/default-avatar.png"} // إضافة ?. وصورة احتياطية
-                              alt={student?.fullName || "Student"} // إضافة ?.
+                              src={student?.imageUrl || "/default-avatar.png"} 
+                              alt={student?.fullName || "Student"} 
                               width={32}
                               height={32}
                               className="rounded-full"
                             />
-                            {/* تعديل الاسم ليكون أكثر أمانًا */}
                             {student?.fullName ||
                               `${student?.firstName || ""} ${
                                 student?.lastName || ""
@@ -429,7 +421,6 @@ const Analytics = ({ enrolledCourses, countStudents, studentList = [] }) => {
                           </div>
                         </td>
                         <td className="px-6 py-4">
-                          {/* الآن الدالة timeAgo آمنة */}
                           {student?.lastActiveAt
                             ? timeAgo(student.lastActiveAt, locale)
                             : "N/A"}
