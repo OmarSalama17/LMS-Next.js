@@ -136,15 +136,15 @@ export default async function Home({ params }) {
                 </p>
 
                 <div className="mt-12 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                  <button className="w-full sm:w-auto px-10 py-5 text-xl font-bold rounded-full bg-primary text-white hover:bg-primary/90 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                  <Link href={"/courses"} className="w-full sm:w-auto px-10 py-5 text-xl font-bold rounded-full bg-primary text-white hover:bg-primary/90 transition-all duration-300 transform hover:scale-105 shadow-lg">
                     {t("landing.btn1")}
-                  </button>
-                  <button className="w-full sm:w-auto px-10 py-5 text-xl font-bold rounded-full bg-primary-light dark:bg-gray-800 text-primary dark:text-text-dark hover:bg-primary/20 dark:hover:bg-gray-700 transition-colors flex items-center gap-2 group">
+                  </Link>
+                  <Link href="/sign-up" className="w-full sm:w-auto px-10 py-5 text-xl font-bold rounded-full bg-primary-light dark:bg-gray-800 text-primary dark:text-text-dark hover:bg-primary/20 dark:hover:bg-gray-700 transition-colors flex items-center gap-2 group">
                     <span>{t("landing.btn2")}</span>
                     <span className="material-symbols-outlined transition-transform group-hover:translate-x-1">
                       arrow_forward
                     </span>
-                  </button>
+                  </Link>
                 </div>
               </div>
 
