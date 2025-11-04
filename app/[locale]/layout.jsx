@@ -3,6 +3,7 @@ import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import "./(main)/global.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
@@ -46,6 +47,8 @@ export default async function RootLayout({ children, params }) {
           </head>
           <body className="bg-background-light dark:bg-[#131c26] font-display text-text-light dark:text-text-dark">
             {children}
+                    <SpeedInsights />
+
           </body>
         </html>
       </NextIntlClientProvider>
