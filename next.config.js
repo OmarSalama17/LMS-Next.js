@@ -15,6 +15,7 @@ const nextConfig = {
       'www.graphicpear.com',
       'static-assets.codecademy.com',
       'flagcdn.com',
+      "img.clerk.com"
     ],
   },
 };

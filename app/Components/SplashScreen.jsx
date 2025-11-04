@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 export default function SplashScreen() {
   const pathname = usePathname();
 
-  // 🚀 1. علشان نتأكد إن الكومبوننت اتركب على العميل
   const [isMounted, setIsMounted] = useState(false);
 
   const [isVisible, setIsVisible] = useState(false);
@@ -18,13 +17,11 @@ export default function SplashScreen() {
   const [showText, setShowText] = useState(false);
 
   useEffect(() => {
-    // 🚀 2. أول ما الكومبوننت يركب
     setIsMounted(true);
 
     const splashShown = localStorage.getItem("splashShown");
     const isHomePage = pathname === "/en" || pathname === "/ar";
 
-    // 🚀 3. اللوجيك بتاع إظهار السبلاتش
     if (!splashShown && isHomePage) {
       localStorage.setItem("splashShown", "true");
       setIsVisible(true);
@@ -53,11 +50,9 @@ export default function SplashScreen() {
     };
   }, [isVisible]);
 
-  // 🚀 4. لو لسه الكومبوننت ما اتركبش، أو مش ظاهر حالياً
   if (!isMounted) return null;
   if (!isVisible) return null;
 
-  // 🚀 5. عرض الأنيميشن
   return (
     <div
       className={`fixed inset-0 z-[9999] flex flex-col justify-center items-center h-screen bg-[#0d3d71]

@@ -1,9 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
+import { useSearchParams } from "next/navigation";
+import { Link } from "../../../src/i18n/navigation";
 
 const StudentCard = ({ student, view }) => {
-  const { firstName, lastName , image: img,  online } = student;
+
+  const { firstName, lastName, image: img, online } = student;
   const name = `${firstName} ${lastName}`;
 
   if (view === "grid") {
@@ -23,10 +26,10 @@ const StudentCard = ({ student, view }) => {
           {name}
         </h3>
         <div className="flex gap-2 w-full">
-          <button className="flex-1 flex items-center justify-center gap-2 h-10 rounded-lg bg-primary text-white hover:bg-primary/90 text-sm font-medium">
+          <Link href={`/dashboard/messages?share=@${name}`} className="flex-1 flex items-center justify-center gap-2 h-10 rounded-lg bg-primary text-white hover:bg-primary/90 text-sm font-medium">
             <span className="material-symbols-outlined text-base">chat</span>
             Message
-          </button>
+          </Link>
         </div>
       </div>
     );
@@ -61,13 +64,15 @@ const StudentCard = ({ student, view }) => {
   );
 };
 
-const Students = ({ students  , locale}) => {
+const Students = ({ students, locale }) => {
   console.log(students);
 
   const [view, setView] = useState("grid");
 
   return (
-    <main className={`flex-1 flex-col ml-0  ${locale === "ar" ? "lg:mr-64" : "lg:ml-64"}`}>
+    <main
+      className={`flex-1 flex-col ml-0  ${locale === "ar" ? "lg:mr-64" : "lg:ml-64"}`}
+    >
       <div className="w-full">
         <Header
           div={

@@ -4,6 +4,7 @@ import EnrollButton from "../../../../Components/EnrollButton";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation"; 
 import Image from "next/image";
+import Reviews from "../../../../Components/Reviews";
 
 const api = process.env.URL_API;
 
@@ -73,20 +74,7 @@ const data = await getProductBySlug(slug, locale);
 
   // console.log(data);
 
-  const reviews = [
-    {
-      name: t("review_1_name"),
-      img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBqDSWnX-BQnRX9JcwTCTp7LR11ksZLqX9OEhrugbrPwG9hpBg_fNq52VU08j3JWPnocZVVIQp-7EBGZOZm0wz5q3YW-1rWowisjFzk6ecFoMOJFjxuVwYut8cJYEzWLoaz4Gk3ghFwoeJSvh34X0yiCNPLSfhqVfJTIqS02bV4A9S0xa7V2pMm8fh4eH4b1Ht5Tsny72iM7TUED6ZhlUyCIGoiydLhfn5_7HK0-b8qfxASEMQY7FWce4OggmWBm0FK_AKJLDDUFm2F",
-      rating: 4.5,
-      text: t("review_1_text"),
-    },
-    {
-      name: t("review_2_name"),
-      img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCx9BX5IXMmOYsTsWcM0f6NE9JSfdirsNxzO2Wa8_oY4DmpLIfvcNnveaWch5BtvsTilkBW6jtb0dYt4tlS3aJZfjCiqLMKkICo7LTCGluJcrbT7yvv1OGbZsydO2S7BKXR05pPQV041iukfSqYJ4qD36t-GgYF-nA8zfnR5FwHldqeFr6iXXYEtPBIhIPsyHN9VNy5KIKv1Vb2ycmZ1zekONhYdSKN5zuFdawldw8HwPNiJzdZMwlD-OYrzWLXEQOw1Fa7zsDai14K",
-      rating: 5,
-      text: t("review_2_text"),
-    },
-  ];
+
 
   return (
     <main className="flex-1">
@@ -297,59 +285,7 @@ const data = await getProductBySlug(slug, locale);
               </div>
             </div>
 
-            <div className="lg:col-span-1">
-              <div className="flex flex-col gap-10">
-                <div>
-                  <h3 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">
-                    {t("reviews_title")}
-                  </h3>
-
-                  <div className="space-y-6">
-                    {reviews.map((review, i) => (
-                      <div
-                        key={i}
-                        className="p-6 bg-white dark:bg-slate-800/50 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800"
-                      >
-                        <div className="flex items-center gap-4">
-                          <div
-                            className="size-12 bg-center bg-no-repeat aspect-square bg-cover rounded-full shrink-0"
-                            
-                          >
-                            <Image className="rounded-full" width={48} height={48} src={review.img} alt={review.name} />
-                          </div>
-                          <div className="flex-1">
-                            <p className="font-bold text-slate-900 dark:text-white">
-                              {review.name}
-                            </p>
-                            <div className="flex items-center gap-1 text-amber-400 mt-1">
-                              {Array.from({ length: 5 }).map((_, j) => (
-                                <span
-                                  key={j}
-                                  className="material-symbols-outlined"
-                                  style={{ fontSize: 16 }}
-                                >
-                                  {review.rating >= j + 1
-                                    ? "star"
-                                    : review.rating >= j + 0.5
-                                    ? "star_half"
-                                    : "star_outline"}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                        <p className="mt-4 text-slate-600 dark:text-slate-300">
-                          {review.text}
-                        </p>
-                      </div>
-                    ))}
-                    <button className="w-full text-center text-primary font-semibold hover:underline">
-                      {t("show_all_reviews")}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+                    <Reviews courseId={data.id}/>
           </div>
         </div>
       </div>

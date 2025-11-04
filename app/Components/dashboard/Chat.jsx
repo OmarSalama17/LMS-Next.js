@@ -4,14 +4,18 @@ import { useUser } from "@clerk/nextjs";
 import { useTranslations } from "next-intl";
 import { useEffect, useState, useRef } from "react";
 import Header from "./Header";
+import { useSearchParams } from "next/navigation";
 
 const MOCK_API_URL = "https://677184e2ee76b92dd48fe746.mockapi.io/api/chats";
 
-export default function Chat({locale}) {
+export default function Chat({ locale }) {
+  const searchParams = useSearchParams();
+  const share = searchParams.get("share");
+
   const t = useTranslations("Chat");
   const { user } = useUser();
   const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState("");
+  const [newMessage, setNewMessage] = useState(share === null ? "" : share);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const messagesEndRef = useRef(null);
@@ -105,7 +109,9 @@ export default function Chat({locale}) {
   }
 
   return (
-    <div className={`flex-1 flex flex-col bg-background-light dark:bg-background-dark h-[calc(100vh-100px)] ${locale === "ar" ? "lg:mr-64" : "lg:ml-64"}`}>
+    <div
+      className={`flex-1 flex flex-col bg-background-light dark:bg-background-dark h-[calc(100vh-100px)] ${locale === "ar" ? "lg:mr-64" : "lg:ml-64"}`}
+    >
       <Header />
       <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
         <div>
