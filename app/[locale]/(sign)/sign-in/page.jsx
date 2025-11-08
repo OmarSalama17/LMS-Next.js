@@ -92,11 +92,11 @@ export default function Page() {
                  appearance-none 
                  cursor-pointer 
                  top-[-2px] 
-                 left-0                 /* وضع البداية (شمال) */
+                 left-0
                  transition-all 
                  duration-200 
                  ease-in
-                 checked:left-4           /* الوضع لما تدوس (يمين) */
+                 checked:left-4
                 "
                     />
 
@@ -223,7 +223,7 @@ export default function Page() {
               disabled={isLoading}
               className="w-full bg-primary text-white font-bold py-3 px-4 rounded-lg hover:bg-primary/90 transition-colors duration-300 h-12 text-sm shadow-md shadow-primary/30 disabled:opacity-50"
             >
-                          {isLoading ? "Signing In..." : "Sign In"}           {" "}
+              {isLoading ? "Signing In..." : "Sign In" }{" "}
             </button>
 
             <div className="relative flex items-center my-4">

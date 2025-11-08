@@ -65,7 +65,7 @@ export default async function Home({ params }) {
       name: t("review.review1.name"),
       role: t("review.review1.role"),
       image:
-        "https://lh3.googleusercontent.com/aida-public/AB6AXuDRJPnvSWiwTZYGmKJdi_vF9LZS7Id1splML7iE7YozeG3U_gy5tiRwLn-4iqghxBALg-fuIvOXMj0Y8EOq8InUKQUzqbq2pYD6naexPCiN1DVGMg25fg-cVxeXFnKl3SysV3h9lvH_n_mAkKPrHQniIDh7o-uT9_8yl5AH0Qcd7iSDe0wpnxYrQTYBnDDWy8kba0lUuTInIgw8mLAjgV7NRP1-EZw-FDrTHak0PBsX36Viw70qEMi3DBWzBFVfYVJGMXTJMsz0CYQf",
+        "https://res.cloudinary.com/dr2dnmx76/image/upload/v1762637834/1703539818783_o8dap9.jpg",
       quote: t("review.review1.title"),
       rating: 5,
     },
