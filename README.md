@@ -69,16 +69,6 @@ https://edp-edupro.vercel.app/en
 
 https://github.com/OmarSalama17/LMS-Next.js
 
-🖼 Screenshots
-
-(Add 3–5 screenshots here)
-
-Example:
-
-/public/screenshots/home.png  
-/public/screenshots/course.png  
-/public/screenshots/dashboard.png  
-
 ⚙️ Installation
 # Clone repo
 git clone https://github.com/OmarSalama17/LMS-Next.js
